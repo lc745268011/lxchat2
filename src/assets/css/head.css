@@ -1,0 +1,17 @@
+@media (min-width: 769px) {
+    #header .small{display: none}
+}
+@media (max-width: 768px) {
+    #header .big{display: none}
+    #header .small{display: block}
+}
+#header .big{padding:0 30px;height: 60px;line-height: 59px;}
+#header .small{padding:0 15px;height: 48px;line-height: 47px;}
+#header a{color: #fff;font-size: 16px;}
+#header .fl li{margin-right: 60px;}
+#header .small .fl li{margin-right: 20px;}
+#header .big .fr li{margin-left: 25px;}
+#header .big .fl li a{color: rgba(255,255,255,.5)}
+#header .big .fl li.active a{font-weight: bold;color: #fff}
+.userHeadImg{width: 32px;height: 32px;border-radius: 50%;border: 1px solid #fff}
+.search{width: 190px;height: 38px;font-size: 16px;border: 0;background-color: #fff;padding: 10px;border-radius: 6px;}

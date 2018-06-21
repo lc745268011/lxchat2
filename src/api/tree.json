@@ -1,0 +1,28 @@
+  {
+    "children": [
+      {
+        "name":"组织1" ,
+        "tid":1,
+        "children":[{
+          "name":"组织1-1",
+          "tid":2,
+          "children":[{
+            "name":"组织1-1-1",
+            "tid":3
+          }]
+        }]
+      },
+      {
+        "name":"组织2" ,
+        "tid":1,
+        "children":[{
+          "name":"组织2-1",
+          "tid":2,
+          "children":[{
+            "name":"组织2-1-2",
+            "tid":3
+          }]
+        }]
+      }
+    ]
+  }
