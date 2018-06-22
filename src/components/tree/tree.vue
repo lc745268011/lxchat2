@@ -27,8 +27,11 @@
                 {
                     menuName: '订单列表',
                     menuCode: '31',
-                    tid:'1'
-
+                    tid:'1',
+                    children:[{
+                        menuName:'列表1',
+                        tid:'2'
+                    }]
                 },
                 {
                     menuName: '退货列表',

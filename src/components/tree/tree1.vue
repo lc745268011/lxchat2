@@ -70,10 +70,13 @@
         background-image: url(../../assets/img/tree-2.png);
         transform:rotate(90deg);transition: transform 0.4s ease-out;
     }
+    .icon.folder-open.first{
+        transform:rotate(0deg);transition: transform 0.4s ease-out;
+    }
     .icon.file-text {
         /*background-image: url(../../assets/img/file-text.png);*/
     }
-    .first{
+    .icon.first{
         background-image: url(../../assets/img/tree-1.png);
     }
 </style>
