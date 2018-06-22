@@ -1,14 +1,16 @@
 <template>
     <div>
         <lx-header></lx-header>
-        <div class="contanier vCenter">
-            <div id="userlist" :style="{'height':listheight+'px'}">
+        <div class="contanier vCenter indexBox">
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']">
                 <tree></tree>
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
 
             </div>
+            <img src="../assets/logo.png" alt="" class="mslide" @click="showSlide">
         </div>
+
     </div>
 </template>
 
@@ -20,7 +22,8 @@
         name: "index",
         data:function(){
             return{
-                listheight:''
+                listheight:'',
+                show:false
             }
         },
         components:{
@@ -34,6 +37,10 @@
             //初始化时计算左右两栏高度
             init:function () {
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
+            },
+            //在手机尺寸点击切换显示组织列表
+            showSlide:function () {
+                this.show=!this.show
             }
         },
     }

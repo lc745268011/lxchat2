@@ -1,3 +1,12 @@
 .contanier{width: 100%}
 #userlist{width: 25%;max-width:25%;background-color: #f9f9f9;}
 #userchat{width: 75%;max-width: 75%}
+.mslide{display: none}
+@media (max-width: 786px) {
+    .mslide{display: block;position: absolute;width: 50px;height: 50px;bottom: 50px;left: 50px;background-color: #333}
+    #userlist{position: absolute;width: 50%;max-width: 50%;}
+    #userchat{width: 100%;max-width: 100%;}
+    .indexBox{position: relative}
+    .show{transform: translateX(0);}
+    .noshow{transform: translateX(-150%);}
+}

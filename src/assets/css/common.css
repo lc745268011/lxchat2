@@ -90,3 +90,14 @@ p {
 .font14{font-size: 0.28rem;}
 .font16{font-size: 0.32rem;}
 .font18{font-size: 0.36rem;}
+* {
+   transition-property: all;
+  -ms-transition-property: all;
+  -moz-transition-property: all;
+   -webkit-transition-property: all;
+  -o-transition-property: all;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+}
