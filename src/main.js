@@ -18,17 +18,6 @@ import './assets/css/head.css'
 import './assets/css/index.css'
 
 Vue.config.productionTip = false
-/* Vue.component('item',{
-       template: '<li>\n' +
-       '        <div>\n' +
-       '            {{ treelist.name }}\n' +
-       '        </div>\n' +
-       '        <ul>\n' +
-       '            <item v-for="(treelist, index) in treelist.children">\n' +
-       '            </item>\n' +
-       '        </ul>\n' +
-       '        </li>',
-   });*/
 Vue.component('my-component',{
     template: '#myComponent'
 })

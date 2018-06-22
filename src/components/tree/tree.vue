@@ -1,31 +1,64 @@
 <template>
     <div>
-        <ul>
-            <li v-for="item in treelist">
-                {{item.name}}
-                <ul>
-                    <li v-for="item1 in item.children">{{item1.name}}</li>
-                </ul>
-            </li>
-        </ul>
+        <my-tree :data="theData" :name="menuName"></my-tree>
     </div>
 </template>
 <script>
+    const myData = [
+        {
+            id: '1',
+            menuName: '基础管理',
+            menuCode: '10',
+            tid:'0'
+        },
+        {
+            id: '2',
+            menuName: '商品管理',
+            menuCode: '',
+            tid:'0'
+
+        },
+        {
+            id: '3',
+            menuName: '订单管理',
+            menuCode: '30',
+            tid:'0',
+            children: [
+                {
+                    menuName: '订单列表',
+                    menuCode: '31',
+                    tid:'1'
+
+                },
+                {
+                    menuName: '退货列表',
+                    menuCode: '32',
+                    children: [],
+                    tid:'1'
+
+                }
+            ]
+        },
+        {
+            id: '4',
+            menuName: '商家管理',
+            menuCode: '',
+            children: [],
+            tid:'0'
+
+        }
+    ];
+    import myTree from './tree1.vue'
     export default {
-        data(){
-            return{
-                treelist:[]
+        components: {
+            myTree
+        },
+        data () {
+            return {
+                theData: myData,
+                menuName: 'menuName', // 显示菜单名称的属性
             }
         },
-        mounted(){
-            this.$http.post('http://localhost:8080/api/tree').then(response => {
-                // success callback
-                console.log(response.data.data)
-                this.treelist=response.data.data
-            }, response => {
-                // error callback
-            })
-        }
     }
 
 </script>
