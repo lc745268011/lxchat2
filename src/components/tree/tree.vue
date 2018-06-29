@@ -8,25 +8,21 @@
         {
             id: '1',
             menuName: '基础管理',
-            menuCode: '10',
             tid:'0'
         },
         {
             id: '2',
             menuName: '商品管理',
-            menuCode: '',
             tid:'0'
 
         },
         {
             id: '3',
             menuName: '订单管理',
-            menuCode: '30',
             tid:'0',
             children: [
                 {
                     menuName: '订单列表',
-                    menuCode: '31',
                     tid:'1',
                     children:[{
                         menuName:'列表1',
@@ -35,7 +31,6 @@
                 },
                 {
                     menuName: '退货列表',
-                    menuCode: '32',
                     children: [],
                     tid:'1'
 
@@ -45,7 +40,6 @@
         {
             id: '4',
             menuName: '商家管理',
-            menuCode: '',
             children: [],
             tid:'0'
 
