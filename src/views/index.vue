@@ -10,7 +10,10 @@
             <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">dapp
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
-
+                <div class="chatInfo">
+                    <img src="//tva2.sinaimg.cn/crop.1.0.747.747.180/633f068fjw8f9h040n951j20ku0kr74t.jpg" alt="" class="chatavatar">
+                    <span class="chatname">昵称</span>
+                </div>
             </div>
             <img src="../assets/logo.png" alt="" class="mslide" @click="showSlide">
         </div>
@@ -35,7 +38,11 @@
             tree
         },
         mounted (){
-            this.init()
+            this.init();
+            window.onresize = () => {
+                this.init();
+            }
+
         },
         methods:{
             //初始化时计算左右两栏高度
@@ -55,8 +62,21 @@
     }
 </script>
 
-<style scoped>
-    /*#userlist{
-        padding:0 20px;
-    }*/
+<style scoped lang="scss">
+    .chatInfo {
+        height: 60px;
+        line-height: 60px;
+        padding: 0 20px;
+        border-bottom: 1px solid #dcdcdc;
+        .chatavatar{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .chatname{
+            font-size: 18px;
+        }
+    }
+
 </style>

@@ -4,10 +4,10 @@
         <div class="clearfix big">
             <div class="fl">
                 <ul class="clearfix">
-                    <li class="fl"><img src="../../assets/logo.png" alt="" class="userHeadImg"></li>
+                    <li class="fl"><img src="//ofl49b399.bkt.clouddn.com/1.jpg" alt="" class="userHeadImg"></li>
                     <li :class="{'active':currentTab==='xiaoxi'}"><a href="javascript:;" @click="changenav('xiaoxi')">消息</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTab==='tongxunlu'}" @click="changenav('tongxunlu')"><a href="javascript:;">通讯录</a><p class="sanjiao"></p></li>
-                    <li :class="{'active':currentTab==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">应用</a><p class="sanjiao"></p></li>
+                    <li :class="{'active':currentTab==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">DAPP</a><p class="sanjiao"></p></li>
                 </ul>
             </div>
             <div class="fr">
@@ -31,7 +31,7 @@
                     <li class="fl"><img src="../../assets/logo.png" alt="" class="userHeadImg"></li>
                     <li class="fl active"><a href="">通讯录</a></li>
                     <li class="fl"><a href="">消息</a></li>
-                    <li class="fl"><a href="">应用</a></li>
+                    <li class="fl"><a href="">dapp</a></li>
                 </ul>
             </div>
             <div class="fr">
