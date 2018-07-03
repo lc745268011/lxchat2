@@ -1,7 +1,7 @@
 <template>
     <ul class="tree-menu">
-        <li v-for="(item, index) in data" :style="{'padding-left':item.tid*20+'px'}">
-            <span @click="toggle(item, index)">
+        <li v-for="(item, index) in data">
+            <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
             {{item.menuName }}
             </span>
@@ -51,7 +51,13 @@
     }
     .tree-menu li span {
         cursor: default;
+        width: 100%;
+        display: block;
+        padding-right:20px;
+        font-size: 14px;
+        color: #666;
     }
+    .tree-menu li span:hover{background: #d5d5d5}
     .icon {
         display: inline-block;
         width: 15px;

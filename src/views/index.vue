@@ -2,8 +2,12 @@
     <div>
         <lx-header></lx-header>
         <div class="contanier vCenter indexBox">
-            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']">
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']" v-show="currentTab == 'xiaoxi'">消息
+            </div>
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">通讯录
                 <tree></tree>
+            </div>
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">dapp
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
 
@@ -23,7 +27,7 @@
         data:function(){
             return{
                 listheight:'',
-                show:false
+                show:false,
             }
         },
         components:{
@@ -43,11 +47,16 @@
                 this.show=!this.show
             }
         },
+        computed:{
+            currentTab () {
+                return this.$store.state.currentTab
+            }
+        }
     }
 </script>
 
 <style scoped>
-    #userlist{
+    /*#userlist{
         padding:0 20px;
-    }
+    }*/
 </style>

@@ -1,6 +1,6 @@
 .contanier{width: 100%}
-#userlist{width: 25%;max-width:25%;background-color: #f9f9f9;}
-#userchat{width: 75%;max-width: 75%}
+#userlist{width: 15%;max-width:15%;background-color: #f9f9f9;}
+#userchat{width: 85%;max-width: 85%}
 .mslide{display: none}
 @media (max-width: 786px) {
     .mslide{display: block;position: absolute;width: 50px;height: 50px;bottom: 50px;left: 50px;background-color: #333}

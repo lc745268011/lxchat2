@@ -8,18 +8,18 @@
         {
             id: '1',
             menuName: '基础管理',
-            tid:'0'
+            tid:0
         },
         {
             id: '2',
             menuName: '商品管理',
-            tid:'0'
+            tid:0
 
         },
         {
             id: '3',
             menuName: '订单管理',
-            tid:'0',
+            tid:0,
             children: [
                 {
                     menuName: '订单列表',
@@ -41,7 +41,7 @@
             id: '4',
             menuName: '商家管理',
             children: [],
-            tid:'0'
+            tid:0
 
         }
     ];
