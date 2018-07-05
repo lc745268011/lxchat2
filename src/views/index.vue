@@ -38,8 +38,7 @@
                                 <div class="fr">
                                     <img :src=m.avatar alt="" class="msgBoxAvatar">
                                 </div>
-                                <div style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
-                                    {{m.msgInfo}}
+                                <div v-html="m.msgInfo" style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
                                 </div>
 
                             </div>
@@ -47,8 +46,8 @@
                                 <div class="fl">
                                     <img :src=m.avatar alt="" class="msgBoxAvatar">
                                 </div>
-                                <div style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
-                                    {{m.msgInfo}}
+                                <div v-html="m.msgInfo" style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
+
                                 </div>
 
                             </div>
@@ -65,7 +64,7 @@
                                   @ready="onEditorReady($event)">
                     </quill-editor>
                     <div class="sendbtn">
-                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg">发送</button>
+                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +85,7 @@
                 show:false,
                 closeColor:'#666',
                 clickId:-1,
-                content: '<h2>I am Example</h2>',
+                content: '',
                 conversion:[
                     {
                         recivename:'我是接受者',
@@ -108,7 +107,8 @@
                     }
                 ],
                 msgBoxHeight:'',
-                msgBox:[{
+                msgBox:[
+                    {
                     id:0,
                     msg:[{
                         time:'09:00',
@@ -199,6 +199,7 @@
                 },
                 recavatar:'',
                 recusername:'',
+                editorInfo:''
             }
         },
         components:{
@@ -258,8 +259,16 @@
                 this.recusername=this.$store.state.replyusername
 
             },
-            sendMsg:function () {
-                
+            //发送消息
+            sendMsg:function (i) {
+                this.msgBox[i].msg.push({
+                    time:'09:00',
+                    msgInfo:this.content,
+                    usertype:1,
+                    avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                    username:'我是用户'
+                });
+                this.content=''
             }
         },
         computed:{

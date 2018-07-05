@@ -17,8 +17,8 @@
 #userchat{width: 80%;max-width: 80%;position: relative}
 .mslide{display: none}
 @media (max-width: 786px) {
-    .mslide{display: block;position: absolute;width: 50px;height: 50px;bottom: 50px;left: 50px;background-color: #333}
-    #userlist{position: absolute;width: 50%;max-width: 50%;}
+    .mslide{display: block;position: absolute;width: 50px;height: 50px;bottom: 50px;left: 50px;background-color: #333;z-index: 9999}
+    #userlist{position: absolute;width: 50%;max-width: 50%;z-index: 999}
     #userchat{width: 100%;max-width: 100%;}
     .indexBox{position: relative}
     .show{transform: translateX(0);}
