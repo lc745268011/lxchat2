@@ -84,7 +84,7 @@
                 listheight:'',
                 show:false,
                 closeColor:'#666',
-                clickId:-1,
+                clickId:0,
                 content: '',
                 conversion:[
                     {
@@ -178,7 +178,7 @@
                 editorOption:{
                     modules:{//自定义编辑器工具栏
                         toolbar:[
-                            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                            ['bold', 'underline', 'strike'],        // toggled buttons
                             // ['blockquote', 'code-block'],
 
                             // [{'header': 1}, {'header': 2}],               // custom button values
@@ -210,15 +210,14 @@
             this.init();
             window.onresize = () => {
                 this.init();
-            }
-
+            };
+            this.openconversion(this.clickId)
         },
         methods:{
             //初始化时计算左右两栏高度
             init:function () {
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
                 this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
-
             },
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
@@ -315,9 +314,6 @@
         border-radius: 5px;
         background: #EDEDED;
     }
-
-
-
     .sendbtn{
         text-align: right;
         button{
@@ -374,7 +370,7 @@
             height: 60px;
             /*line-height: 60px;*/
             font-size: 14px;
-            padding:10px 20px;
+            padding:10px;
             display: flex;
             cursor: pointer;
             div.fl{
