@@ -30,6 +30,31 @@
                     <img :src=recavatar alt="" class="chatavatar">
                     <span class="chatname">{{recusername}}</span>
                 </div>
+                <div class="msgBox" :style="{'height':msgBoxHeight+'px'}">
+                    <ul v-for="item in msgBox" v-show="clickId==item.id">
+                        <li v-for="m in item.msg" class="clearfix">
+
+                            <div v-if="m.usertype==1" style="width: 40%;" class="fr clearfix">
+                                <div class="fr">
+                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
+                                </div>
+                                <div style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
+                                    {{m.msgInfo}}
+                                </div>
+
+                            </div>
+                            <div v-else-if="m.usertype==0" style="width: 40%;" class="fl clearfix">
+                                <div class="fl">
+                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
+                                </div>
+                                <div style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
+                                    {{m.msgInfo}}
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="editorbox">
                     <div></div>
                     <quill-editor :options="editorOption"
@@ -40,7 +65,7 @@
                                   @ready="onEditorReady($event)">
                     </quill-editor>
                     <div class="sendbtn">
-                        <button :style="{'background-color':this.$store.state.skintype}">发送</button>
+                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg">发送</button>
                     </div>
                 </div>
             </div>
@@ -82,6 +107,74 @@
                         id:1
                     }
                 ],
+                msgBoxHeight:'',
+                msgBox:[{
+                    id:0,
+                    msg:[{
+                        time:'09:00',
+                        msgInfo:'hello',
+                        usertype:1,
+                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        username:'我是用户'
+                    },{
+                        time:'09:03',
+                        msgInfo:'hello',
+                        usertype:0,
+                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        username:'我是接受者'
+                    },{
+                        time:'09:00',
+                        msgInfo:'hello',
+                        usertype:1,
+                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        username:'我是用户'
+                    },{
+                        time:'09:03',
+                        msgInfo:'hello',
+                        usertype:0,
+                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        username:'我是接受者'
+                    },{
+                        time:'09:00',
+                        msgInfo:'hello',
+                        usertype:1,
+                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        username:'我是用户'
+                    },{
+                        time:'09:03',
+                        msgInfo:'hello',
+                        usertype:0,
+                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        username:'我是接受者'
+                    },{
+                        time:'09:00',
+                        msgInfo:'hello',
+                        usertype:1,
+                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        username:'我是用户'
+                    },{
+                        time:'09:03',
+                        msgInfo:'hello',
+                        usertype:0,
+                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        username:'我是接受者'
+                    }]
+                },{
+                    id:1,
+                    msg:[{
+                        time:'09:00',
+                        msgInfo:'hello1',
+                        usertype:1,
+                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        username:'我是用户'
+                    },{
+                        time:'09:03',
+                        msgInfo:'hello1',
+                        usertype:0,
+                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        username:'我是接受者'
+                    }]
+                }],
                 editorOption:{
                     modules:{//自定义编辑器工具栏
                         toolbar:[
@@ -123,6 +216,8 @@
             //初始化时计算左右两栏高度
             init:function () {
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
+                this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
+
             },
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
@@ -161,17 +256,59 @@
                 this.$store.commit('replyusername',this.conversion[i].recivename);
                 this.recavatar=this.$store.state.reciveavatar;
                 this.recusername=this.$store.state.replyusername
+
+            },
+            sendMsg:function () {
+                
             }
         },
         computed:{
             currentTab () {
                 return this.$store.state.currentTab
-            }
-        }
+            },
+
+    }
     }
 </script>
 
 <style scoped lang="scss">
+    .msgBox{
+        padding:10px 20px;
+        overflow: auto;
+        ul{
+            height: 100%;
+            li{margin-bottom: 20px}
+        }
+
+        .msgInfo{
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            max-width: 80%;
+        }
+        .msgBoxAvatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%
+        }
+    }
+    ::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+    }
+    ::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        background: #999;
+    }
+    ::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        background: #EDEDED;
+    }
+
+
+
     .sendbtn{
         text-align: right;
         button{
@@ -184,6 +321,9 @@
         }
         :hover{
             cursor: pointer;
+        }
+        :focus{
+            outline: none;
         }
     }
     .editorbox {
