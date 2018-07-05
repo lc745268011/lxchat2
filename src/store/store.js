@@ -5,8 +5,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         listheight:'',
-        currentTab:'xiaoxi',
-        skintype:'red'
+        currentTab:'message',
+        skintype:'#fb6161'
     },
     mutations: {
         "setId": function(state, listheight) {

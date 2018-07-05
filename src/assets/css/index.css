@@ -1,6 +1,20 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 732874 */
+    src: url('//at.alicdn.com/t/font_732874_pid2qqpvsx.eot');
+    src: url('//at.alicdn.com/t/font_732874_pid2qqpvsx.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_732874_pid2qqpvsx.woff') format('woff'),
+    url('//at.alicdn.com/t/font_732874_pid2qqpvsx.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_732874_pid2qqpvsx.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
 .contanier{width: 100%}
-#userlist{width: 15%;max-width:15%;background-color: #f9f9f9;}
-#userchat{width: 85%;max-width: 85%}
+#userlist{width: 20%;max-width:20%;background-color: #f9f9f9;}
+#userchat{width: 80%;max-width: 80%;position: relative}
 .mslide{display: none}
 @media (max-width: 786px) {
     .mslide{display: block;position: absolute;width: 50px;height: 50px;bottom: 50px;left: 50px;background-color: #333}

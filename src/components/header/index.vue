@@ -5,7 +5,7 @@
             <div class="fl">
                 <ul class="clearfix">
                     <li class="fl"><img src="//ofl49b399.bkt.clouddn.com/1.jpg" alt="" class="userHeadImg"></li>
-                    <li :class="{'active':currentTab==='xiaoxi'}"><a href="javascript:;" @click="changenav('xiaoxi')">消息</a><p class="sanjiao"></p></li>
+                    <li :class="{'active':currentTab==='message'}"><a href="javascript:;" @click="changenav('message')">消息</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTab==='tongxunlu'}" @click="changenav('tongxunlu')"><a href="javascript:;">通讯录</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTab==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">DAPP</a><p class="sanjiao"></p></li>
                 </ul>
@@ -15,8 +15,8 @@
                     <li class="fl"><input type="text" placeholder="搜索" class="search"></li>
                     <li class="fl skin"><a href="javascript:;" @click="skin">换肤</a>
                         <ul v-show="skinlist" class="skinlist">
-                            <li @click="skinchange('red')">红色</li>
-                            <li @click="skinchange('blue')">蓝色</li>
+                            <li @click="skinchange('#fb6161')">红色</li>
+                            <li @click="skinchange('#5498f5')">蓝色</li>
                             <li @click="skinchange('black')">黑色</li>
                         </ul>
                     </li>
@@ -51,9 +51,9 @@
         data :function() {
             return {
                 aheight:'',
-                currentTab:'xiaoxi',
+                currentTab:'message',
                 skinlist:false,
-                skintype:'red'
+                skintype:'#fb6161'
             }
         },
         mounted (){
@@ -83,7 +83,7 @@
 <style scoped lang="scss" rel="stylesheet/scss">
     #header{background-color: $color}
     #header .skin{position: relative}
-    #header .skin .skinlist{position: absolute;width: 100px;background: #f3f3f3;border-radius: 4px;}
+    #header .skin .skinlist{position: absolute;width: 100px;background: #f3f3f3;border-radius: 4px;    z-index: 999;}
     #header .skin .skinlist li{width: 100%;text-align: center;margin-left: 0;line-height: 2;padding: 5px 15px;border-bottom: 1px solid #dcdcdc;font-size: 14px;color: #666;cursor: pointer}
     #header .skin .skinlist li:last-child{border-bottom: 0;}
 </style>

@@ -10,6 +10,13 @@ import store from './store/store'
 import axios from 'axios'
 Vue.prototype.$http = axios
 /**
+ * 富文本编辑器
+ */
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import VueQuillEditor from 'vue-quill-editor'
+Vue.use(VueQuillEditor)
+/**
 静态资源
  */
 import './assets/js/rem.js'

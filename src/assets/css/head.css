@@ -9,6 +9,7 @@
 #header .small{padding:0 15px;height: 48px;line-height: 47px;}
 #header a{color: #fff;font-size: 16px;}
 #header li{margin-right: 60px;float: left}
+#header li:last-child{margin-right: 0}
 #header .small .fl li{margin-right: 20px;}
 #header .big .fr li{margin-left: 25px;margin-right: 0}
 #header .big .fl li a{color: rgba(255,255,255,.5)}
