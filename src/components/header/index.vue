@@ -5,7 +5,7 @@
             <div class="fl">
                 <ul class="clearfix">
                     <li class="fl"><img src="//ofl49b399.bkt.clouddn.com/1.jpg" alt="" class="userHeadImg"></li>
-                    <li :class="{'active':currentTab==='message'}"><a href="javascript:;" @click="changenav('message')">消息</a><p class="sanjiao"></p></li>
+                    <li :class="{'active':currentTab==='message'}"><a href="javascript:;" @click="changenav('message')">互动</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTab==='tongxunlu'}" @click="changenav('tongxunlu')"><a href="javascript:;">通讯录</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTab==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">DAPP</a><p class="sanjiao"></p></li>
                 </ul>

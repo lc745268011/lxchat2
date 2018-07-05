@@ -4,7 +4,7 @@
         <div class="contanier vCenter indexBox">
             <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']" v-show="currentTab == 'message'">
                 <ul class="conversationlist">
-                    <li class="clearfix" v-for="(item,index) in conversion">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
@@ -27,8 +27,8 @@
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
                 <div class="chatInfo">
-                    <img src="//tva2.sinaimg.cn/crop.1.0.747.747.180/633f068fjw8f9h040n951j20ku0kr74t.jpg" alt="" class="chatavatar">
-                    <span class="chatname">昵称</span>
+                    <img :src=recavatar alt="" class="chatavatar">
+                    <span class="chatname">{{recusername}}</span>
                 </div>
                 <div class="editorbox">
                     <div></div>
@@ -60,6 +60,7 @@
                 listheight:'',
                 show:false,
                 closeColor:'#666',
+                clickId:-1,
                 content: '<h2>I am Example</h2>',
                 conversion:[
                     {
@@ -68,7 +69,8 @@
                         sendtime:'09:00',
                         lastmsg:'我是最后一条显示数据',
                         sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg'
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:0
                     },
                     {
                         recivename:'我是接受者1',
@@ -76,7 +78,8 @@
                         sendtime:'09:00',
                         lastmsg:'我是最后一条显示数据',
                         sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg'
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:1
                     }
                 ],
                 editorOption:{
@@ -100,7 +103,9 @@
                             ['link', 'image', 'video', 'formula']//去除video即可
                         ]
                     }
-                }
+                },
+                recavatar:'',
+                recusername:'',
             }
         },
         components:{
@@ -135,6 +140,7 @@
             closeconversion:function (index) {
                 this.conversion.splice(index,1)
             },
+            //富文本编辑器状态
             onEditorBlur(quill) {
                 console.log('editor blur!', quill)
             },
@@ -147,6 +153,14 @@
             onEditorChange({ quill, html, text }) {
                 console.log('editor change!', quill, html, text)
                 this.content = html
+            },
+            //左侧会话列表和右侧会话窗口联动
+            openconversion:function (i) {
+                this.clickId=i;
+                this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
+                this.$store.commit('replyusername',this.conversion[i].recivename);
+                this.recavatar=this.$store.state.reciveavatar;
+                this.recusername=this.$store.state.replyusername
             }
         },
         computed:{
@@ -167,6 +181,9 @@
             padding: 5px 10px;
             color: #fff;
             font-size: 14px;
+        }
+        :hover{
+            cursor: pointer;
         }
     }
     .editorbox {

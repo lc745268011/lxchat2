@@ -6,21 +6,27 @@ const store = new Vuex.Store({
     state: {
         listheight:'',
         currentTab:'message',
-        skintype:'#fb6161'
+        skintype:'#fb6161',
+        //互动页面右侧聊天框
+        reciveavatar:'',
+        replyusername:'',
     },
     mutations: {
         "setId": function(state, listheight) {
             state.listheight = listheight
-            // console.log('保存', state.listheight)
         },
         "currentTab": function(state, currentTab) {
             state.currentTab = currentTab
-            // console.log('保存', state.listheight)
         },
         "skintype": function(state, skintype) {
             state.skintype = skintype
-            // console.log('保存', state.listheight)
-        }
+        },
+        "reciveavatar":function (state,reciveavatar) {
+            state.reciveavatar = reciveavatar
+        },
+        "replyusername":function (state,replyusername) {
+            state.replyusername = replyusername
+        },
     },
     actions: {
         "setId": function(state, listheight) {
@@ -34,6 +40,14 @@ const store = new Vuex.Store({
         "skintype": function(state, skintype) {
             // console.log('获取', state.listheight)
             store.commit("skintype", skintype)
+        },
+        "reciveavatar": function(state, reciveavatar) {
+            // console.log('获取', state.listheight)
+            store.commit("reciveavatar", reciveavatar)
+        },
+        "replyusername": function(state, replyusername) {
+            // console.log('获取', state.listheight)
+            store.commit("replyusername", replyusername)
         }
     }
 })
