@@ -14,14 +14,19 @@
                     </li>
                 </ul>
             </div>
-            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">通讯录
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
                 <div class="messagetab">
                     <ul>
-                        <li>好友</li>
-                        <li>群组</li>
+                        <li :class="{'active':txTab===0}" @click="txTablist(0)" :style="{'border-bottom-color':txTab===0 ? this.$store.state.skintype:''}">好友</li>
+                        <li :class="{'active':txTab===1}" @click="txTablist(1)" :style="{'border-bottom-color':txTab===1 ? this.$store.state.skintype:''}">群组</li>
                     </ul>
                 </div>
-                <tree></tree>
+                <div v-show="txTab == 0" style="margin: 10px 0">
+                    <tree></tree>
+                </div>
+                <div v-show="txTab == 1" style="margin: 10px 0">
+                    <tree></tree>
+                </div>
             </div>
             <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">dapp
             </div>
@@ -107,6 +112,7 @@
                     }
                 ],
                 msgBoxHeight:'',
+                txTabNum:0,
                 msgBox:[
                     {
                     id:0,
@@ -218,6 +224,7 @@
             init:function () {
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
                 this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
+                this.scrolldown()
             },
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
@@ -255,8 +262,15 @@
                 this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.conversion[i].recivename);
                 this.recavatar=this.$store.state.reciveavatar;
-                this.recusername=this.$store.state.replyusername
-
+                this.recusername=this.$store.state.replyusername;
+                this.scrolldown()
+            },
+            //会话窗口滚动条在底部
+            scrolldown:function(){
+                this.$nextTick(function(){
+                    var div = document.getElementsByClassName('msgBox');
+                    div[0].scrollTop = div[0].scrollHeight;
+                })
             },
             //发送消息
             sendMsg:function (i) {
@@ -267,15 +281,23 @@
                     avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
                     username:'我是用户'
                 });
-                this.content=''
+                this.content='';
+                this.scrolldown()
+            },
+            txTablist:function (id) {
+                this.txTabNum=id;
+                this.$store.commit('txTab',this.txTabNum)
             }
+
         },
         computed:{
             currentTab () {
                 return this.$store.state.currentTab
             },
-
-    }
+            txTab () {
+                return this.$store.state.txTab
+            },
+        },
     }
 </script>
 
@@ -362,7 +384,14 @@
             width: 50%;
             float: left;
             text-align: center;
-
+            border-bottom: 2px solid transparent;
+            margin-top: -2px;
+        }
+        :hover{
+            cursor: pointer;
+        }
+        .active{
+            border-bottom: 2px solid;
         }
     }
     .conversationlist{

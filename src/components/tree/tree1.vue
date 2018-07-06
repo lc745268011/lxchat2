@@ -1,9 +1,9 @@
 <template>
     <ul class="tree-menu">
-        <li v-for="(item, index) in data">
+        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'">
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
-            {{item.menuName }}
+            <img :src="item.avatar" alt="" class="avatarImg">{{item.menuName }}
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
@@ -47,15 +47,16 @@
         list-style: none;
     }
     .tree-menu li {
-        line-height: 2;
+        line-height: 1.5;
     }
     .tree-menu li span {
-        cursor: default;
         width: 100%;
         display: block;
+        padding: 5px 0;
         padding-right:20px;
         font-size: 14px;
         color: #666;
+        cursor: pointer;
     }
     .tree-menu li span:hover{background: #d5d5d5}
     .icon {
@@ -84,5 +85,17 @@
     }
     .icon.first{
         background-image: url(../../assets/img/tree-1.png);
+    }
+
+    .avatarImg {
+        display: none
+    }
+
+    .avatar img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 10px;
     }
 </style>
