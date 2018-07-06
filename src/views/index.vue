@@ -39,7 +39,7 @@
                     <ul v-for="item in msgBox" v-show="clickId==item.id">
                         <li v-for="m in item.msg" class="clearfix">
 
-                            <div v-if="m.usertype==1" style="width: 40%;" class="fr clearfix">
+                            <div v-if="m.usertype==1" style="width: 61.8%;" class="fr clearfix">
                                 <div class="fr">
                                     <img :src=m.avatar alt="" class="msgBoxAvatar">
                                 </div>
@@ -47,7 +47,7 @@
                                 </div>
 
                             </div>
-                            <div v-else-if="m.usertype==0" style="width: 40%;" class="fl clearfix">
+                            <div v-else-if="m.usertype==0" style="width: 61.8%;" class="fl clearfix">
                                 <div class="fl">
                                     <img :src=m.avatar alt="" class="msgBoxAvatar">
                                 </div>
@@ -120,7 +120,7 @@
                         time:'09:00',
                         msgInfo:'hello',
                         usertype:1,
-                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                         username:'我是用户'
                     },{
                         time:'09:03',
@@ -132,7 +132,7 @@
                         time:'09:00',
                         msgInfo:'hello',
                         usertype:1,
-                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                         username:'我是用户'
                     },{
                         time:'09:03',
@@ -144,7 +144,7 @@
                         time:'09:00',
                         msgInfo:'hello',
                         usertype:1,
-                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                         username:'我是用户'
                     },{
                         time:'09:03',
@@ -156,7 +156,7 @@
                         time:'09:00',
                         msgInfo:'hello',
                         usertype:1,
-                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                         username:'我是用户'
                     },{
                         time:'09:03',
@@ -171,7 +171,7 @@
                         time:'09:00',
                         msgInfo:'hello1',
                         usertype:1,
-                        avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                         username:'我是用户'
                     },{
                         time:'09:03',
@@ -278,7 +278,7 @@
                     time:'09:00',
                     msgInfo:this.content,
                     usertype:1,
-                    avatar:'//ofl49b399.bkt.clouddn.com/1.jpg',
+                    avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                     username:'我是用户'
                 });
                 this.content='';
@@ -445,8 +445,8 @@
 
 </style>
 <style>
-    .ql-editor{height: 180px;}
-    .ql-toolbar.ql-snow,.ql-container.ql-snow{border: 0}
-    .ql-toolbar.ql-snow{
+    .quill-editor .ql-editor{height: 180px;}
+    .quill-editor .ql-toolbar.ql-snow,.quill-editor .ql-container.ql-snow{border: 0}
+    .quill-editor .ql-toolbar.ql-snow{
         border-top: 1px solid #dcdcdc;}
 </style>

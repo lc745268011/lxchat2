@@ -26,7 +26,7 @@ select {
 }
 #body::-webkit-scrollbar,body::-webkit-scrollbar,html::-webkit-scrollbar {display:none}
 body {
-  font: 14px "微软雅黑", "Arial Narrow", HELVETICA;
+  font: 14px "Microsoft Yahei", "Arial Narrow", HELVETICA;
   background: #fff;
   -webkit-text-size-adjust: 100%;
   color: #666666;
