@@ -98,6 +98,7 @@
 <script>
     import lxHeader from '../components/header/index'
     import tree from '../components/tree/tree'
+    import {mapState,mapActions} from 'vuex'
     export default {
         name: "index",
         data:function(){
@@ -234,6 +235,28 @@
             };
             this.openconversion(this.clickId)
         },
+        computed:{
+            ...mapState({
+                skintype: function (state) {
+                    return state.skintype
+                },
+                currentTab: function (state) {
+                    return state.currentTab
+                },
+                txTab: function (state) {
+                    return state.txTab
+                },
+                txTab1: function (state) {
+                    return state.txTab1
+                },
+                reciveavatar: function (state) {
+                    return state.reciveavatar
+                },
+                replyusername: function (state) {
+                    return state.replyusername
+                }
+            }),
+        },
         methods:{
             //初始化时计算左右两栏高度
             init:function () {
@@ -247,7 +270,7 @@
             },
             //鼠标悬浮关闭按钮，颜色变换
             closecolor:function () {
-                this.closeColor=this.$store.state.skintype
+                this.closeColor=this.skintype
             },
             //鼠标离开返回初始颜色
             closecolor1:function () {
@@ -276,9 +299,9 @@
                 this.clickId=i;
                 this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.conversion[i].recivename);
-                this.recavatar=this.$store.state.reciveavatar;
-                this.recusername=this.$store.state.replyusername;
-                this.scrolldown()
+                this.recavatar=this.reciveavatar;
+                this.recusername=this.replyusername;
+                this.scrolldown();
             },
             //会话窗口滚动条在底部
             scrolldown:function(){
@@ -299,24 +322,11 @@
                 this.content='';
                 this.scrolldown()
             },
-            txTablist:function (id) {
-                this.$store.commit('txTab',id)
-            },
-            txTablist1:function (id) {
-                this.$store.commit('txTab1',id)
-            }
+            ...mapMutations({
+                txTablist: "txTab",
+                txTablist1: "txTab1",
+            })
 
-        },
-        computed:{
-            currentTab () {
-                return this.$store.state.currentTab
-            },
-            txTab () {
-                return this.$store.state.txTab
-            },
-            txTab1 () {
-                return this.$store.state.txTab1
-            },
         },
     }
 </script>
