@@ -3,7 +3,23 @@
         <lx-header></lx-header>
         <div class="contanier vCenter indexBox">
             <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']" v-show="currentTab == 'message'">
-                <ul class="conversationlist">
+                <div class="messagetab">
+                    <ul>
+                        <li :class="{'active':txTab1===2}" @click="txTablist1(2)" :style="{'border-bottom-color':txTab1===2 ? this.$store.state.skintype:''}">常用</li>
+                        <li :class="{'active':txTab1===3}" @click="txTablist1(3)" :style="{'border-bottom-color':txTab1===3 ? this.$store.state.skintype:''}">更多</li>
+                    </ul>
+                </div>
+                <ul class="conversationlist" v-show="txTab1 == 2">1
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
+                        <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
+                        <div class="fl">
+                            <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
+                            <div class="messageInfo">{{item.lastmsg}}</div>
+                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="conversationlist" v-show="txTab1 == 3">
                     <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
@@ -112,7 +128,6 @@
                     }
                 ],
                 msgBoxHeight:'',
-                txTabNum:0,
                 msgBox:[
                     {
                     id:0,
@@ -285,8 +300,10 @@
                 this.scrolldown()
             },
             txTablist:function (id) {
-                this.txTabNum=id;
-                this.$store.commit('txTab',this.txTabNum)
+                this.$store.commit('txTab',id)
+            },
+            txTablist1:function (id) {
+                this.$store.commit('txTab1',id)
             }
 
         },
@@ -296,6 +313,9 @@
             },
             txTab () {
                 return this.$store.state.txTab
+            },
+            txTab1 () {
+                return this.$store.state.txTab1
             },
         },
     }

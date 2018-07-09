@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         //互动页面右侧聊天框
         reciveavatar:'',
         replyusername:'',
-        txTab:0
+        txTab:0,
+        txTab1:2
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
         },
         "txTab":function (state,txTab) {
             state.txTab = txTab
+        },
+        "txTab1":function (state,txTab1) {
+            state.txTab1 = txTab1
         },
     },
     actions: {
@@ -56,6 +60,10 @@ const store = new Vuex.Store({
         "txTab": function(state, txTab) {
             // console.log('获取', state.listheight)
             store.commit("txTab", txTab)
+        },
+        "txTab1": function(state, txTab1) {
+            // console.log('获取', state.listheight)
+            store.commit("txTab1", txTab1)
         }
     }
 })
