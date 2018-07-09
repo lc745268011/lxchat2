@@ -68,6 +68,10 @@ const store = new Vuex.Store({
         "txTab1": function(state, txTab1) {
             // console.log('获取', state.listheight)
             store.commit("txTab1", txTab1)
+        },
+        "txTab2": function(state, txTab2) {
+            // console.log('获取', state.listheight)
+            store.commit("txTab1", txTab2)
         }
     }
 })

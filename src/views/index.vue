@@ -48,7 +48,7 @@
                         </li>
                     </ul>
                 </div>
-                <div v-show="txTab == 1" style="margin: 10px 0">
+                <div v-show="txTab == 1">
                     <treetx></treetx>
                     <div class="addgn">
                         <ul>
@@ -77,7 +77,7 @@
                         </li>
                     </ul>
                 </div>
-                <div v-show="txTab2 == 5" style="margin: 10px 0">
+                <div v-show="txTab2 == 5">
                     <treedapp></treedapp>
                     <div class="addgn">
                         +创建DAPP
@@ -85,11 +85,18 @@
                 </div>
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
-                <div class="chatInfo">
-                    <img :src=recavatar alt="" class="chatavatar">
-                    <span class="chatname">{{recusername}}</span>
+                <div class="chatInfo clearfix">
+                    <div class="fl">
+                        <img :src=recavatar alt="" class="chatavatar">
+                        <span class="chatname">{{recusername}}</span>
+                    </div>
+                    <div class="fr">
+                        <i class="iconfont">&#xe634;</i>
+                        <i class="iconfont">&#xe600;</i>
+                    </div>
+
                 </div>
-                <div class="msgBox" :style="{'height':msgBoxHeight+'px'}">
+                <div class="msgBox" :style="{'height':msgBoxHeight+'px','width':'100%'}">
                     <ul v-for="item in msgBox" v-show="clickId==item.id">
                         <li v-for="m in item.msg" class="clearfix">
 
@@ -138,7 +145,7 @@
     import tree from '../components/tree/tree'
     import treetx from '../components/tree/treetx'
     import treedapp from '../components/tree/treedapp'
-    import {mapState,mapMutations} from 'vuex'
+    import {mapState,mapActions} from 'vuex'
     export default {
         name: "index",
         data:function(){
@@ -168,26 +175,6 @@
                         id:1
                     }
                 ],
-                conversion2:[
-                    {
-                        recivename:'张三',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'最后消息',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:0
-                    },
-                    {
-                        recivename:'李四',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'最后消息',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:1
-                    }
-                ],
                 conversion1:[
                     {
                         recivename:'记事本',
@@ -203,6 +190,26 @@
                         sendname:'我是用户',
                         sendtime:'09:00',
                         lastmsg:'我是最后一条显示数据',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:1
+                    }
+                ],
+                conversion2:[
+                    {
+                        recivename:'张三',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'最后消息',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:0
+                    },
+                    {
+                        recivename:'李四',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'最后消息',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:1
@@ -407,7 +414,7 @@
                 this.content='';
                 this.scrolldown()
             },
-            ...mapMutations({
+            ...mapActions({
                 txTablist: "txTab",
                 txTablist1: "txTab1",
                 txTablist2: "txTab2",
@@ -488,6 +495,10 @@
         }
         .chatname{
             font-size: 18px;
+        }
+        i.iconfont{
+            font-size: 26px;
+            margin-left: 10px;
         }
     }
     .messagetab{

@@ -29,15 +29,13 @@
                 {
                     menuName: '订单列表',
                     tid:'1',
-                    children:[{
-                        menuName:'列表1',
-                        tid:'2',
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg'
-                    }]
+                    star:false,
+                    avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg'
                 },
                 {
                     menuName: '退货列表',
                     tid:'1',
+                    star:false,
                     avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg'
 
 

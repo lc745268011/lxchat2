@@ -4,6 +4,7 @@
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
             <img :src="item.avatar" alt="" class="avatarImg">{{item.menuName }}
+                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.tid!=0" @click="addstar(item)">&#xe6b9;</i>
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
@@ -15,13 +16,14 @@
         props: {
             data: Array,
         },
-        data () {
+        data() {
             return {
                 folderIconList: [],
-                scope: {}
+                scope: {},
+                star:false
             }
         },
-        created () {
+        created() {
             this.data.forEach((item, index) => {
                 if (item.children && item.children.length) {
                     this.folderIconList[index] = 'folder';
@@ -29,14 +31,17 @@
             });
         },
         methods: {
-            doTask (index) {
+            doTask(index) {
                 this.$set(this.scope, index, !this.scope[index]);
                 this.folderIconList[index] = this.scope[index] ? 'folder-open' : 'folder';
             },
-            toggle (item, index) {
+            toggle(item, index) {
                 if (item.children && item.children.length) {
                     this.doTask(index);
                 }
+            },
+            addstar(item){
+                item.star=!item.star
             }
         }
     }
@@ -46,19 +51,25 @@
     .tree-menu {
         list-style: none;
     }
+
     .tree-menu li {
         line-height: 1.5;
     }
+
     .tree-menu li span {
         width: 100%;
         display: block;
         padding: 5px 0;
-        padding-right:20px;
+        padding-right: 20px;
         font-size: 14px;
         color: #666;
         cursor: pointer;
     }
-    .tree-menu li span:hover{background: #d5d5d5}
+
+    .tree-menu li span:hover {
+        background: #d5d5d5
+    }
+
     .icon {
         display: inline-block;
         width: 15px;
@@ -68,23 +79,33 @@
         background-position: center;
         margin-right: 10px;
     }
+
     .icon.folder {
         background-image: url(../../assets/img/tree-2.png);
-        transform:rotate(0deg);transition: transform 0.4s ease-out;
+        transform: rotate(0deg);
+        transition: transform 0.4s ease-out;
 
     }
+
     .icon.folder-open {
         background-image: url(../../assets/img/tree-2.png);
-        transform:rotate(90deg);transition: transform 0.4s ease-out;
+        transform: rotate(90deg);
+        transition: transform 0.4s ease-out;
     }
-    .icon.folder-open.first{
-        transform:rotate(0deg);transition: transform 0.4s ease-out;
+
+    .icon.folder-open.first {
+        transform: rotate(0deg);
+        transition: transform 0.4s ease-out;
     }
+
     .icon.file-text {
         /*background-image: url(../../assets/img/file-text.png);*/
+        display: none;
     }
-    .icon.first{
-        background-image: url(../../assets/img/tree-1.png);
+
+    .icon.first {
+        background-image: url(../../assets/img/tree-1.png) !important;
+        display: inline-block;
     }
 
     .avatarImg {
@@ -98,4 +119,10 @@
         display: inline-block;
         margin-right: 10px;
     }
+
+    .star {
+        float: right;
+        color: #ccc;
+    }
+    .star.addStar{color: #ffd000}
 </style>
