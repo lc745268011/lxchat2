@@ -11,7 +11,8 @@ const store = new Vuex.Store({
         reciveavatar:'',
         replyusername:'',
         txTab:0,
-        txTab1:2
+        txTab1:2,
+        txTab2:4
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -34,6 +35,9 @@ const store = new Vuex.Store({
         },
         "txTab1":function (state,txTab1) {
             state.txTab1 = txTab1
+        },
+        "txTab2":function (state,txTab2) {
+            state.txTab2 = txTab2
         },
     },
     actions: {

@@ -9,8 +9,8 @@
                         <li :class="{'active':txTab1===3}" @click="txTablist1(3)" :style="{'border-bottom-color':txTab1===3 ? this.$store.state.skintype:''}">更多</li>
                     </ul>
                 </div>
-                <ul class="conversationlist" v-show="txTab1 == 2">1
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
+                <ul class="conversationlist" v-show="txTab1 == 2">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
@@ -19,32 +19,70 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="conversationlist" v-show="txTab1 == 3">
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
-                        <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
-                        <div class="fl">
-                            <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
-                            <div class="messageInfo">{{item.lastmsg}}</div>
-                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
-                        </div>
-                    </li>
-                </ul>
+                <div v-show="txTab1 == 3">
+                    <tree></tree>
+                    <div class="addgn">
+                        <ul>
+                            <li>+新建对话</li>
+                            <li>+创建群组</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
                 <div class="messagetab">
                     <ul>
-                        <li :class="{'active':txTab===0}" @click="txTablist(0)" :style="{'border-bottom-color':txTab===0 ? this.$store.state.skintype:''}">好友</li>
-                        <li :class="{'active':txTab===1}" @click="txTablist(1)" :style="{'border-bottom-color':txTab===1 ? this.$store.state.skintype:''}">群组</li>
+                        <li :class="{'active':txTab===0}" @click="txTablist(0)" :style="{'border-bottom-color':txTab===0 ? this.$store.state.skintype:''}">常用</li>
+                        <li :class="{'active':txTab===1}" @click="txTablist(1)" :style="{'border-bottom-color':txTab===1 ? this.$store.state.skintype:''}">更多</li>
                     </ul>
                 </div>
-                <div v-show="txTab == 0" style="margin: 10px 0">
-                    <tree></tree>
+                <div v-show="txTab == 0">
+                    <ul class="conversationlist">
+                        <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
+                            <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
+                            <div class="fl">
+                                <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
+                                <div class="messageInfo">{{item.lastmsg}}</div>
+                                <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div v-show="txTab == 1" style="margin: 10px 0">
-                    <tree></tree>
+                    <treetx></treetx>
+                    <div class="addgn">
+                        <ul>
+                            <li>+添加好友</li>
+                            <li>+创建组织</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">dapp
+            <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">
+                <div class="messagetab">
+                    <ul>
+                        <li :class="{'active':txTab2===4}" @click="txTablist2(4)" :style="{'border-bottom-color':txTab2===4 ? this.$store.state.skintype:''}">常用</li>
+                        <li :class="{'active':txTab2===5}" @click="txTablist2(5)" :style="{'border-bottom-color':txTab2===5 ? this.$store.state.skintype:''}">更多</li>
+                    </ul>
+                </div>
+                <div v-show="txTab2 == 4">
+                    <ul class="conversationlist">
+                        <li :class="index==clickId?'active':''" v-for="(item,index) in conversion1" @click="openconversion(index)">
+                            <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
+                            <div class="fl">
+                                <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
+                                <div class="messageInfo">{{item.lastmsg}}</div>
+                                <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div v-show="txTab2 == 5" style="margin: 10px 0">
+                    <treedapp></treedapp>
+                    <div class="addgn">
+                        +创建DAPP
+                    </div>
+                </div>
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
                 <div class="chatInfo">
@@ -98,7 +136,9 @@
 <script>
     import lxHeader from '../components/header/index'
     import tree from '../components/tree/tree'
-    import {mapState,mapActions} from 'vuex'
+    import treetx from '../components/tree/treetx'
+    import treedapp from '../components/tree/treedapp'
+    import {mapState,mapMutations} from 'vuex'
     export default {
         name: "index",
         data:function(){
@@ -110,7 +150,47 @@
                 content: '',
                 conversion:[
                     {
-                        recivename:'我是接受者',
+                        recivename:'张三',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'青岛河北商会-秘书长',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:0
+                    },
+                    {
+                        recivename:'李四',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'联信科技-研发总监',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:1
+                    }
+                ],
+                conversion2:[
+                    {
+                        recivename:'张三',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'最后消息',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:0
+                    },
+                    {
+                        recivename:'李四',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'最后消息',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:1
+                    }
+                ],
+                conversion1:[
+                    {
+                        recivename:'记事本',
                         sendname:'我是用户',
                         sendtime:'09:00',
                         lastmsg:'我是最后一条显示数据',
@@ -119,7 +199,7 @@
                         id:0
                     },
                     {
-                        recivename:'我是接受者1',
+                        recivename:'项目计划',
                         sendname:'我是用户',
                         sendtime:'09:00',
                         lastmsg:'我是最后一条显示数据',
@@ -131,72 +211,72 @@
                 msgBoxHeight:'',
                 msgBox:[
                     {
-                    id:0,
-                    msg:[{
-                        time:'09:00',
-                        msgInfo:'hello',
-                        usertype:1,
-                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                        username:'我是用户'
+                        id:0,
+                        msg:[{
+                            time:'09:00',
+                            msgInfo:'hello',
+                            usertype:1,
+                            avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                            username:'我是用户'
+                        },{
+                            time:'09:03',
+                            msgInfo:'hello',
+                            usertype:0,
+                            avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                            username:'我是接受者'
+                        },{
+                            time:'09:00',
+                            msgInfo:'hello',
+                            usertype:1,
+                            avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                            username:'我是用户'
+                        },{
+                            time:'09:03',
+                            msgInfo:'hello',
+                            usertype:0,
+                            avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                            username:'我是接受者'
+                        },{
+                            time:'09:00',
+                            msgInfo:'hello',
+                            usertype:1,
+                            avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                            username:'我是用户'
+                        },{
+                            time:'09:03',
+                            msgInfo:'hello',
+                            usertype:0,
+                            avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                            username:'我是接受者'
+                        },{
+                            time:'09:00',
+                            msgInfo:'hello',
+                            usertype:1,
+                            avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                            username:'我是用户'
+                        },{
+                            time:'09:03',
+                            msgInfo:'hello',
+                            usertype:0,
+                            avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                            username:'我是接受者'
+                        }]
                     },{
-                        time:'09:03',
-                        msgInfo:'hello',
-                        usertype:0,
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        username:'我是接受者'
-                    },{
-                        time:'09:00',
-                        msgInfo:'hello',
-                        usertype:1,
-                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                        username:'我是用户'
-                    },{
-                        time:'09:03',
-                        msgInfo:'hello',
-                        usertype:0,
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        username:'我是接受者'
-                    },{
-                        time:'09:00',
-                        msgInfo:'hello',
-                        usertype:1,
-                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                        username:'我是用户'
-                    },{
-                        time:'09:03',
-                        msgInfo:'hello',
-                        usertype:0,
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        username:'我是接受者'
-                    },{
-                        time:'09:00',
-                        msgInfo:'hello',
-                        usertype:1,
-                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                        username:'我是用户'
-                    },{
-                        time:'09:03',
-                        msgInfo:'hello',
-                        usertype:0,
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        username:'我是接受者'
-                    }]
-                },{
-                    id:1,
-                    msg:[{
-                        time:'09:00',
-                        msgInfo:'hello1',
-                        usertype:1,
-                        avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                        username:'我是用户'
-                    },{
-                        time:'09:03',
-                        msgInfo:'hello1',
-                        usertype:0,
-                        avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        username:'我是接受者'
-                    }]
-                }],
+                        id:1,
+                        msg:[{
+                            time:'09:00',
+                            msgInfo:'hello1',
+                            usertype:1,
+                            avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                            username:'我是用户'
+                        },{
+                            time:'09:03',
+                            msgInfo:'hello1',
+                            usertype:0,
+                            avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                            username:'我是接受者'
+                        }]
+                    }],
                 editorOption:{
                     modules:{//自定义编辑器工具栏
                         toolbar:[
@@ -227,6 +307,8 @@
         components:{
             lxHeader,
             tree,
+            treetx,
+            treedapp,
         },
         mounted (){
             this.init();
@@ -248,6 +330,9 @@
                 },
                 txTab1: function (state) {
                     return state.txTab1
+                },
+                txTab2: function (state) {
+                    return state.txTab2
                 },
                 reciveavatar: function (state) {
                     return state.reciveavatar
@@ -325,6 +410,7 @@
             ...mapMutations({
                 txTablist: "txTab",
                 txTablist1: "txTab1",
+                txTablist2: "txTab2",
             })
 
         },
@@ -472,6 +558,13 @@
         }
     }
 
+    .addgn {
+        position: fixed;
+        bottom: 0;
+        width: 20%;
+        text-align: center;
+        li{width: 50%;float: left}
+    }
 
 </style>
 <style>

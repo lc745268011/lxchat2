@@ -7,23 +7,23 @@
     const myData = [
         {
             id: '0',
-            menuName: '个人消息',
+            menuName: '个人好友',
             tid:0
         },
         {
             id: '1',
-            menuName: '群组消息',
+            menuName: '联信科技公司',
             tid:0
         },
         {
             id: '2',
-            menuName: '组织消息',
+            menuName: '青岛河北商会',
             tid:0
 
         },
         {
             id: '3',
-            menuName: '广告消息',
+            menuName: '昕苑丽都社区',
             tid:0,
             children: [
                 {
@@ -46,7 +46,7 @@
         },
         {
             id: '4',
-            menuName: '陌生人消息',
+            menuName: '智慧城市',
             children: [],
             tid:0
 
