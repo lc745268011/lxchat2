@@ -3,8 +3,8 @@
         <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'">
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
-            <img :src="item.avatar" alt="" class="avatarImg">{{item.menuName }}
-                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.tid!=0" @click.stop="addstar(item)">&#xe6b9;</i>
+            <img :src="item.avatar" alt="" class="avatarImg">{{item.gname}}
+                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
