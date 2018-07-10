@@ -11,6 +11,7 @@
     </ul>
 </template>
 <script>
+    import {mapState} from 'vuex'
     export default {
         name: 'treeMenu',
         props: {
@@ -20,9 +21,17 @@
             return {
                 folderIconList: [],
                 scope: {},
-                star:false
+                star:false,
             }
         },
+        computed:{
+            ...mapState({
+                ucard: function (state) {
+                    return state.ucard
+                }
+            }),
+        },
+
         created() {
             this.data.forEach((item, index) => {
                 if (item.children && item.children.length) {
@@ -38,6 +47,8 @@
             toggle(item, index) {
                 if (item.children && item.children.length) {
                     this.doTask(index);
+                }else if(!item.children&&item.tid!=0){
+                    this.$store.commit('ucard',true);
                 }
             },
             addstar(item){

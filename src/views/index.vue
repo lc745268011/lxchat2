@@ -10,7 +10,7 @@
                     </ul>
                 </div>
                 <ul class="conversationlist" v-show="txTab1 == 2">
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
@@ -85,6 +85,18 @@
                 </div>
             </div>
             <div id="userchat" :style="{'height':listheight+'px'}">
+                <div id="usercard" v-show="this.ucard">
+                    <div class="top">
+                        <img :src=recavatar alt="" class="avatar">
+                        <div class="uname">
+                            {{recusername}}
+                        </div>
+                        <button class="openmsg" :style="{'background-color':this.$store.state.skintype}" @click="openconversion(clickId)">
+                            <i class="iconfont">&#xe712;</i>
+                        </button>
+                    </div>
+                    <div class="nickname bottom">昵称：<span>{{recusername}}</span></div>
+                </div>
                 <div class="chatInfo clearfix">
                     <div class="fl">
                         <img :src=recavatar alt="" class="chatavatar">
@@ -308,7 +320,8 @@
                 },
                 recavatar:'',
                 recusername:'',
-                editorInfo:''
+                editorInfo:'',
+                // ucard:false
             }
         },
         components:{
@@ -346,6 +359,9 @@
                 },
                 replyusername: function (state) {
                     return state.replyusername
+                },
+                ucard: function (state) {
+                    return state.ucard
                 }
             }),
         },
@@ -386,8 +402,10 @@
                 console.log('editor change!', quill, html, text)
                 this.content = html
             },
+
             //左侧会话列表和右侧会话窗口联动
             openconversion:function (i) {
+                this.$store.commit('ucard',false);
                 this.clickId=i;
                 this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.conversion[i].recivename);
@@ -577,6 +595,62 @@
         li{width: 50%;float: left}
     }
 
+    #usercard {
+        position: absolute;
+        width: 260px;
+        height: 400px;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-image: url("https://lzy1043.github.io/vue-im-demo/dist/static/img/2.6d96e8d.jpg");
+        background-size: cover;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+        border-radius: 10px;
+        z-index: 999;
+        text-align: center;
+        .top{
+            border-bottom: 1px solid #dcdcdc;
+            padding: 20px;
+            position: relative;
+            .avatar{
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+            .uname{
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+                margin-top: 20px;
+            }
+            .openmsg{
+                border: 0;
+                background: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                position: absolute;
+                bottom: 20px;right: 20px;
+                cursor: pointer;
+                outline: none;
+                i{
+                    color: #fff;
+                    font-size: 24px;
+                }
+            }
+        }
+        .nickname{
+            font-size: 14px;
+            margin-top: 20px;
+            span{
+                color: #333;
+                font-weight: bold;
+            }
+        }
+    }
 </style>
 <style>
     .quill-editor .ql-editor{height: 180px;}

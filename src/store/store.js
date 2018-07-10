@@ -12,7 +12,8 @@ const store = new Vuex.Store({
         replyusername:'',
         txTab:0,
         txTab1:2,
-        txTab2:4
+        txTab2:4,
+        ucard:false
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -38,6 +39,9 @@ const store = new Vuex.Store({
         },
         "txTab2":function (state,txTab2) {
             state.txTab2 = txTab2
+        },
+        "ucard":function (state,ucard) {
+            state.ucard = ucard
         },
     },
     actions: {
@@ -71,7 +75,11 @@ const store = new Vuex.Store({
         },
         "txTab2": function(state, txTab2) {
             // console.log('获取', state.listheight)
-            store.commit("txTab1", txTab2)
+            store.commit("txTab2", txTab2)
+        },
+        "ucard": function(state, ucard) {
+            // console.log('获取', state.listheight)
+            store.commit("ucard", ucard)
         }
     }
 })
