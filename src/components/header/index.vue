@@ -46,6 +46,7 @@
 </template>
 
 <script>
+    import Bus from '../bus.js'
     export default {
         name: "index",
         data :function() {
@@ -57,7 +58,11 @@
             }
         },
         mounted (){
-            this.init()
+            this.init();
+            Bus.$on('msg', (e) => {
+                self.message = e
+                console.log(`传来的数据是：${e}`)
+            })
         },
         methods:{
             init:function () {

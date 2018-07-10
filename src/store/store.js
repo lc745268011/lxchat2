@@ -39,6 +39,14 @@ const store = new Vuex.Store({
         "txTab2":function (state,txTab2) {
             state.txTab2 = txTab2
         },
+        /*"scrolldown":function () {
+            console.log(1)
+            this.$nextTick(function(){
+                var div = document.getElementsByClassName('msgBox');
+                div[0].scrollTop = div[0].scrollHeight;
+                console.log(div)
+            })
+        }*/
     },
     actions: {
         "setId": function(state, listheight) {
@@ -72,7 +80,7 @@ const store = new Vuex.Store({
         "txTab2": function(state, txTab2) {
             // console.log('获取', state.listheight)
             store.commit("txTab1", txTab2)
-        }
+        },
     }
 })
 export default store;
