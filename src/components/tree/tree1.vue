@@ -4,14 +4,14 @@
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
             <img :src="item.avatar" alt="" class="avatarImg">{{item.menuName }}
-                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.tid!=0" @click="addstar(item)">&#xe6b9;</i>
+                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.tid!=0" @click.stop="addstar(item)">&#xe6b9;</i>
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
     </ul>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState,mapActions} from 'vuex'
     export default {
         name: 'treeMenu',
         props: {
@@ -28,7 +28,7 @@
             ...mapState({
                 ucard: function (state) {
                     return state.ucard
-                }
+                },
             }),
         },
 
@@ -49,11 +49,14 @@
                     this.doTask(index);
                 }else if(!item.children&&item.tid!=0){
                     this.$store.commit('ucard',true);
+                    this.$store.commit('clickId',index);
+                    this.$store.commit('reciveavatar',item.avatar);
+                    this.$store.commit('replyusername',item.menuName);
                 }
             },
             addstar(item){
                 item.star=!item.star
-            }
+            },
         }
     }
 </script>

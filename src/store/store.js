@@ -10,10 +10,12 @@ const store = new Vuex.Store({
         //互动页面右侧聊天框
         reciveavatar:'',
         replyusername:'',
+        replyposition:'',
         txTab:0,
         txTab1:2,
         txTab2:4,
-        ucard:false
+        ucard:false,
+        clickId:0
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -31,6 +33,9 @@ const store = new Vuex.Store({
         "replyusername":function (state,replyusername) {
             state.replyusername = replyusername
         },
+        "replyposition":function (state,replyposition) {
+            state.replyposition = replyposition
+        },
         "txTab":function (state,txTab) {
             state.txTab = txTab
         },
@@ -42,6 +47,9 @@ const store = new Vuex.Store({
         },
         "ucard":function (state,ucard) {
             state.ucard = ucard
+        },
+        "clickId":function (state,clickId) {
+            state.clickId = clickId
         },
     },
     actions: {
@@ -62,8 +70,10 @@ const store = new Vuex.Store({
             store.commit("reciveavatar", reciveavatar)
         },
         "replyusername": function(state, replyusername) {
-            // console.log('获取', state.listheight)
             store.commit("replyusername", replyusername)
+        },
+        "replyposition": function(state, replyposition) {
+            store.commit("replyposition", replyposition)
         },
         "txTab": function(state, txTab) {
             // console.log('获取', state.listheight)
@@ -80,6 +90,9 @@ const store = new Vuex.Store({
         "ucard": function(state, ucard) {
             // console.log('获取', state.listheight)
             store.commit("ucard", ucard)
+        },
+        "clickId": function(state, clickId) {
+            store.commit("clickId", clickId)
         }
     }
 })
