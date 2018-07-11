@@ -48,10 +48,17 @@
                 if (item.children && item.children.length) {
                     this.doTask(index);
                 }else if(!item.children&&item.tid!=0){
-                    this.$store.commit('ucard',true);
-                    this.$store.commit('clickId',index);
-                    this.$store.commit('reciveavatar',item.avatar);
-                    this.$store.commit('replyusername',item.gname);
+                    if(this.$store.state.txTab==1){
+                        this.$store.commit('ucard',true);
+                        this.$store.commit('clickId',index);
+                        this.$store.commit('reciveavatar',item.avatar);
+                        this.$store.commit('replyusername',item.gname);
+                    }else{
+                        this.$store.commit('ucard',false);
+                        this.$store.commit('reciveavatar',item.avatar);
+                        this.$store.commit('replyusername',item.gname);
+                    }
+
                 }
             },
             addstar(item){

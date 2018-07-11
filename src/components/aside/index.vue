@@ -36,7 +36,7 @@
             </div>
             <div v-show="txTab == 0">
                 <ul class="conversationlist">
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in this.conversionabc" @click="openconversion(index)">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in this.conversionabc" @click="opencard(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}}</div>
@@ -213,7 +213,15 @@
             //左侧会话列表和右侧会话窗口联动
             openconversion:function (i) {
                 this.clickId=i;
-                this.$store.commit('ucard',this.false);
+                this.$store.commit('ucard',false);
+                this.$store.commit('clickId',this.clickId);
+                this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
+                this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
+                this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
+            },
+            opencard:function (i) {
+                this.clickId=i;
+                this.$store.commit('ucard',true);
                 this.$store.commit('clickId',this.clickId);
                 this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
