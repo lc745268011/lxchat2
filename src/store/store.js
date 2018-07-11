@@ -8,14 +8,34 @@ const store = new Vuex.Store({
         currentTab:'message',
         skintype:'#fb6161',
         //互动页面右侧聊天框
-        reciveavatar:'',
-        replyusername:'',
+        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+        replyusername:'张三',
         replyposition:'',
         txTab:0,
         txTab1:2,
         txTab2:4,
         ucard:false,
-        clickId:0
+        clickId:0,
+        conversion:[
+            {
+                "recivename":"张三",
+                "sendname":"我是用户",
+                "sendtime":"09:00",
+                "lastmsg":"青岛河北商会-秘书长",
+                "sendavatar":"",
+                "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+                "id":0
+            },
+            {
+                "recivename":"李四",
+                "sendname":"我是用户",
+                "sendtime":"09:00",
+                "lastmsg":"联信科技-研发总监",
+                "sendavatar":"",
+                "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+                "id":1
+            }
+        ]
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -50,6 +70,10 @@ const store = new Vuex.Store({
         },
         "clickId":function (state,clickId) {
             state.clickId = clickId
+        },
+        "conversion":function (state,conversion) {
+            state.conversion = conversion
+            console.log(state.conversion)
         },
     },
     actions: {
@@ -93,6 +117,9 @@ const store = new Vuex.Store({
         },
         "clickId": function(state, clickId) {
             store.commit("clickId", clickId)
+        },
+        "conversion": function(state, conversion) {
+            store.commit("conversion", conversion)
         }
     }
 })

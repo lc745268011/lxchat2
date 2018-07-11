@@ -166,10 +166,11 @@
               listheight:'',
               msgBoxHeight:'',
               content: '',
+              clickId:0
           }
         },
         mounted(){
-            this.init()
+            this.init();
         },
         watch: {
             clickId: function () {
@@ -205,7 +206,7 @@
             init(){
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
                 this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
-                this.scrolldown()
+                this.scrolldown();
             },
             //富文本编辑器状态
             onEditorBlur(quill) {

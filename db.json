@@ -51,6 +51,7 @@
           "gname": "李四",
           "tid":1,
           "star":false,
+          "last":true,
           "position":"青岛河北商会-秘书长",
           "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
         }
@@ -65,6 +66,7 @@
           "gname": "王麻子",
           "tid":1,
           "star":false,
+          "last":true,
           "position":"B座501业主",
           "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
         }
@@ -86,6 +88,7 @@
           "gname": "小学同学",
           "tid": 1,
           "star": false,
+          "last":true,
           "position": "联信科技-研发总监",
           "avatar": "https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
         }
@@ -121,6 +124,7 @@
           "gname": "李四",
           "tid":1,
           "star":false,
+          "last":true,
           "position":"青岛河北商会-秘书长",
           "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
         }
@@ -135,6 +139,7 @@
           "gname": "王麻子",
           "tid":1,
           "star":false,
+          "last":true,
           "position":"B座501业主",
           "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
         }
@@ -156,6 +161,7 @@
           "gname": "电子白板",
           "tid":1,
           "star":false,
+          "last":true,
           "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
         }
       ]
@@ -169,6 +175,7 @@
           "gname": "收到的邮件",
           "tid":1,
           "star":false,
+          "last":true,
           "avatar":"https://tva1.sinaimg.cn/crop.0.23.1242.1242.180/8693225ajw8fbimjimpjwj20yi0zs77l.jpg"
         }
       ]
@@ -182,6 +189,7 @@
           "gname": "发出的邮件",
           "tid":1,
           "star":false,
+          "last":true,
           "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
         }
       ]
@@ -195,6 +203,7 @@
           "gname": "我的电视",
           "tid":1,
           "star":false,
+          "last":true,
           "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
         }
       ]
@@ -203,6 +212,26 @@
       "gid":4,
       "gname":"青岛河北商会应用",
       "tid":0
+    }
+  ],
+  "conversion":[
+    {
+      "recivename":"张三",
+      "sendname":"我是用户",
+      "sendtime":"09:00",
+      "lastmsg":"青岛河北商会-秘书长",
+      "sendavatar":"",
+      "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+      "id":0
+    },
+    {
+      "recivename":"李四",
+      "sendname":"我是用户",
+      "sendtime":"09:00",
+      "lastmsg":"联信科技-研发总监",
+      "sendavatar":"",
+      "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+      "id":1
     }
   ]
 

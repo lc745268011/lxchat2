@@ -18,9 +18,9 @@
         mounted(){
             this.init()
         },
-        methods:{
-            init(){
-                this.$http.get('/api/mailList')//代替http://localhost:3000/getNewsList
+        methods: {
+            init() {
+                this.$http.get('/api/contact')//代替http://localhost:3000/getNewsList
                     .then((res) => {
                         this.theData = res.data
                     }, (err) => {

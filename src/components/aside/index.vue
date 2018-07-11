@@ -13,7 +13,7 @@
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                         <div class="messageInfo">{{item.lastmsg}}</div>
-                        <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                        <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
                     </div>
                 </li>
             </ul>
@@ -36,7 +36,7 @@
             </div>
             <div v-show="txTab == 0">
                 <ul class="conversationlist">
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion" @click="openconversion(index)">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in this.conversionabc" @click="openconversion(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}}</div>
@@ -70,7 +70,7 @@
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                             <div class="messageInfo">{{item.lastmsg}}</div>
-                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion2(index)">&#xe776;</i>
                         </div>
                     </li>
                 </ul>
@@ -97,26 +97,7 @@
             return {
                 listheight:'',
                 show:false,
-                conversion:[
-                    {
-                        recivename:'张三',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'青岛河北商会-秘书长',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:0
-                    },
-                    {
-                        recivename:'李四',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'联信科技-研发总监',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:1
-                    }
-                ],
+                conversion:[],
                 conversion1:[
                     {
                         recivename:'记事本',
@@ -191,13 +172,22 @@
                 },
                 ucard: function (state) {
                     return state.ucard
+                },
+                conversionabc: function (state) {
+                    return state.conversion
                 }
             }),
         },
         methods:{
             //初始化时计算左右两栏高度
             init:function () {
-                this.listheight=document.documentElement.clientHeight-this.$store.state.listheight
+                this.listheight=document.documentElement.clientHeight-this.$store.state.listheight;
+                this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
+                    .then((res) => {
+                        this.conversion = res.data
+                    }, (err) => {
+                        console.log(err)
+                    })
             },
 
             //鼠标悬浮关闭按钮，颜色变换
@@ -211,6 +201,14 @@
             //关闭按钮删除选中的会话
             closeconversion:function (index) {
                 this.conversion.splice(index,1)
+            },
+            //关闭按钮删除选中的会话
+            closeconversion1:function (index) {
+                this.conversion2.splice(index,1)
+            },
+            //关闭按钮删除选中的会话
+            closeconversion2:function (index) {
+                this.conversion1.splice(index,1)
             },
             //左侧会话列表和右侧会话窗口联动
             openconversion:function (i) {

@@ -51,11 +51,29 @@
                     this.$store.commit('ucard',true);
                     this.$store.commit('clickId',index);
                     this.$store.commit('reciveavatar',item.avatar);
-                    this.$store.commit('replyusername',item.menuName);
+                    this.$store.commit('replyusername',item.gname);
                 }
             },
             addstar(item){
-                item.star=!item.star
+                item.star=!item.star;
+                var addPush= {
+                    "recivename":item.gname,
+                    "sendname":"我是用户",
+                    "sendtime":"09:00",
+                    "lastmsg":"青岛河北商会-秘书长",
+                    "sendavatar":"",
+                    "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+                    "id":5
+                };
+                this.$store.state.conversion.push(addPush)
+               /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
+                    .then((res) => {
+                        res.data.push(addPush);
+                        this.$store.commit('conversion',res.data);
+                    }, (err) => {
+                        console.log(err)
+                    })*/
+
             },
         }
     }
