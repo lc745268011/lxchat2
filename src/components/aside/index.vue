@@ -182,12 +182,12 @@
             //初始化时计算左右两栏高度
             init:function () {
                 this.listheight=document.documentElement.clientHeight-this.$store.state.listheight;
-                this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
+               /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
                     .then((res) => {
                         this.conversion = res.data
                     }, (err) => {
                         console.log(err)
-                    })
+                    })*/
             },
 
             //鼠标悬浮关闭按钮，颜色变换
@@ -215,9 +215,9 @@
                 this.clickId=i;
                 this.$store.commit('ucard',this.false);
                 this.$store.commit('clickId',this.clickId);
-                this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
-                this.$store.commit('replyusername',this.conversion[i].recivename);
-                this.$store.commit('replyposition',this.conversion[i].lastmsg);
+                this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
+                this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
+                this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
             },
             ...mapActions({
                 txTablist: "txTab",

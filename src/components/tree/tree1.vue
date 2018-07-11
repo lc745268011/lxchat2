@@ -62,7 +62,7 @@
                     "sendtime":"09:00",
                     "lastmsg":"青岛河北商会-秘书长",
                     "sendavatar":"",
-                    "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
+                    "reciveavatar":item.avatar,
                     "id":5
                 };
                 this.$store.state.conversion.push(addPush)

@@ -166,7 +166,6 @@
               listheight:'',
               msgBoxHeight:'',
               content: '',
-              clickId:0
           }
         },
         mounted(){
@@ -225,10 +224,11 @@
             //左侧会话列表和右侧会话窗口联动
             openconversion:function (i) {
                 this.$store.commit('ucard',this.false);
+                console.log(i)
                 this.$store.commit('clickId',i);
-                this.$store.commit('reciveavatar',this.conversion[i].reciveavatar);
-                this.$store.commit('replyusername',this.conversion[i].recivename);
-                this.$store.commit('replyposition',this.conversion[i].lastmsg);
+                this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
+                this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
+                this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
             },
             //发送消息
             sendMsg:function (i) {
