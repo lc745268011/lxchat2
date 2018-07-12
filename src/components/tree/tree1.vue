@@ -1,13 +1,26 @@
 <template>
     <ul class="tree-menu">
-        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'">
+        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'"v-show="currentTab!='message'">
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
-            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'']"></i>
+            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
             <img :src="item.avatar" alt="" class="avatarImg">{{item.gname}}
                 <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
+        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'" v-show="currentTab=='message'">
+            <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
+            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
+            <div style="display: inline-block">
+                <img :src="item.avatar" alt="" class="avatarImg"><div style="display: inline-block"><p>{{item.gname}}</p><p style="font-size: 12px">{{item.msg}}</p></div>
+
+            </div>
+                                                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
+
+            </span>
+            <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
+        </li>
+
     </ul>
 </template>
 <script>
@@ -29,6 +42,10 @@
                 ucard: function (state) {
                     return state.ucard
                 },
+                currentTab:function (state) {
+                    return state.currentTab
+
+                }
             }),
         },
 
@@ -48,7 +65,7 @@
                 if (item.children && item.children.length) {
                     this.doTask(index);
                 }else if(!item.children&&item.tid!=0){
-                    if(this.$store.state.txTab==1){
+                    if(this.$store.state.currentTab=='tongxunlu'){
                         this.$store.commit('ucard',true);
                         this.$store.commit('clickId',index);
                         this.$store.commit('reciveavatar',item.avatar);
@@ -125,6 +142,18 @@
         transition: transform 0.4s ease-out;
 
     }
+    .icon.first.dapp {
+        background-image: url(../../assets/img/dapp.png)!important;
+        transform: rotate(0deg);
+        transition: transform 0.4s ease-out;
+
+    }
+    .icon.first.message {
+        background-image: url(../../assets/img/hudong.png)!important;
+        transform: rotate(0deg);
+        transition: transform 0.4s ease-out;
+
+    }
 
     .icon.folder-open {
         background-image: url(../../assets/img/tree-2.png);
@@ -157,6 +186,7 @@
         border-radius: 50%;
         display: inline-block;
         margin-right: 10px;
+        margin-top: -20px;
     }
 
     .star {

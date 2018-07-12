@@ -23,6 +23,7 @@
                                 "star": false,
                                 "last":true,
                                 "position": "联信科技-研发总监",
+                                "msg":'你好',
                                 "avatar": "https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                             }
                         ]
@@ -32,21 +33,17 @@
                         "gname":"群组消息",
                         "tid":0,
                         "children":[
-                            {
-                                "gname": "技术部",
-                                "tid":1,
-                                "children":[
                                     {
                                         "gname": "张三",
-                                        "tid":2,
+                                        "tid":1,
                                         "star":false,
                                         "last":true,
                                         "position":"联信科技-研发总监",
+                                        "msg":'你好',
+
                                         "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                                     }
                                 ]
-                            }
-                        ]
                     },
                     {
                         "gid":2,
@@ -59,6 +56,8 @@
                                 "star":false,
                                 "last":true,
                                 "position":"青岛河北商会-秘书长",
+                                "msg":'你好',
+
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                             }
                         ]
@@ -74,6 +73,8 @@
                                 "star":false,
                                 "last":true,
                                 "position":"B座501业主",
+                                "msg":'你好',
+
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
                             }
                         ]

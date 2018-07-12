@@ -12,55 +12,65 @@
             </div>
             <div class="nickname bottom">昵称：<span>{{replyusername}}</span><br>职位：<span>{{replyusername}}</span></div>
         </div>
+
         <div v-show="!this.ucard">
-            <div class="chatInfo vCenter">
-                <div>
+            <div id="dapp" v-show="currentTab=='dapp'" :style="{'height':listheight+'px'}">
+                <div class="dappBox">
                     <img :src=reciveavatar alt="" class="chatavatar">
                     <span class="chatname">{{replyusername}}</span>
                 </div>
-                <div>
-                    <i class="iconfont">&#xe634;</i>
-                    <i class="iconfont">&#xe600;</i>
+            </div>
+            <div v-show="currentTab!='dapp'">
+                <div class="chatInfo vCenter">
+                    <div>
+                        <img :src=reciveavatar alt="" class="chatavatar">
+                        <span class="chatname">{{replyusername}}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont">&#xe634;</i>
+                        <i class="iconfont">&#xe600;</i>
+                    </div>
+
                 </div>
+                <div class="msgBox" :style="{'height':msgBoxHeight+'px','width':'100%'}">
+                    <ul v-for="item in msgBox" v-show="clickId==item.id">
+                        <li v-for="m in item.msg" class="clearfix">
 
-            </div>
-            <div class="msgBox" :style="{'height':msgBoxHeight+'px','width':'100%'}">
-                <ul v-for="item in msgBox" v-show="clickId==item.id">
-                    <li v-for="m in item.msg" class="clearfix">
-
-                        <div v-if="m.usertype==1" style="width: 61.8%;" class="fr clearfix">
-                            <div class="fr">
-                                <img :src=m.avatar alt="" class="msgBoxAvatar">
-                            </div>
-                            <div v-html="m.msgInfo" style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
-                            </div>
-
-                        </div>
-                        <div v-else-if="m.usertype==0" style="width: 61.8%;" class="fl clearfix">
-                            <div class="fl">
-                                <img :src=m.avatar alt="" class="msgBoxAvatar">
-                            </div>
-                            <div v-html="m.msgInfo" style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
+                            <div v-if="m.usertype==1" style="width: 61.8%;" class="fr clearfix">
+                                <div class="fr">
+                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
+                                </div>
+                                <div v-html="m.msgInfo" style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
+                                </div>
 
                             </div>
+                            <div v-else-if="m.usertype==0" style="width: 61.8%;" class="fl clearfix">
+                                <div class="fl">
+                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
+                                </div>
+                                <div v-html="m.msgInfo" style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
 
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="editorbox">
-                <div></div>
-                <quill-editor :options="editorOption"
-                              :content="content"
-                              ref="QuillEditor"
-                              @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-                              @change="onEditorChange($event)"
-                              @ready="onEditorReady($event)">
-                </quill-editor>
-                <div class="sendbtn">
-                    <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送</button>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="editorbox">
+                    <div></div>
+                    <quill-editor :options="editorOption"
+                                  :content="content"
+                                  ref="QuillEditor"
+                                  @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
+                                  @change="onEditorChange($event)"
+                                  @ready="onEditorReady($event)">
+                    </quill-editor>
+                    <div class="sendbtn">
+                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送</button>
+                    </div>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -198,6 +208,9 @@
                 },
                 ucard: function (state) {
                     return state.ucard
+                },
+                currentTab:function (state) {
+                    return state.currentTab
                 }
             }),
         },
@@ -224,7 +237,7 @@
             //左侧会话列表和右侧会话窗口联动
             openconversion:function (i) {
                 this.$store.commit('ucard',this.false);
-                console.log(i)
+                this.$store.commit('currentTab','message');
                 this.$store.commit('clickId',i);
                 this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
@@ -393,6 +406,9 @@
             }
         }
     }
+    #dapp{position: relative}
+    .dappBox{width: 50%;margin:auto;height:500px;position: absolute;background: #dcdcdc;top: 0;bottom: 0;left: 0;right: 0}
+    .dappBox img{width: 60px;height: 60px;border-radius: 50%}
 </style>
 <style>
     .quill-editor .ql-editor{height: 180px;}

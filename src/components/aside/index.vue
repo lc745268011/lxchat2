@@ -12,7 +12,7 @@
                     <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
-                        <div class="messageInfo">{{item.lastmsg}}</div>
+                        <div class="messageInfo"><span style="color:red">[未读]</span>{{item.lastmsg}}</div>
                         <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
                     </div>
                 </li>
@@ -40,7 +40,8 @@
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}}</div>
-                            <div class="messageInfo">{{item.lastmsg}}</div>
+                            <div class="messageInfo">
+                               {{item.lastmsg}}</div>
                             <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
                         </div>
                     </li>
@@ -65,7 +66,7 @@
             </div>
             <div v-show="txTab2 == 4">
                 <ul class="conversationlist">
-                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversion1" @click="openconversion(index)">
+                    <li :class="index==clickId?'active':''" v-for="(item,index) in conversionabc1" @click="openconversion1(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
@@ -98,32 +99,13 @@
                 listheight:'',
                 show:false,
                 conversion:[],
-                conversion1:[
-                    {
-                        recivename:'记事本',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'我是最后一条显示数据',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:0
-                    },
-                    {
-                        recivename:'项目计划',
-                        sendname:'我是用户',
-                        sendtime:'09:00',
-                        lastmsg:'我是最后一条显示数据',
-                        sendavatar:'',
-                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:1
-                    }
-                ],
+                conversion1:[],
                 conversion2:[
                     {
                         recivename:'张三',
                         sendname:'我是用户',
                         sendtime:'09:00',
-                        lastmsg:'最后消息',
+                        lastmsg:'你好',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:0
@@ -132,7 +114,7 @@
                         recivename:'李四',
                         sendname:'我是用户',
                         sendtime:'09:00',
-                        lastmsg:'最后消息',
+                        lastmsg:'你好，请传文件过来',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:1
@@ -175,6 +157,9 @@
                 },
                 conversionabc: function (state) {
                     return state.conversion
+                },
+                conversionabc1: function (state) {
+                    return state.conversion1
                 }
             }),
         },
@@ -218,6 +203,14 @@
                 this.$store.commit('reciveavatar',this.$store.state.conversion[i].reciveavatar);
                 this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
                 this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
+            },
+            openconversion1:function (i) {
+                this.clickId=i;
+                this.$store.commit('ucard',false);
+                this.$store.commit('clickId',this.clickId);
+                this.$store.commit('reciveavatar',this.$store.state.conversion1[i].reciveavatar);
+                this.$store.commit('replyusername',this.$store.state.conversion1[i].recivename);
+                this.$store.commit('replyposition',this.$store.state.conversion1[i].lastmsg);
             },
             opencard:function (i) {
                 this.clickId=i;

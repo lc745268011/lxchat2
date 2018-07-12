@@ -20,6 +20,7 @@ Vue.use(VueQuillEditor)
 静态资源
  */
 import './assets/js/rem.js'
+import './assets/js/menu.js'
 import './assets/css/common.css'
 import './assets/css/head.css'
 import './assets/css/index.css'

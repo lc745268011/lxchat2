@@ -88,6 +88,29 @@
                         "gid":4,
                         "gname":"智慧城市",
                         "tid":0
+                    },
+                    {
+                        "gid":5,
+                        "gname":"我的设备",
+                        "tid":0,
+                        "children":[
+                            {
+                                "gname": "我的冰箱",
+                                "tid":1,
+                                "star":false,
+                                "last":true,
+                                "position":"B座501业主",
+                                "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
+                            },
+                            {
+                                "gname": "我的手机",
+                                "tid":1,
+                                "star":false,
+                                "last":true,
+                                "position":"B座501业主",
+                                "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
+                            }
+                        ]
                     }
                 ],
                         menuName: 'menuName', // 显示菜单名称的属性

@@ -35,7 +35,27 @@ const store = new Vuex.Store({
                 "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
                 "id":1
             }
-        ]
+        ],
+        conversion1:[
+            {
+                recivename:'记事本',
+                sendname:'我是用户',
+                sendtime:'09:00',
+                lastmsg:'我是最后一条显示数据',
+                sendavatar:'',
+                reciveavatar:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531388445127&di=b92e9354558a01fc4e5386cdbbaf3de5&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a0205818056ea84a0d304fb02a48.jpg',
+                id:0
+            },
+            {
+                recivename:'项目计划',
+                sendname:'我是用户',
+                sendtime:'09:00',
+                lastmsg:'我是最后一条显示数据',
+                sendavatar:'',
+                reciveavatar:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531388445126&di=7e78479a5f5a7cd9b736823f869aa583&imgtype=0&src=http%3A%2F%2Fcdns2.freepik.com%2Ffree-photo%2Flaptop-computer-with-loud-speaker_318-39515.jpg',
+                id:1
+            }
+        ],
     },
     mutations: {
         "setId": function(state, listheight) {
@@ -73,7 +93,9 @@ const store = new Vuex.Store({
         },
         "conversion":function (state,conversion) {
             state.conversion = conversion
-            console.log(state.conversion)
+        },
+        "conversion1":function (state,conversion1) {
+            state.conversion1 = conversion1
         },
     },
     actions: {
@@ -120,6 +142,9 @@ const store = new Vuex.Store({
         },
         "conversion": function(state, conversion) {
             store.commit("conversion", conversion)
+        },
+        "conversion1": function(state, conversion1) {
+            store.commit("conversion1", conversion1)
         }
     }
 })
