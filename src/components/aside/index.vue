@@ -118,6 +118,24 @@
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:1
+                    },
+                    {
+                        recivename:'系统消息',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'你好，请传文件过来',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:2
+                    },
+                    {
+                        recivename:'消息平台',
+                        sendname:'我是用户',
+                        sendtime:'09:00',
+                        lastmsg:'你好，请传文件过来',
+                        sendavatar:'',
+                        reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
+                        id:3
                     }
                 ],
                 closeColor:'#666',

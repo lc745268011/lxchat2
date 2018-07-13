@@ -20,7 +20,7 @@
                             <li @click="skinchange('black')">黑色</li>
                         </ul>
                     </li>
-                    <li class="fl"><a href="">退出</a></li>
+                    <li class="fl"><a href="">系统</a></li>
                 </ul>
             </div>
         </div>

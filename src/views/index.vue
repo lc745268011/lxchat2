@@ -46,7 +46,6 @@
     import lxAside from '../components/aside/index'
     import lxContact from '../components/contact/index'
 
-    import {mapState,mapActions} from 'vuex'
     export default {
         name: "index",
         data:function(){

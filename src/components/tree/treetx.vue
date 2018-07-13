@@ -111,7 +111,12 @@
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
                             }
                         ]
-                    }
+                    },
+                    {
+                        "gid":6,
+                        "gname":"附近的",
+                        "tid":0
+                    },
                 ],
                         menuName: 'menuName', // 显示菜单名称的属性
                     }

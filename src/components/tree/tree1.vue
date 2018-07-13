@@ -12,7 +12,7 @@
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
             <div style="display: inline-block">
-                <img :src="item.avatar" alt="" class="avatarImg"><div style="display: inline-block"><p>{{item.gname}}</p><p style="font-size: 12px">{{item.msg}}</p></div>
+                <img :src="item.avatar" alt="" class="avatarImg messageavatar"><div style="display: inline-block"><p>{{item.gname}}</p><p style="font-size: 12px">{{item.msg}}</p></div>
 
             </div>
                                                 <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
@@ -186,9 +186,8 @@
         border-radius: 50%;
         display: inline-block;
         margin-right: 10px;
-        margin-top: -20px;
     }
-
+    .messageavatar{margin-top: -20px;}
     .star {
         float: right;
         color: #ccc;
