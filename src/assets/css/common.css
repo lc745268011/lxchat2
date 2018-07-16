@@ -101,3 +101,6 @@ p {
   -ms-transition-duration: 0.4s;
   -o-transition-duration: 0.4s;
 }
+input::-ms-clear{display:none;}/*隐藏文本框叉子*/
+input::-ms-reveal{display:none;}/*隐藏密码框小眼睛*/
+input:focus,input:hover,button:focus{outline: none}
