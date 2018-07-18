@@ -5,6 +5,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         listheight:'',
+        show:false,
         currentTab:'message',
         skintype:'#fb6161',
         //互动页面右侧聊天框
@@ -97,6 +98,9 @@ const store = new Vuex.Store({
         "conversion1":function (state,conversion1) {
             state.conversion1 = conversion1
         },
+        "show":function (state,show) {
+            state.show = show
+        },
     },
     actions: {
         "setId": function(state, listheight) {
@@ -145,6 +149,9 @@ const store = new Vuex.Store({
         },
         "conversion1": function(state, conversion1) {
             store.commit("conversion1", conversion1)
+        },
+        "show": function(state, show) {
+            store.commit("show", show)
         }
     }
 })

@@ -1,6 +1,6 @@
 <template>
-    <div id="aside">
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']" v-show="currentTab == 'message'">
+    <div id="aside">{{this.$refs.show}}
+        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']" v-show="currentTab == 'message'">
             <div class="messagetab">
                 <ul>
                     <li :class="{'active':txTab1===2}" @click="txTablist1(2)" :style="{'border-bottom-color':txTab1===2 ? this.$store.state.skintype:''}">常用</li>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
+        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
             <div class="messagetab">
                 <ul>
                     <li :class="{'active':txTab===0}" @click="txTablist(0)" :style="{'border-bottom-color':txTab===0 ? this.$store.state.skintype:''}">常用</li>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[show?'show':'noshow']"  v-show="currentTab == 'dapp'">
+        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'dapp'">
             <div class="messagetab">
                 <ul>
                     <li :class="{'active':txTab2===4}" @click="txTablist2(4)" :style="{'border-bottom-color':txTab2===4 ? this.$store.state.skintype:''}">常用</li>
@@ -97,7 +97,7 @@
         data :function() {
             return {
                 listheight:'',
-                show:false,
+                // show:false,
                 conversion:[],
                 conversion1:[],
                 conversion2:[

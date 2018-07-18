@@ -13,7 +13,8 @@
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;}
 .contanier{width: 100%}
-#aside{width: 20%;max-width:20%;background-color: #f9f9f9;}
+#aside{width: 20%;max-width:20%;}
+#userlist{background-color: #f9f9f9;}
 #userchat{width: 80%;max-width: 80%;position: relative}
 .mslide{display: none}
 @media (max-width: 786px) {

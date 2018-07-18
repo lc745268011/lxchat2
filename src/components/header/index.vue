@@ -4,7 +4,7 @@
         <div class="clearfix big">
             <div class="fl">
                 <ul class="clearfix">
-                    <li class="fl"><img src="https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg" alt="" class="userHeadImg"></li>
+                    <li class="fl"><router-link to="/setting"><img src="https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg" alt="" class="userHeadImg"></router-link></li>
                     <li :class="{'active':currentTabstate==='message'}"><a href="javascript:;" @click="changenav('message')">互动</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTabstate==='tongxunlu'}" @click="changenav('tongxunlu')"><a href="javascript:;">通讯录</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTabstate==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">DAPP</a><p class="sanjiao"></p></li>
@@ -20,7 +20,11 @@
                             <li @click="skinchange('black')">黑色</li>
                         </ul>
                     </li>
-                    <li class="fl"><a href="">系统</a></li>
+                    <li class="fl">
+                        <router-link to="/login1">
+                        退出
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -29,9 +33,9 @@
             <div class="fl">
                 <ul class="clearfix">
                     <li class="fl"><img src="../../assets/logo.png" alt="" class="userHeadImg"></li>
-                    <li class="fl active"><a href="">通讯录</a></li>
-                    <li class="fl"><a href="">消息</a></li>
-                    <li class="fl"><a href="">dapp</a></li>
+                    <li class="fl active"><a href="javascript:;" @click="changenav('message')">互动</a></li>
+                    <li class="fl"><a href="javascript:;" @click="changenav('tongxunlu')">通讯录</a></li>
+                    <li class="fl"><a href="javascript:;" @click="changenav('dapp')">dapp</a></li>
                 </ul>
             </div>
             <div class="fr">

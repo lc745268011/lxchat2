@@ -1,60 +1,8 @@
 <template>
     <div>
-        <div id="head">
-            <div class="contanier clearfix">
-                <div id="logo" class="fl">
-                    <img src="../assets/img/logo.png" alt="">
-                </div>
-                <ul id="nav" class="clearfix fl">
-                    <li class="active">
-                        <router-link to="/">首页</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/contacts">找人脉</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/industry">找行业</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/dapp">找供求</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/login1">聊天</router-link>
-                    </li>
-                </ul>
-                <div class="loginBtn fr">
-                    <router-link to="/">登录/注册</router-link>
-                </div>
-            </div>
-        </div>
         <div id="section">
-            <div class="contanier clearfix">
-                <div class="fr loginBox">
-                    <div class="tab clearfix">
-                        <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>
-                        <div :class="tabshow=='tabuser'?'fl active':'fl'" @click="changeTab('tabuser')">帐户密码登录</div>
-                    </div>
-                    <div class="tabewm" v-show="tabshow=='tabewm'">
-                        <img src="../assets/img/erwei.png" alt="" class="ewm">
-                        <p>请使用联信app扫二维码登录 <span>刷新</span></p>
-                    </div>
-                    <div class="tabuser" v-show="tabshow=='tabuser'">
-                        <input type="text" placeholder="请输入手机号/邮箱" class="username"  v-model='username' @focus="onFocus" @blur="onBlur">
-                        <input :type="inputType" placeholder="请输入登录密码" class="password"  v-model='password' @focus="onFocus1" @blur="onBlur1">
-                        <router-link to="/index" target="_blank">
-                            <button class="submit">登录</button>
-                        </router-link>
-                        <div class="clearfix linkBtn">
-                            <router-link to="/regisiter" target="_blank">
-                                <span class="fl">新用户注册</span>
-                            </router-link>
-                            <router-link to="/forget" target="_blank">
-                                <span class="fr">忘记密码</span>
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <router-link to="/">返回</router-link>
+            忘记密码
         </div>
     </div>
 
@@ -142,8 +90,8 @@
     #nav li{float: left;font-size: 16px;margin-left: 60px;}
     #nav li a{color: #333}
     #nav li.active a,#section .loginBox .tab>div.active{color:#2e9cf1 }
-    #section{background: url("../assets/img/loginbg.jpg");width: 100%}
-    #section .loginBox{margin: 126px 0;background: #fff;width: 360px;height: 380px;border-radius: 6px;}
+    /*#section{background: url("../assets/img/loginbg.jpg");width: 100%}*/
+    #section .loginBox{margin: 126px auto;background: #fff;width: 360px;height: 380px;border-radius: 6px;}
     #section .loginBox .tab{height: 53px;line-height: 51px;border-bottom: 1px solid #dcdcdc}
     #section .loginBox .tab>div{width: 50%;text-align: center;font-size: 16px;cursor: pointer;color: #333}
     #section .loginBox .tab>div.active{border-bottom: 2px solid #2e9cf1;}

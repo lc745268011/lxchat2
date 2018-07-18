@@ -50,7 +50,6 @@
         name: "index",
         data:function(){
             return{
-                show:false,
             }
         },
         components:{
@@ -64,7 +63,7 @@
         methods:{
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
-                this.show=!this.show
+                this.$store.commit('show',!this.$store.state.show);
             },
             init:function () {
                 document.oncontextmenu = function (ev)
