@@ -7,15 +7,16 @@
 }
 #header .big{padding:0 30px;height: 60px;line-height: 59px;}
 #header .small{padding:0 15px;height: 48px;line-height: 47px;}
-#header a{color: #fff;font-size: 16px;}
-#header li{margin-right: 60px;float: left}
+#header a{color: #fffefe;font-size: 16px;}
+#header li{margin-right: 80px;float: left}
+#header li.first{margin-right: 130px;}
 #header li:last-child{margin-right: 0}
 #header .small .fl li{margin-right: 20px;}
-#header .big .fr li{margin-left: 25px;margin-right: 0}
-#header .big .fl li a{color: rgba(255,255,255,.5)}
-#header .big .fl li.active a{color: #fff}
+#header .big .fr li{margin-left: 15px;margin-right: 0}
+#header .big .fr li.skin{margin-left: 40px;}
+#header .big .fl li.active a{color: #fff;font-weight: bold}
 #header .active{position: relative}
 #header .active .sanjiao{width: 0;height: 0;margin: auto;position: absolute;bottom: 0;left: 0;right: 0;border:10px solid;border-color: transparent transparent #fff transparent;}
-.userHeadImg{width: 42px;height: 42px;border-radius: 50%;border: 1px solid #fff}
+.userHeadImg{width: 45px;height: 45px;border-radius: 50%;border: 2px solid #fff}
 .search{width: 190px;height: 30px;font-size: 14px;border: 0;background-color: #fff;padding: 10px;border-radius: 20px;line-height: 30px;}
 .search:focus{outline: none}

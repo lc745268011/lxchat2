@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="section">
-            <router-link to="/">返回</router-link>
+            <router-link to="/login">返回</router-link>
             注册
         </div>
     </div>

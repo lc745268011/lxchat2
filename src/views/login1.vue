@@ -1,12 +1,13 @@
 <template>
     <div>
-        <router-link to="/">返回首页</router-link>
+        <router-link to="/login">返回首页</router-link>
         <div id="section">
             <div class="contanier clearfix">
                 <div class="loginBox">
                     <div class="tab clearfix">
-                        <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>
                         <div :class="tabshow=='tabuser'?'fl active':'fl'" @click="changeTab('tabuser')">帐户密码登录</div>
+                        <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>
+
                     </div>
                     <div class="tabewm" v-show="tabshow=='tabewm'">
                         <img src="../assets/img/erwei.png" alt="" class="ewm">
@@ -72,26 +73,82 @@
                 this.tabshow=tabshow;
             },
             onFocus:function () {
-                if(this.username=='请输入手机号/邮箱') {
-                    this.username = ''
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='请输入手机号/邮箱') {
+                            this.username = ''
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur:function () {
-                if(this.username=='') {
-                    this.username='请输入手机号/邮箱'
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='') {
+                            this.username='请输入手机号/邮箱'
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onFocus1:function () {
-                if(this.password=='请输入登录密码') {
-                    this.password = ''
-                    this.inputType="password"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='请输入登录密码') {
+                            this.password = ''
+                            this.inputType="password"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur1:function () {
-                if(this.password=='') {
-                    this.password='请输入登录密码'
-                    this.inputType="text"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='') {
+                            this.password='请输入登录密码'
+                            this.inputType="text"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
         }
     }

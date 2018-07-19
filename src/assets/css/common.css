@@ -96,10 +96,10 @@ p {
   -moz-transition-property: all;
    -webkit-transition-property: all;
   -o-transition-property: all;
-  -webkit-transition-duration: 0.4s;
-  -moz-transition-duration: 0.4s;
-  -ms-transition-duration: 0.4s;
-  -o-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
 }
 input::-ms-clear{display:none;}/*隐藏文本框叉子*/
 input::-ms-reveal{display:none;}/*隐藏密码框小眼睛*/

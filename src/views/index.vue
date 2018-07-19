@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="div1">
+       <!-- <div id="div1">
 
             <ul>
 
@@ -30,7 +30,7 @@
 
             </ul>
 
-        </div>
+        </div>-->
         <lx-header></lx-header>
         <div class="contanier vCenter indexBox">
             <lx-aside></lx-aside>
@@ -57,15 +57,16 @@
             lxAside,
             lxContact
         },
-        mounted(){
+      /*  mounted(){
             this.init()
-        },
+        },*/
         methods:{
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
                 this.$store.commit('show',!this.$store.state.show);
             },
-            init:function () {
+            /*init:function () {
+                //右键自定义
                 document.oncontextmenu = function (ev)
 
                 {
@@ -93,7 +94,7 @@
                     oDiv.style.display='none';
 
                 };
-            }
+            }*/
 
         },
     }

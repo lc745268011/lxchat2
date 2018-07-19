@@ -1,32 +1,7 @@
 <template>
     <div>
-        <div id="head">
-            <div class="contanier clearfix">
-                <div id="logo" class="fl">
-                    <img src="../assets/img/logo.png" alt="">
-                </div>
-                <ul id="nav" class="clearfix fl">
-                    <li>
-                        <router-link to="/">首页</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/contacts">找人脉</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/industry">找行业</router-link>
-                    </li>
-                    <li class="active">
-                        <router-link to="/dapp">找供求</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/login1">聊天</router-link>
-                    </li>
-                </ul>
-                <div class="loginBtn fr">
-                    <router-link to="/">登录/注册</router-link>
-                </div>
-            </div>
-        </div>
+        <lheader></lheader>
+
         <div id="section">
             找供求
         </div>
@@ -35,6 +10,8 @@
 </template>
 
 <script>
+    import lheader from '../components/header/loginheader'
+
     export default {
         name: "login",
         data:function(){
@@ -44,6 +21,9 @@
                 password:'',
                 inputType:'password'
             }
+        },
+        components:{
+            lheader
         },
         mounted(){
             this.init()

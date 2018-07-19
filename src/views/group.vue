@@ -1,8 +1,11 @@
 <template>
     <div>
+        <router-link to="/login">返回首页</router-link>
         <div id="section">
-            <router-link to="/login">返回</router-link>
-            忘记密码
+            联盟 <br>
+            商会类 <br>
+            企业类 <br>
+            +创建我的
         </div>
     </div>
 
@@ -46,26 +49,82 @@
                 this.tabshow=tabshow;
             },
             onFocus:function () {
-                if(this.username=='请输入手机号/邮箱') {
-                    this.username = ''
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='请输入手机号/邮箱') {
+                            this.username = ''
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur:function () {
-                if(this.username=='') {
-                    this.username='请输入手机号/邮箱'
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='') {
+                            this.username='请输入手机号/邮箱'
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onFocus1:function () {
-                if(this.password=='请输入登录密码') {
-                    this.password = ''
-                    this.inputType="password"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='请输入登录密码') {
+                            this.password = ''
+                            this.inputType="password"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur1:function () {
-                if(this.password=='') {
-                    this.password='请输入登录密码'
-                    this.inputType="text"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='') {
+                            this.password='请输入登录密码'
+                            this.inputType="text"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
         }
     }

@@ -1,38 +1,13 @@
 <template>
     <div>
-        <div id="head">
-            <div class="contanier clearfix">
-                <div id="logo" class="fl">
-                    <img src="../assets/img/logo.png" alt="">
-                </div>
-                <ul id="nav" class="clearfix fl">
-                    <li class="active">
-                        <router-link to="/">首页</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/contacts">找人脉</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/industry">找行业</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/dapp">找供求</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/login1">聊天</router-link>
-                    </li>
-                </ul>
-                <div class="loginBtn fr">
-                    <router-link to="/">登录/注册</router-link>
-                </div>
-            </div>
-        </div>
+        <lheader></lheader>
         <div id="section">
             <div class="contanier clearfix">
                 <div class="fr loginBox">
                     <div class="tab clearfix">
-                        <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>
                         <div :class="tabshow=='tabuser'?'fl active':'fl'" @click="changeTab('tabuser')">帐户密码登录</div>
+                        <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>
+
                     </div>
                     <div class="tabewm" v-show="tabshow=='tabewm'">
                         <img src="../assets/img/erwei.png" alt="" class="ewm">
@@ -56,11 +31,16 @@
                 </div>
             </div>
         </div>
+        <div id="footer">
+            在线人数：166/在线访客：张三，李四
+        </div>
     </div>
 
 </template>
 
 <script>
+    import lheader from '../components/header/loginheader'
+
     export default {
         name: "login",
         data:function(){
@@ -70,6 +50,9 @@
                 password:'',
                 inputType:'password'
             }
+        },
+        components:{
+            lheader
         },
         mounted(){
             this.init()
@@ -98,26 +81,82 @@
                 this.tabshow=tabshow;
             },
             onFocus:function () {
-                if(this.username=='请输入手机号/邮箱') {
-                    this.username = ''
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='请输入手机号/邮箱') {
+                            this.username = ''
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur:function () {
-                if(this.username=='') {
-                    this.username='请输入手机号/邮箱'
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.username=='') {
+                            this.username='请输入手机号/邮箱'
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onFocus1:function () {
-                if(this.password=='请输入登录密码') {
-                    this.password = ''
-                    this.inputType="password"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='请输入登录密码') {
+                            this.password = ''
+                            this.inputType="password"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
             onBlur1:function () {
-                if(this.password=='') {
-                    this.password='请输入登录密码'
-                    this.inputType="text"
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+                var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion == 9) {
+                        if(this.password=='') {
+                            this.password='请输入登录密码'
+                            this.inputType="text"
+                        }
+                    }
+                } else{
+                    return -1;//不是ie浏览器
                 }
+
             },
         }
     }
@@ -136,12 +175,6 @@
         -o-transition-duration: 0s;
     }
     .contanier{width: 1200px;margin: 0 auto}
-    #head{height: 80px;line-height: 80px}
-    .loginBtn a{color: #2e9cf1;display: inline-block;width: 111px;height: 40px;border-radius: 20px;border: 2px solid #2e9cf1;text-align: center;font-size: 16px;line-height: 36px}
-    #nav{margin-left: 70px}
-    #nav li{float: left;font-size: 16px;margin-left: 60px;}
-    #nav li a{color: #333}
-    #nav li.active a,#section .loginBox .tab>div.active{color:#2e9cf1 }
     #section{background: url("../assets/img/loginbg.jpg");width: 100%}
     #section .loginBox{margin: 126px 0;background: #fff;width: 360px;height: 380px;border-radius: 6px;}
     #section .loginBox .tab{height: 53px;line-height: 51px;border-bottom: 1px solid #dcdcdc}

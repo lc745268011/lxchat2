@@ -1,6 +1,7 @@
 <template>
     <ul class="tree-menu">
-        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'"v-show="currentTab!='message'">
+        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'"
+            v-show="currentTab!='message'">
             <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
             <img :src="item.avatar" alt="" class="avatarImg">{{item.gname}}
@@ -8,14 +9,30 @@
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
-        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'" v-show="currentTab=='message'">
-            <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
+        <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'"
+            v-show="currentTab=='message'">
+            <span @click="toggle(item, index)" class="listTitle" v-show="item.tid=='0'">
+            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first1':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
-            <div style="display: inline-block">
-                <img :src="item.avatar" alt="" class="avatarImg messageavatar"><div style="display: inline-block"><p>{{item.gname}}</p><p style="font-size: 12px">{{item.msg}}</p></div>
+                <div style="display: inline-block">
+                    <div>
+                        <p>{{item.gname}}</p>
+                    </div>
+                </div>
+            </span>
+            <span @click="toggle(item, index)" v-show="item.tid!='0'">
+                <img :src="item.avatar" alt="" class="avatarImg messageavatar fl">
+                <div style="width: 74%" class="fr">
+                    <div class="clearfix">
+                        <p class="fl name">{{item.gname}}</p>
+                        <p class="fr time">09:00</p>
+                    </div>
+                    <div class="clearfix">
+                    <p class="msg fl">{{item.msg}}</p>
+                    <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
 
-            </div>
-                                                <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
+                    </div>
+                </div>
 
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
@@ -24,7 +41,8 @@
     </ul>
 </template>
 <script>
-    import {mapState,mapActions} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
+
     export default {
         name: 'treeMenu',
         props: {
@@ -34,15 +52,15 @@
             return {
                 folderIconList: [],
                 scope: {},
-                star:false,
+                star: false,
             }
         },
-        computed:{
+        computed: {
             ...mapState({
                 ucard: function (state) {
                     return state.ucard
                 },
-                currentTab:function (state) {
+                currentTab: function (state) {
                     return state.currentTab
 
                 }
@@ -64,39 +82,39 @@
             toggle(item, index) {
                 if (item.children && item.children.length) {
                     this.doTask(index);
-                }else if(!item.children&&item.tid!=0){
-                    if(this.$store.state.currentTab=='tongxunlu'){
-                        this.$store.commit('ucard',true);
-                        this.$store.commit('clickId',index);
-                        this.$store.commit('reciveavatar',item.avatar);
-                        this.$store.commit('replyusername',item.gname);
-                    }else{
-                        this.$store.commit('ucard',false);
-                        this.$store.commit('reciveavatar',item.avatar);
-                        this.$store.commit('replyusername',item.gname);
+                } else if (!item.children && item.tid != 0) {
+                    if (this.$store.state.currentTab == 'tongxunlu') {
+                        this.$store.commit('ucard', true);
+                        this.$store.commit('clickId', index);
+                        this.$store.commit('reciveavatar', item.avatar);
+                        this.$store.commit('replyusername', item.gname);
+                    } else {
+                        this.$store.commit('ucard', false);
+                        this.$store.commit('reciveavatar', item.avatar);
+                        this.$store.commit('replyusername', item.gname);
                     }
 
                 }
             },
-            addstar(item){
-                item.star=!item.star;
-                var addPush= {
-                    "recivename":item.gname,
-                    "sendname":"我是用户",
-                    "sendtime":"09:00",
-                    "lastmsg":"青岛河北商会-秘书长",
-                    "sendavatar":"",
-                    "reciveavatar":item.avatar,
-                    "id":5
+            addstar(item) {
+                item.star = !item.star;
+                var addPush = {
+                    "recivename": item.gname,
+                    "sendname": "我是用户",
+                    "sendtime": "09:00",
+                    "lastmsg": "青岛河北商会-秘书长",
+                    "sendavatar": "",
+                    "reciveavatar": item.avatar,
+                    "id": 5
                 };
                 this.$store.state.conversion.push(addPush)
-               /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
-                    .then((res) => {
-                        res.data.push(addPush);
-                        this.$store.commit('conversion',res.data);
-                    }, (err) => {
-                        console.log(err)
-                    })*/
+                /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
+                     .then((res) => {
+                         res.data.push(addPush);
+                         this.$store.commit('conversion',res.data);
+                     }, (err) => {
+                         console.log(err)
+                     })*/
 
             },
         }
@@ -115,11 +133,12 @@
     .tree-menu li span {
         width: 100%;
         display: block;
-        padding: 5px 0;
-        padding-right: 20px;
+        padding: 10px 20px;
         font-size: 14px;
         color: #666;
         cursor: pointer;
+        height: 60px;
+        border-bottom: 1px solid #dcdcdc;
     }
 
     .tree-menu li span:hover {
@@ -128,8 +147,8 @@
 
     .icon {
         display: inline-block;
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
         background-repeat: no-repeat;
         vertical-align: -2px;
         background-position: center;
@@ -142,14 +161,16 @@
         transition: transform 0.4s ease-out;
 
     }
+
     .icon.first.dapp {
-        background-image: url(../../assets/img/dapp.png)!important;
+        background-image: url(../../assets/img/dapp.png) !important;
         transform: rotate(0deg);
         transition: transform 0.4s ease-out;
 
     }
+
     .icon.first.message {
-        background-image: url(../../assets/img/hudong.png)!important;
+        background-image: url(../../assets/img/hudong.png) !important;
         transform: rotate(0deg);
         transition: transform 0.4s ease-out;
 
@@ -175,22 +196,47 @@
         background-image: url(../../assets/img/tree-1.png) !important;
         display: inline-block;
     }
+    .icon.first1 {
+        background-image: url(../../assets/img/tree-2.png) !important;
+        display: inline-block;
+        width: 10px;
+    }
 
     .avatarImg {
         display: none
     }
 
     .avatar img {
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
         display: inline-block;
         margin-right: 10px;
     }
-    .messageavatar{margin-top: -20px;}
     .star {
         float: right;
         color: #ccc;
+        font-size: 15px;
     }
-    .star.addStar{color: #ffd000}
+
+    .star.addStar {
+        color: #ffd000
+    }
+
+    .tree-menu li span.listTitle {
+        height: 40px;
+        line-height: 20px;
+        font-size: 14px;
+        border-bottom: 1px solid #dcdcdc;
+    }
+    .name{font-size: 14px;color: #333}
+    .time{font-size: 13px;color: #999}
+    .msg{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 80%;
+        font-size: 13px;
+        color: #999;
+    }
 </style>

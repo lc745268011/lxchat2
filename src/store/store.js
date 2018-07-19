@@ -17,6 +17,7 @@ const store = new Vuex.Store({
         txTab2:4,
         ucard:false,
         clickId:0,
+        dialogVisible:false,
         conversion:[
             {
                 "recivename":"张三",
@@ -101,6 +102,9 @@ const store = new Vuex.Store({
         "show":function (state,show) {
             state.show = show
         },
+        "dialogVisible":function (state,dialogVisible) {
+            state.dialogVisible = dialogVisible
+        },
     },
     actions: {
         "setId": function(state, listheight) {
@@ -152,6 +156,9 @@ const store = new Vuex.Store({
         },
         "show": function(state, show) {
             store.commit("show", show)
+        },
+        "dialogVisible": function(state, dialogVisible) {
+            store.commit("dialogVisible", dialogVisible)
         }
     }
 })

@@ -9,13 +9,19 @@ import industry from '@/views/industry'
 import dapp from '@/views/dapp'
 import regisiter from '@/views/regisiter'
 import forget from '@/views/forget'
+import backstage from '@/views/backstage'
+import group from '@/views/group'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
       {
-          path: '/',
+          path:'/',           //这个表示的是根目录，即一进入的页面
+          redirect:'login'
+      },
+      {
+          path: '/login',
           name: 'login',
           component: login
       },
@@ -58,6 +64,16 @@ export default new Router({
           path: '/forget',
           name: 'forget',
           component: forget
+      },
+      {
+          path: '/backstage',
+          name: 'backstage',
+          component: backstage
+      },
+      {
+          path: '/group',
+          name: 'group',
+          component: group
       }
   ]
 })

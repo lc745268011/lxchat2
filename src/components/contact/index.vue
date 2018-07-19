@@ -6,6 +6,7 @@
                 <div class="uname">
                     {{replyusername}}
                 </div>
+
                 <button class="openmsg" :style="{'background-color':this.$store.state.skintype}" @click="openconversion(clickId)">
                     <i class="iconfont">&#xe712;</i>
                 </button>
@@ -25,39 +26,54 @@
                     <div>
                         <img :src=reciveavatar alt="" class="chatavatar">
                         <span class="chatname">{{replyusername}}</span>
+
                     </div>
                     <div>
-                        <i class="iconfont">&#xe634;</i>
-                        <i class="iconfont">&#xe600;</i>
+                        <ul class="clearfix funicon">
+                            <li class="fr" v-for="(item,index) in functions" @mouseover="showtips(index)" @mouseout="hidetips" @click="open5(index)">
+                                <i class="iconfont" v-html="item.icon" :style="{'color':skintype}"></i>
+                                <div class="tips" v-show="tips==index">{{item.tipsname}}</div>
+                            </li>
+                        </ul>
                     </div>
+
 
                 </div>
                 <div class="msgBox" :style="{'height':msgBoxHeight+'px','width':'100%'}">
-                    <ul v-for="item in msgBox" v-show="clickId==item.id">
-                        <li v-for="m in item.msg" class="clearfix">
+                    <div v-for="item in msgBox" v-show="clickId==item.id">
+                        <div v-for="m in item.msg" class="clearfix list ql-editor">
 
                             <div v-if="m.usertype==1" style="width: 61.8%;" class="fr clearfix">
-                                <div class="fr">
-                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
-                                </div>
                                 <div v-html="m.msgInfo" style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
                                 </div>
 
                             </div>
                             <div v-else-if="m.usertype==0" style="width: 61.8%;" class="fl clearfix">
-                                <div class="fl">
-                                    <img :src=m.avatar alt="" class="msgBoxAvatar">
-                                </div>
                                 <div v-html="m.msgInfo" style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
 
                                 </div>
 
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="editorbox">
-                    <div></div>
+                    <div class="toolbar">
+                        <ul class="clearfix">
+                            <li @click="gongneng(1)"><img src="../../assets/img/font.png" alt="" :class="{'itemActive':itemActive===1}"></li>
+                            <li @click="gongneng(2)"><img src="../../assets/img/expression.png" alt="" :class="{'itemActive':itemActive===2}"></li>
+                            <li @click="gongneng(3)"><img src="../../assets/img/screenshots.png" alt="" :class="{'itemActive':itemActive===3}"></li>
+                            <li @click="gongneng(4)"><img src="../../assets/img/pic.png" alt="":class="{'itemActive':itemActive===4}"></li>
+                            <li @click="gongneng(5)"><img src="../../assets/img/files.png" alt="":class="{'itemActive':itemActive===5}"></li>
+                            <li><span class="line">|</span></li>
+                            <li @click="gongneng(6)"><img src="../../assets/img/vote.png" alt="":class="{'itemActive':itemActive===6}"></li>
+                            <li @click="gongneng(7)"><img src="../../assets/img/sign.png" alt="":class="{'itemActive':itemActive===7}"></li>
+                            <li @click="gongneng(8)"><img src="../../assets/img/log.png" alt="":class="{'itemActive':itemActive===8}"></li>
+                            <li @click="gongneng(9)"><img src="../../assets/img/whiteboard.png" alt="":class="{'itemActive':itemActive===9}"></li>
+                            <li @click="gongneng(10)"><img src="../../assets/img/news.png" alt="":class="{'itemActive':itemActive===10}"></li>
+                            <li @click="gongneng(11)"><img src="../../assets/img/more.png" alt="":class="{'itemActive':itemActive===11}"></li>
+                        </ul>
+                    </div>
                     <quill-editor :options="editorOption"
                                   :content="content"
                                   ref="QuillEditor"
@@ -66,35 +82,52 @@
                                   @ready="onEditorReady($event)">
                     </quill-editor>
                     <div class="sendbtn">
-                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送</button>
+                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送{{this.barStatus}}</button>
                     </div>
+                    <dialog></dialog>
                 </div>
+                <dialogs></dialogs>
             </div>
 
         </div>
 
     </div>
+
 </template>
 
 <script>
     import {mapState,mapActions} from 'vuex'
+    import dialogs from '../dialog/addgroup'
 
     export default {
         name: "index",
         data:function () {
+            const generateData2 = _ => {
+                const data = [];
+                const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
+                const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
+                cities.forEach((city, index) => {
+                    data.push({
+                        label: city,
+                        key: index,
+                        pinyin: pinyin[index]
+                    });
+                });
+                return data;
+            };
           return{
               msgBox:[
                   {
                       id:0,
                       msg:[{
                           time:'09:00',
-                          msgInfo:'hello',
+                          msgInfo:'正在设计页面',
                           usertype:1,
                           avatar:'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                           username:'我是用户'
                       },{
                           time:'09:03',
-                          msgInfo:'hello',
+                          msgInfo:'你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢你好啊，在干嘛呢',
                           usertype:0,
                           avatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                           username:'我是接受者'
@@ -176,18 +209,35 @@
               listheight:'',
               msgBoxHeight:'',
               content: '',
+              barStatus:false,
+              itemActive:-1,
+              functions:[{
+                fid:0,
+                icon:'&#xe600;',
+                  tipsname:'视频聊天'
+              },{
+                  fid:1,
+                  icon:'&#xe634;',
+                  tipsname:'网络电话'
+              },{
+                  fid:2,
+                  icon:'&#xe606;',
+                  tipsname:'创建讨论组'
+              },],
+              tips:-1,
+              data2: generateData2(),
+              value2: [],
+              filterMethod(query, item) {
+                  return item.pinyin.indexOf(query) > -1;
+              }
           }
         },
         mounted(){
             this.init();
+            this.toolbar();
         },
-        watch: {
-            clickId: function () {
-                this.scrolldown()
-            },
-            msgBoxHeight:function () {
-                this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
-            }
+        components:{
+            dialogs
         },
         computed:{
             ...mapState({
@@ -220,6 +270,10 @@
                 this.msgBoxHeight=this.listheight-document.getElementsByClassName('editorbox')[0].offsetHeight-document.getElementsByClassName('chatInfo')[0].offsetHeight;
                 this.scrolldown();
             },
+            toolbar(){
+                document.getElementsByClassName('ql-container')[0].style.height=document.getElementsByClassName('quill-editor')[0].offsetHeight-document.getElementsByClassName('ql-toolbar')[0].offsetHeight-1+'px';
+
+            },
             //富文本编辑器状态
             onEditorBlur(quill) {
                 console.log('editor blur!', quill)
@@ -245,6 +299,7 @@
             },
             //发送消息
             sendMsg:function (i) {
+                console.log(i)
                 this.msgBox[i].msg.push({
                     time:'09:00',
                     msgInfo:this.content,
@@ -262,24 +317,54 @@
                     div[0].scrollTop = div[0].scrollHeight;
                 })
             },
+            gongneng(i){
+                if(i==1){
+                    if(this.barStatus){
+                        this.barStatus=!this.barStatus;
+                        document.getElementsByClassName('ql-toolbar')[0].style.display='none'
+                        this.toolbar()
+                    }else{
+                        this.barStatus=!this.barStatus;
+                        document.getElementsByClassName('ql-toolbar')[0].style.display='block',
+                            this.toolbar()
+                    }
+                }else{
+                    this.barStatus=false;
+                    document.getElementsByClassName('ql-toolbar')[0].style.display='none'
+                    this.toolbar()
+                }
+
+                this.itemActive=i
+            },
+            showtips(t){
+                this.tips=t
+            },
+            hidetips(){
+                this.tips=-1
+            },
+            open5(t){
+                if(t==2){
+                    this.$store.commit('dialogVisible',true);
+                }
+            }
+
         }
     }
 </script>
 
 <style scoped lang="scss">
     .msgBox{
-        padding:10px 20px;
-        overflow: auto;
-        ul{
-            height: 100%;
-            li{margin-bottom: 20px}
+        .list{
+            margin-bottom: 20px;
+            padding: 0;
         }
-
+        padding:28px;
+        overflow: auto;
         .msgInfo{
-            padding: 10px 15px;
+            padding: 14px 20px;
             border-radius: 15px;
-            font-size: 14px;
-            max-width: 80%;
+            font-size: 13px;
+
         }
         .msgBoxAvatar {
             width: 40px;
@@ -330,17 +415,18 @@
         padding: 0 20px;
         border-bottom: 1px solid #dcdcdc;
         .chatavatar{
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            margin-right: 15px;
+            margin-right: 20px;
         }
         .chatname{
-            font-size: 18px;
+            font-size: 16px;
         }
         i.iconfont{
             font-size: 26px;
-            margin-left: 10px;
+            margin-left: 20px;
+            cursor: pointer;
         }
         div {
             width: 50%;
@@ -409,10 +495,44 @@
     #dapp{position: relative}
     .dappBox{width: 50%;margin:auto;height:500px;position: absolute;background: #dcdcdc;top: 0;bottom: 0;left: 0;right: 0}
     .dappBox img{width: 60px;height: 60px;border-radius: 50%}
+    .editorbox{border-top: 1px solid #dcdcdc;height: 260px}
+    .toolbar{
+        padding: 10px 11px 0;
+        li{
+            float: left;
+            margin-right: 10px;
+            .line{
+                display: inline-block;
+                color: #dcdcdc;
+                width: 1px;
+                margin: 2px 20px;
+            }
+            .itemActive{background: #f2f2f2}
+        }
+    }
+    .funicon{
+        li{
+            position: relative;
+            .tips {
+                position: absolute;
+                width: 64px;
+                height: 28px;
+                right: -10px;
+                bottom: -20px;
+                font-size: 12px;
+                color: #fff;
+                background: #333;
+                line-height: 28px;
+                text-align: center;
+                border-radius: 3px;
+                box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.35);
+            }
+        }
+    }
 </style>
 <style>
-    .quill-editor .ql-editor{height: 180px;}
+    .quill-editor{height: 180px;}
+    /*.quill-editor .ql-editor{height: 180px;}*/
     .quill-editor .ql-toolbar.ql-snow,.quill-editor .ql-container.ql-snow{border: 0}
-    .quill-editor .ql-toolbar.ql-snow{
-        border-top: 1px solid #dcdcdc;}
+    .quill-editor .ql-toolbar.ql-snow{display: none}
 </style>

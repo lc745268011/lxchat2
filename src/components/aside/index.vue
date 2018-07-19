@@ -1,10 +1,18 @@
 <template>
-    <div id="aside">{{this.$refs.show}}
+    <div id="aside">
         <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']" v-show="currentTab == 'message'">
             <div class="messagetab">
                 <ul>
-                    <li :class="{'active':txTab1===2}" @click="txTablist1(2)" :style="{'border-bottom-color':txTab1===2 ? this.$store.state.skintype:''}">常用</li>
-                    <li :class="{'active':txTab1===3}" @click="txTablist1(3)" :style="{'border-bottom-color':txTab1===3 ? this.$store.state.skintype:''}">更多</li>
+                    <li :class="{'active':txTab1===2}" @click="txTablist1(2)">
+                        <div :style="{'border-bottom-color':txTab1===2 ? skintype:'','color':txTab1===2 ? skintype:''}">
+                            <i class="iconfont">&#xe65c;</i>常用
+                        </div>
+                    </li>
+                    <li :class="{'active':txTab1===3}" @click="txTablist1(3)">
+                        <div :style="{'border-bottom-color':txTab1===3 ? skintype:'','color':txTab1===3 ? skintype:''}">
+                            <i class="iconfont">&#xe635;</i>更多
+                        </div>
+                    </li>
                 </ul>
             </div>
             <ul class="conversationlist" v-show="txTab1 == 2">
@@ -12,19 +20,16 @@
                     <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
-                        <div class="messageInfo"><span style="color:red">[未读]</span>{{item.lastmsg}}</div>
+                        <div class="messageInfo"><span :style="{'color':skintype}">[未读]</span>{{item.lastmsg}}</div>
                         <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
                     </div>
                 </li>
             </ul>
             <div v-show="txTab1 == 3">
                 <tree></tree>
-                <div class="addgn">
-                    <ul>
-                        <li>+新建对话</li>
-                        <li>+创建群组</li>
-                    </ul>
-                </div>
+            </div>
+            <div class="addicon" :style="{'background-color':skintype}">
+                <img src="../../assets/img/addicon.png" alt="">
             </div>
         </div>
         <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
@@ -251,21 +256,28 @@
     .messagetab{
         width: 100%;
         border-bottom: 1px solid #dcdcdc;
-        height: 40px;
-        line-height: 40px;
+        height: 60px;
+        line-height: 60px;
         font-size: 14px;
         li{
             width: 50%;
+            font-size: 16px;
             float: left;
             text-align: center;
-            border-bottom: 2px solid transparent;
-            margin-top: -2px;
+            div{
+                width: 50%;
+                margin: 0 auto;
+                height: 60px;
+            }
+            i{margin-right: 10px;}
         }
         :hover{
             cursor: pointer;
         }
         .active{
-            border-bottom: 2px solid;
+            div{
+                border-bottom: 4px solid;
+            }
         }
     }
     .conversationlist{
@@ -273,11 +285,13 @@
             height: 60px;
             /*line-height: 60px;*/
             font-size: 14px;
-            padding:10px;
+            color: #333;
+            padding:10px 20px;
             display: flex;
             cursor: pointer;
+            border-bottom: 1px solid #dcdcdc;
             div.fl{
-                line-height: normal;
+                line-height: 1.5;
                 width: 80%;
                 position: relative;
             }
@@ -289,37 +303,42 @@
                 display: none;
             }
             .replyuseravatar{
-                width: 40px;
-                height: 40px;
+                width: 42px;
+                height: 42px;
                 border-radius: 50%;
                 margin-right: 10px;
             }
             .time{
-                font-size: 12px;
+                font-size: 13px;
+                color: #999;
             }
             .messageInfo{
-                font-size: 12px;
+                font-size: 13px;
                 overflow: hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
                 width: 100%;
+                color: #999;
             }
         }
         li.active{
-            background:#ebebec;
+            background:#dcdcdc;
         }
         li:hover{
-            background: #ebebec;
+            background: #f0f0f0;
             .closeconversion{
                 display: block;
             }
         }
     }
-    .addgn {
-        position: fixed;
-        bottom: 0;
-        width: 20%;
+    .addicon{
+        width: 42px;
+        height: 42px;
         text-align: center;
-        li{width: 50%;float: left}
+        line-height: 38px;
+        position: fixed;
+        left:20px;
+        bottom: 20px;
+        border-radius: 50%;
     }
 </style>

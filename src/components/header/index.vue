@@ -4,7 +4,7 @@
         <div class="clearfix big">
             <div class="fl">
                 <ul class="clearfix">
-                    <li class="fl"><router-link to="/setting"><img src="https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg" alt="" class="userHeadImg"></router-link></li>
+                    <li class="fl first"><router-link to="/setting"><img src="https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg" alt="" class="userHeadImg"></router-link></li>
                     <li :class="{'active':currentTabstate==='message'}"><a href="javascript:;" @click="changenav('message')">互动</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTabstate==='tongxunlu'}" @click="changenav('tongxunlu')"><a href="javascript:;">通讯录</a><p class="sanjiao"></p></li>
                     <li :class="{'active':currentTabstate==='dapp'}"><a href="javascript:;" @click="changenav('dapp')">DAPP</a><p class="sanjiao"></p></li>
@@ -13,16 +13,16 @@
             <div class="fr">
                 <ul class="clearfix">
                     <li class="fl"><input type="text" placeholder="搜索" class="search"></li>
-                    <li class="fl skin"><a href="javascript:;" @click="skin">换肤</a>
+                    <li class="fl skin"><a href="javascript:;" @click="skin"><img src="../../assets/img/skin.png" alt=""></a>
                         <ul v-show="skinlist" class="skinlist">
                             <li @click="skinchange('#fb6161')">红色</li>
-                            <li @click="skinchange('#5498f5')">蓝色</li>
+                            <li @click="skinchange('#579ff1')">蓝色</li>
                             <li @click="skinchange('black')">黑色</li>
                         </ul>
                     </li>
                     <li class="fl">
                         <router-link to="/login1">
-                        退出
+                            <img src="../../assets/img/close.png" alt="">
                         </router-link>
                     </li>
                 </ul>
@@ -96,7 +96,7 @@
 <style scoped lang="scss" rel="stylesheet/scss">
     #header{background-color: $color}
     #header .skin{position: relative}
-    #header .skin .skinlist{position: absolute;width: 100px;background: #f3f3f3;border-radius: 4px;    z-index: 999;}
+    #header .skin .skinlist{position: absolute;width: 100px;background: #f3f3f3;border-radius: 4px;    z-index: 999;right: 0}
     #header .skin .skinlist li{width: 100%;text-align: center;margin-left: 0;line-height: 2;padding: 5px 15px;border-bottom: 1px solid #dcdcdc;font-size: 14px;color: #666;cursor: pointer}
     #header .skin .skinlist li:last-child{border-bottom: 0;}
 </style>
