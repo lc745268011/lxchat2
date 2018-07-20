@@ -44,12 +44,12 @@
                         <div v-for="m in item.msg" class="clearfix list ql-editor">
 
                             <div v-if="m.usertype==1" style="width: 61.8%;" class="fr clearfix">
-                                <div v-html="m.msgInfo" style="background: #d8e8f9;margin-right: 10px;" class="msgInfo fr">
+                                <div v-html="m.msgInfo" style="background: #d8e8f9;" class="msgInfo fr">
                                 </div>
 
                             </div>
                             <div v-else-if="m.usertype==0" style="width: 61.8%;" class="fl clearfix">
-                                <div v-html="m.msgInfo" style="background: #e8e8e8;margin-left: 10px;" class="msgInfo fl">
+                                <div v-html="m.msgInfo" style="background: #e8e8e8;" class="msgInfo fl">
 
                                 </div>
 
@@ -82,9 +82,8 @@
                                   @ready="onEditorReady($event)">
                     </quill-editor>
                     <div class="sendbtn">
-                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送{{this.barStatus}}</button>
+                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送</button>
                     </div>
-                    <dialog></dialog>
                 </div>
                 <dialogs></dialogs>
             </div>
@@ -261,7 +260,7 @@
                 },
                 currentTab:function (state) {
                     return state.currentTab
-                }
+                },
             }),
         },
         methods:{
@@ -412,7 +411,7 @@
     .chatInfo {
         height: 60px;
         line-height: 60px;
-        padding: 0 20px;
+        padding: 0 30px;
         border-bottom: 1px solid #dcdcdc;
         .chatavatar{
             width: 42px;

@@ -20,7 +20,11 @@
                     <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
-                        <div class="messageInfo"><span :style="{'color':skintype}">[未读]</span>{{item.lastmsg}}</div>
+                        <div class="messageInfo clearfix">
+                            <p class="fl"><span :style="{'color':skintype}">[未读]</span>
+                            {{item.lastmsg}}</p>
+                            <i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
+                        </div>
                         <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
                     </div>
                 </li>
@@ -35,8 +39,16 @@
         <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
             <div class="messagetab">
                 <ul>
-                    <li :class="{'active':txTab===0}" @click="txTablist(0)" :style="{'border-bottom-color':txTab===0 ? this.$store.state.skintype:''}">常用</li>
-                    <li :class="{'active':txTab===1}" @click="txTablist(1)" :style="{'border-bottom-color':txTab===1 ? this.$store.state.skintype:''}">更多</li>
+                    <li :class="{'active':txTab===0}" @click="txTablist(0)">
+                        <div :style="{'border-bottom-color':txTab===0 ? skintype:'','color':txTab===0 ? skintype:''}">
+                            <i class="iconfont">&#xe65c;</i>常用
+                        </div>
+                    </li>
+                    <li :class="{'active':txTab===1}" @click="txTablist(1)">
+                        <div :style="{'border-bottom-color':txTab===1 ? skintype:'','color':txTab===1 ? skintype:''}">
+                            <i class="iconfont">&#xe635;</i>更多
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div v-show="txTab == 0">
@@ -113,16 +125,18 @@
                         lastmsg:'你好',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:0
+                        id:0,
+                        star:false
                     },
                     {
                         recivename:'李四',
                         sendname:'我是用户',
                         sendtime:'09:00',
-                        lastmsg:'你好，请传文件过来',
+                        lastmsg:'你好，请传文件过来你好，请传文件过来你好，请传文件过来你好，请传文件过来',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:1
+                        id:1,
+                        star:false
                     },
                     {
                         recivename:'系统消息',
@@ -131,7 +145,9 @@
                         lastmsg:'你好，请传文件过来',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:2
+                        id:2,
+                        star:false
+
                     },
                     {
                         recivename:'消息平台',
@@ -140,7 +156,9 @@
                         lastmsg:'你好，请传文件过来',
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
-                        id:3
+                        id:3,
+                        star:false
+
                     }
                 ],
                 closeColor:'#666',
@@ -243,6 +261,9 @@
                 this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
                 this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
             },
+            addStar(item){
+                item.star=!item.star
+            },
             ...mapActions({
                 txTablist: "txTab",
                 txTablist1: "txTab1",
@@ -290,15 +311,16 @@
             display: flex;
             cursor: pointer;
             border-bottom: 1px solid #dcdcdc;
+            position: relative;
             div.fl{
                 line-height: 1.5;
-                width: 80%;
-                position: relative;
+                width: 78%;
             }
             .closeconversion{
                 position: absolute;
-                bottom: 0;
-                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 5px;
                 cursor: pointer;
                 display: none;
             }
@@ -314,11 +336,14 @@
             }
             .messageInfo{
                 font-size: 13px;
-                overflow: hidden;
-                text-overflow:ellipsis;
-                white-space:nowrap;
                 width: 100%;
                 color: #999;
+                p {
+                    width: 80%;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space:nowrap;
+                }
             }
         }
         li.active{
@@ -341,4 +366,9 @@
         bottom: 20px;
         border-radius: 50%;
     }
+    .star{
+        color: #ccc;
+        font-size: 15px;
+    }
+    .addStar{color: #ffd000;}
 </style>

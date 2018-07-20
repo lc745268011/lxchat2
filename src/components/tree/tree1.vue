@@ -20,9 +20,9 @@
                     </div>
                 </div>
             </span>
-            <span @click="toggle(item, index)" v-show="item.tid!='0'">
+            <span @click="toggle(item, index)" v-show="item.tid!='0'" class="clearfix">
                 <img :src="item.avatar" alt="" class="avatarImg messageavatar fl">
-                <div style="width: 74%" class="fr">
+                <div style="width: 80%" class="fl">
                     <div class="clearfix">
                         <p class="fl name">{{item.gname}}</p>
                         <p class="fr time">09:00</p>
@@ -202,15 +202,14 @@
         width: 10px;
     }
 
-    .avatarImg {
+    /*.avatarImg {
         display: none
-    }
+    }*/
 
     .avatar img {
         width: 42px;
         height: 42px;
         border-radius: 50%;
-        display: inline-block;
         margin-right: 10px;
     }
     .star {

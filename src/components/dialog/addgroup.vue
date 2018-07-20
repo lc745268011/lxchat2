@@ -1,5 +1,5 @@
 <template>
-    <div class="addGroup">
+    <div class="addGroup" v-show="dialogVisible1==true">
         <el-dialog
                 title="创建群组"
                 :visible.sync="dialogVisible1"
