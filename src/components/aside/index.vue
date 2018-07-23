@@ -58,7 +58,10 @@
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}}</div>
                             <div class="messageInfo">
-                               {{item.lastmsg}}</div>
+                               <p class="fl">{{item.lastmsg}}</p>
+                                <i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
+
+                            </div>
                             <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
                         </div>
                     </li>
@@ -66,13 +69,11 @@
             </div>
             <div v-show="txTab == 1">
                 <treetx></treetx>
-                <div class="addgn">
-                    <ul>
-                        <li>+添加好友</li>
-                        <li>+创建组织</li>
-                    </ul>
-                </div>
             </div>
+            <div class="addicon" :style="{'background-color':skintype}">
+                <img src="../../assets/img/addicon.png" alt="">
+            </div>
+
         </div>
         <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'dapp'">
             <div class="messagetab">

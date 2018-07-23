@@ -26,7 +26,8 @@ const store = new Vuex.Store({
                 "lastmsg":"青岛河北商会-秘书长",
                 "sendavatar":"",
                 "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
-                "id":0
+                "id":0,
+                "star":false
             },
             {
                 "recivename":"李四",
@@ -35,7 +36,9 @@ const store = new Vuex.Store({
                 "lastmsg":"联信科技-研发总监",
                 "sendavatar":"",
                 "reciveavatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg",
-                "id":1
+                "id":1,
+                "star":false
+
             }
         ],
         conversion1:[

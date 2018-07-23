@@ -60,18 +60,18 @@
                 <div class="editorbox">
                     <div class="toolbar">
                         <ul class="clearfix">
-                            <li @click="gongneng(1)"><img src="../../assets/img/font.png" alt="" :class="{'itemActive':itemActive===1}"></li>
-                            <li @click="gongneng(2)"><img src="../../assets/img/expression.png" alt="" :class="{'itemActive':itemActive===2}"></li>
-                            <li @click="gongneng(3)"><img src="../../assets/img/screenshots.png" alt="" :class="{'itemActive':itemActive===3}"></li>
-                            <li @click="gongneng(4)"><img src="../../assets/img/pic.png" alt="":class="{'itemActive':itemActive===4}"></li>
-                            <li @click="gongneng(5)"><img src="../../assets/img/files.png" alt="":class="{'itemActive':itemActive===5}"></li>
+                            <li @click="gongneng(1)"><img src="../../assets/img/font.png" alt="" :class="{'itemActive':itemActive===1}" title="字体"></li>
+                            <li @click="gongneng(2)"><img src="../../assets/img/expression.png" alt="" :class="{'itemActive':itemActive===2}" title="表情"></li>
+                            <li @click="gongneng(3)"><img src="../../assets/img/screenshots.png" alt="" :class="{'itemActive':itemActive===3}" title="截屏"></li>
+                            <li @click="gongneng(4)"><img src="../../assets/img/pic.png" alt="":class="{'itemActive':itemActive===4}" title="图片"></li>
+                            <li @click="gongneng(5)"><img src="../../assets/img/files.png" alt="":class="{'itemActive':itemActive===5}" title="文件"></li>
                             <li><span class="line">|</span></li>
-                            <li @click="gongneng(6)"><img src="../../assets/img/vote.png" alt="":class="{'itemActive':itemActive===6}"></li>
-                            <li @click="gongneng(7)"><img src="../../assets/img/sign.png" alt="":class="{'itemActive':itemActive===7}"></li>
-                            <li @click="gongneng(8)"><img src="../../assets/img/log.png" alt="":class="{'itemActive':itemActive===8}"></li>
-                            <li @click="gongneng(9)"><img src="../../assets/img/whiteboard.png" alt="":class="{'itemActive':itemActive===9}"></li>
-                            <li @click="gongneng(10)"><img src="../../assets/img/news.png" alt="":class="{'itemActive':itemActive===10}"></li>
-                            <li @click="gongneng(11)"><img src="../../assets/img/more.png" alt="":class="{'itemActive':itemActive===11}"></li>
+                            <li @click="gongneng(6)"><img src="../../assets/img/vote.png" alt="":class="{'itemActive':itemActive===6}" title="投票"></li>
+                            <li @click="gongneng(7)"><img src="../../assets/img/sign.png" alt="":class="{'itemActive':itemActive===7}" title="签到"></li>
+                            <li @click="gongneng(8)"><img src="../../assets/img/log.png" alt="":class="{'itemActive':itemActive===8}" title="日志"></li>
+                            <li @click="gongneng(9)"><img src="../../assets/img/whiteboard.png" alt="":class="{'itemActive':itemActive===9}" title="白板"></li>
+                            <li @click="gongneng(10)"><img src="../../assets/img/news.png" alt="":class="{'itemActive':itemActive===10}" title="新闻"></li>
+                            <li @click="gongneng(11)"><img src="../../assets/img/more.png" alt="":class="{'itemActive':itemActive===11}" title="更多"></li>
                         </ul>
                     </div>
                     <quill-editor :options="editorOption"

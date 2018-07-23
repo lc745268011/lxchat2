@@ -2,10 +2,20 @@
     <ul class="tree-menu">
         <li v-for="(item, index) in data" :class="item.tid==0||item.children ? '' : 'avatar'"
             v-show="currentTab!='message'">
-            <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}">
+            <span @click="toggle(item, index)" class="listTitle"
+                  :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}" v-show="!item.last">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
             <img :src="item.avatar" alt="" class="avatarImg">{{item.gname}}
                 <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
+            </span>
+            <span @click="toggle(item, index)" :style="{'padding-left':(parseInt(item.tid)+1)*20+'px'}"
+                  v-show="item.last" class="clearfix">
+            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
+            <img :src="item.avatar" alt="" class="avatarImg fl">
+            <div class="fl" style="width: 70%;">
+                <p>{{item.gname}}</p><p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">{{item.position}}</p>
+            </div>
+            <i :class="['iconfont','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
@@ -29,7 +39,8 @@
                     </div>
                     <div class="clearfix">
                     <p class="msg fl">{{item.msg}}</p>
-                    <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last" @click.stop="addstar(item)">&#xe6b9;</i>
+                    <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last"
+                       @click.stop="addstar(item)">&#xe6b9;</i>
 
                     </div>
                 </div>
@@ -37,7 +48,6 @@
             </span>
             <tree-menu v-if="scope[index]" :data="item.children"></tree-menu>
         </li>
-
     </ul>
 </template>
 <script>
@@ -196,6 +206,7 @@
         background-image: url(../../assets/img/tree-1.png) !important;
         display: inline-block;
     }
+
     .icon.first1 {
         background-image: url(../../assets/img/tree-2.png) !important;
         display: inline-block;
@@ -212,6 +223,7 @@
         border-radius: 50%;
         margin-right: 10px;
     }
+
     .star {
         float: right;
         color: #ccc;
@@ -228,9 +240,18 @@
         font-size: 14px;
         border-bottom: 1px solid #dcdcdc;
     }
-    .name{font-size: 14px;color: #333}
-    .time{font-size: 13px;color: #999}
-    .msg{
+
+    .name {
+        font-size: 14px;
+        color: #333
+    }
+
+    .time {
+        font-size: 13px;
+        color: #999
+    }
+
+    .msg {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
