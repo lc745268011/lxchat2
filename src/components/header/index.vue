@@ -12,7 +12,13 @@
             </div>
             <div class="fr">
                 <ul class="clearfix">
-                    <li class="fl"><input type="text" placeholder="搜索" class="search"></li>
+                    <li class="fl searchBox">
+                        <div class="search">
+                            <input type="text" placeholder="搜索">
+                            <i class="iconfont searchBtn">&#xe603;</i>
+                        </div>
+
+                    </li>
                     <li class="fl skin"><a href="javascript:;" @click="skin"><img src="../../assets/img/skin.png" alt=""></a>
                         <ul v-show="skinlist" class="skinlist">
                             <li @click="skinchange('#fb6161')">红色</li>
@@ -99,4 +105,9 @@
     #header .skin .skinlist{position: absolute;width: 100px;background: #f3f3f3;border-radius: 4px;    z-index: 999;right: 0}
     #header .skin .skinlist li{width: 100%;text-align: center;margin-left: 0;line-height: 2;padding: 5px 15px;border-bottom: 1px solid #dcdcdc;font-size: 14px;color: #666;cursor: pointer}
     #header .skin .skinlist li:last-child{border-bottom: 0;}
+    .searchBox{position: relative;height: 60px}
+    .searchBox>div.search{position: absolute;right: 10px;top: 50%;transform: translateY(-50%);overflow: hidden}
+    .searchBox>div>input{height: 30px;padding:5px 5px 5px 8px;display: inline-block;border: 0;width: 160px;position: absolute;top: 0;left: 0;color: #666}
+    .searchBtn{cursor:pointer;font-size: 20px;color: #999;position: absolute;right: 10px;top: 0}
+
 </style>

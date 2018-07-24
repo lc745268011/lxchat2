@@ -1,10 +1,6 @@
 <template>
-    <div class="addGroup" v-show="dialogVisible1==true">
-        <el-dialog
-                title="创建群组"
-                :visible.sync="dialogVisible1"
-                width="650px"
-                :before-close="handleClose">
+    <div class="addGroup">
+        <el-dialog title="创建群组" :visible="dialogVisible1" width="650px" @close='closed'>
             <span>请输入群组名称 </span><el-input v-model="input" placeholder="请输入内容"></el-input>
             <el-transfer
                     filterable
@@ -14,10 +10,10 @@
                     :titles="['用户列表', '群组成员']"
                     :data="data2">
             </el-transfer>
-            <span slot="footer" class="dialog-footer">
-    <el-button @click="closed">取 消</el-button>
-    <el-button type="primary" @click="closed">确 定</el-button>
-  </span>
+            <div slot="footer" class="dialog-footer">
+                <el-button  @click="closed">取 消</el-button>
+                <el-button type="primary" @click="closed">确 定</el-button>
+            </div>
         </el-dialog>
     </div>
 </template>
@@ -45,7 +41,7 @@
                 filterMethod(query, item) {
                     return item.pinyin.indexOf(query) > -1;
                 },
-                input: ''
+                input: '',
             };
         },
         computed:{
@@ -56,14 +52,6 @@
             }),
         },
         methods: {
-            handleClose(done) {
-                this.$confirm('确认关闭？')
-                    .then(_ => {
-                        this.$store.commit('dialogVisible',false);
-                    })
-                    .catch(_ => {                this.$store.commit('dialogVisible',false);
-                    });
-            },
             closed(){
                 this.$store.commit('dialogVisible',false);
             }

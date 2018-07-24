@@ -18,5 +18,5 @@
 #header .active{position: relative}
 #header .active .sanjiao{width: 0;height: 0;margin: auto;position: absolute;bottom: 0;left: 0;right: 0;border:10px solid;border-color: transparent transparent #fff transparent;}
 .userHeadImg{width: 45px;height: 45px;border-radius: 50%;border: 2px solid #fff}
-.search{width: 190px;height: 30px;font-size: 14px;border: 0;background-color: #fff;padding: 10px;border-radius: 20px;line-height: 30px;}
+.search{width: 190px;height: 30px;font-size: 14px;border: 0;background-color: #fff;border-radius: 20px;line-height: 30px;}
 .search:focus{outline: none}
