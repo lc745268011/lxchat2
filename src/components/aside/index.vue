@@ -12,7 +12,7 @@
                     </li>
                     <li :class="{'active':txTab1===3}" @click="txTablist1(3)">
                         <div :style="{'border-bottom-color':txTab1===3 ? skintype:'','color':txTab1===3 ? skintype:''}">
-                            <i class="iconfont">&#xe635;</i>更多
+                            <i class="iconfont">&#xe604;</i>更多
                         </div>
                     </li>
                 </ul>
@@ -34,8 +34,8 @@
             <div v-show="txTab1 == 3">
                 <tree></tree>
             </div>
-            <div id="movie">
-                <div class="addicon" :style="{'background-color':skintype}" @click="showMenu">
+            <div id="movie" @mouseleave="hideMenu">
+                <div class="addicon" :style="{'background-color':skintype}" @mouseenter="showMenu">
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
@@ -60,7 +60,7 @@
                     </li>
                     <li :class="{'active':txTab===1}" @click="txTablist(1)">
                         <div :style="{'border-bottom-color':txTab===1 ? skintype:'','color':txTab===1 ? skintype:''}">
-                            <i class="iconfont">&#xe635;</i>更多
+                            <i class="iconfont">&#xe604;</i>更多
                         </div>
                     </li>
                 </ul>
@@ -84,8 +84,8 @@
             <div v-show="txTab == 1">
                 <treetx></treetx>
             </div>
-            <div id="movie">
-                <div class="addicon" :style="{'background-color':skintype}" @click="showMenu">
+            <div id="movie" @mouseleave="hideMenu">
+                <div class="addicon" :style="{'background-color':skintype}" @mouseenter="showMenu">
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
@@ -110,7 +110,7 @@
                     </li>
                     <li :class="{'active':txTab2===5}" @click="txTablist2(5)">
                         <div :style="{'border-bottom-color':txTab2===5 ? skintype:'','color':txTab2===5 ? skintype:''}">
-                            <i class="iconfont">&#xe635;</i>更多
+                            <i class="iconfont">&#xe604;</i>更多
                         </div>
                     </li>
                 </ul>
@@ -130,8 +130,8 @@
             <div v-show="txTab2 == 5">
                 <treedapp></treedapp>
             </div>
-            <div id="movie">
-                <div class="addicon" :style="{'background-color':skintype}" @click="showMenu">
+            <div id="movie" @mouseleave="hideMenu">
+                <div class="addicon" :style="{'background-color':skintype}" @mouseenter="showMenu">
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
@@ -320,8 +320,10 @@
                 this.tabStatus2=!this.tabStatus2
             },
             showMenu() {
-                this.aaa = !this.aaa;
-                console.log(this.aaa)
+                this.aaa = true;
+            },
+            hideMenu() {
+                this.aaa = false;
             },
             ...mapActions({
                 txTablist: "txTab",
@@ -463,8 +465,8 @@
             position: fixed
             bottom: 20px
             left: 20px
-            width: 50px
-            height: 50px
+            width: 100px
+            height: 100px
             border-radius: 50%
             transition: all .7s ease-in
             &.move-enter-active
@@ -481,13 +483,13 @@
                 .inner
                     transition-timing-function: ease-in-out
                 .inner-1
-                    transform: translate3d(0, 60px, 0)
+                    transform: translate3d(10px, 60px, 0)
                     transition-delay: .1s
                 .inner-2
-                    transform: translate3d(-50px, 40px, 0)
+                    transform: translate3d(-40px, 40px, 0)
                     transition-delay: .2s
                 .inner-3
-                    transform: translate3d(-70px, -10px, 0)
+                    transform: translate3d(-60px, -10px, 0)
                     transition-delay: .3s
         .inner
             display: inline-block

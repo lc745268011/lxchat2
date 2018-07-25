@@ -114,7 +114,8 @@
                                   ref="QuillEditor"
                                   @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
                                   @change="onEditorChange($event)"
-                                  @ready="onEditorReady($event)">
+                                  @ready="onEditorReady($event)"
+                                  >
                     </quill-editor>
                     <div class="sendbtn">
                         <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送
@@ -306,9 +307,13 @@
         },
         methods: {
             init() {
-                this.listheight = document.documentElement.clientHeight - this.$store.state.listheight
-                this.msgBoxHeight = this.listheight - document.getElementsByClassName('editorbox')[0].offsetHeight - document.getElementsByClassName('chatInfo')[0].offsetHeight;
-                this.scrolldown();
+                let that=this;
+                that.listheight = document.documentElement.clientHeight - this.$store.state.listheight
+                that.msgBoxHeight = this.listheight - document.getElementsByClassName('editorbox')[0].offsetHeight - document.getElementsByClassName('chatInfo')[0].offsetHeight;
+                that.scrolldown();
+                document.getElementsByClassName('ql-blank')[0].addEventListener('keydown',function () {
+                    that.onEditorKeydown()
+                })
             },
             toolbar() {
                 document.getElementsByClassName('ql-container')[0].style.height = document.getElementsByClassName('quill-editor')[0].offsetHeight - document.getElementsByClassName('ql-toolbar')[0].offsetHeight - 1 + 'px';
@@ -324,14 +329,20 @@
                 // console.log('editor focus!', quill)
                 this.barStatus = !this.barStatus;
                 document.getElementsByClassName('ql-toolbar')[0].style.display = 'block',
-                    this.toolbar()
+                    this.toolbar();
             },
             onEditorReady(quill) {
-                console.log('editor ready!', quill)
+                // console.log('editor ready!', quill)
             },
             onEditorChange({quill, html, text}) {
-                console.log('editor change!', quill, html, text)
+                // console.log('editor change!', quill, html, text)
                 this.content = html
+            },
+            onEditorKeydown(){
+                var key=this.$store.state.clickId;
+                if (event.ctrlKey &&event.keyCode == 13)  {
+                    this.sendMsg(key)
+                }
             },
             //左侧会话列表和右侧会话窗口联动
             openconversion: function (i) {
@@ -344,7 +355,6 @@
             },
             //发送消息
             sendMsg: function (i) {
-                console.log(i)
                 this.msgBox[i].msg.push({
                     time: '09:00',
                     msgInfo: this.content,
@@ -352,7 +362,10 @@
                     avatar: 'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
                     username: '我是用户'
                 });
+
                 this.content = '';
+                console.log(this.content)
+
                 this.scrolldown()
             },
             //会话窗口滚动条在底部
