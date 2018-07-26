@@ -255,7 +255,7 @@
                 itemActive: -1,
                 functions: [{
                     fid: 0,
-                    icon: '&#xe600;',
+                    icon: '&#xe608;',
                     tipsname: '视频聊天'
                 }, {
                     fid: 1,

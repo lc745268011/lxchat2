@@ -27,7 +27,7 @@
                             {{item.lastmsg}}</p>
                             <div @click.stop="addStar(item,$event)">
                                 <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
-                                <div id="ball"></div>
+                                <div id="ball"><img :src=item.reciveavatar alt=""></div>
                             </div>
 
                         </div>
@@ -464,13 +464,16 @@
         cursor: pointer;
     }
     #ball {
-        width:12px;
-        height:12px;
-        background: #5EA345;
-        border-radius: 50%;
+        width:30px;
+        height:30px;
         position: fixed;
         transition: left 1s linear, top 1s ease-in;
         display: none;
+        img{
+            width: 100%;
+            border-radius: 50%;
+            z-index: 999;
+        }
     }
 </style>
 <style lang="stylus" rel="stylesheet/stylus">
