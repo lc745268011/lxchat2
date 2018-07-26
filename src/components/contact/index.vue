@@ -82,8 +82,8 @@
 
                 </div>
                 <div class="editorbox">
-                    <div class="toolbar">
-                        <ul class="clearfix">
+                    <div class="toolbar clearfix">
+                        <ul class="clearfix fl">
                             <li @click="gongneng(1)"><img src="../../assets/img/font.png" alt=""
                                                           :class="{'itemActive':itemActive===1}" title="字体"></li>
                             <li @click="gongneng(2)"><img src="../../assets/img/expression.png" alt=""
@@ -108,6 +108,7 @@
                             <li @click="gongneng(11)"><img src="../../assets/img/more.png" alt=""
                                                            :class="{'itemActive':itemActive===11}" title="更多"></li>
                         </ul>
+                        <div class="fr">消息记录</div>
                     </div>
                     <quill-editor :options="editorOption"
                                   :content="content"

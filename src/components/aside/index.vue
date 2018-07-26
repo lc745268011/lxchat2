@@ -25,7 +25,11 @@
                         <div class="messageInfo clearfix">
                             <p class="fl"><span :style="{'color':skintype}">[未读]</span>
                             {{item.lastmsg}}</p>
-                            <i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
+                            <div @click.stop="addStar(item,$event)">
+                                <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
+                                <div id="ball"></div>
+                            </div>
+
                         </div>
                         <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
                     </div>
@@ -74,7 +78,6 @@
                             <div class="messageInfo">
                                <p class="fl">{{item.lastmsg}}</p>
                                 <i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
-
                             </div>
                             <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
                         </div>
@@ -307,8 +310,24 @@
                 this.$store.commit('replyusername',this.$store.state.conversion[i].recivename);
                 this.$store.commit('replyposition',this.$store.state.conversion[i].lastmsg);
             },
-            addStar(item){
-                item.star=!item.star
+            addStar(item,event){
+                item.star=!item.star;
+                if(item.star==true){
+                    event.target.nextSibling.nextSibling.style.top= event.pageY+'px';
+                    event.target.nextSibling.nextSibling.style.display='block'
+                    event.target.nextSibling.nextSibling.style.left = event.pageX+'px';
+                    event.target.nextSibling.nextSibling.style.transition = 'left 0s, top 0s';
+                    setTimeout(()=>{
+                        event.target.nextSibling.nextSibling.style.top = '80px';
+                        event.target.nextSibling.nextSibling.style.left = '80px';
+                        event.target.nextSibling.nextSibling.style.transition = 'left 1s linear, top 1s ease-in';
+                    }, 20);
+                    setTimeout(()=>{
+                        event.target.nextSibling.nextSibling.style.display='none'
+
+                    }, 1200)
+                }
+
             },
             tabToggle(){
                 this.tabStatus=!this.tabStatus
@@ -432,7 +451,7 @@
         color: #ccc;
         font-size: 15px;
     }
-    .addStar{color: #ffd000;}
+    .addStar{color: #ffd000; }
     .triangle_border_nw{
         width:0;
         height:0;
@@ -443,6 +462,15 @@
         top: 0;
         z-index: 99;
         cursor: pointer;
+    }
+    #ball {
+        width:12px;
+        height:12px;
+        background: #5EA345;
+        border-radius: 50%;
+        position: fixed;
+        transition: left 1s linear, top 1s ease-in;
+        display: none;
     }
 </style>
 <style lang="stylus" rel="stylesheet/stylus">
