@@ -23,24 +23,33 @@
             v-show="currentTab=='message'">
             <span @click="toggle(item, index)" class="listTitle" v-show="item.tid=='0'">
             <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first1':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
-            <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']"></i>
+            <i :class="['icon iconfont', item.children && item.children.length ? folderIconList[index] : 'file-text',item.tid=='0'?'first':'',currentTab=='message'?'message':'',currentTab=='dapp'?'dapp':'']" v-html="item.icon" :style="{'color':skintype}"></i>
                 <div style="display: inline-block">
                     <div>
                         <p>{{item.gname}}</p>
                     </div>
                 </div>
             </span>
-            <span @click="toggle(item, index)" v-show="item.tid!='0'" class="clearfix">
+            <span @click="toggle(item, index)" v-show="item.tid!='0'" class="clearfix"  @mouseenter="rightList(index)" style="position: relative" @mouseleave="rightListhide">
                 <img :src="item.avatar" alt="" class="avatarImg messageavatar fl">
-                <div style="width: 80%" class="fl">
+                <div style="width: 200px" class="fl">
                     <div class="clearfix">
                         <p class="fl name">{{item.gname}}</p>
                         <p class="fr time">09:00</p>
                     </div>
                     <div class="clearfix">
                     <p class="msg fl">{{item.msg}}</p>
-                    <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last"
-                       @click.stop="addstar(item)">&#xe6b9;</i>
+                        <div @mouseenter="rightList(index)">
+                            <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last"
+                               @click.stop="addstar(item)">&#xe617;</i>
+                                <ul id="rightList" v-show="showRightList==index">
+                                    <li @click="closeconversion1(index)"><img src="../../assets/img/deleteIcon.png"
+                                                                              alt="">删除消息</li>
+                                    <li><img src="../../assets/img/upIcon.png" alt="">置顶消息</li>
+                                    <li><img src="../../assets/img/collectIcon.png" alt="">取消常用</li>
+                                    <li><img src="../../assets/img/userIcon.png" alt="">个人资料</li>
+                                </ul>
+                        </div>
 
                     </div>
                 </div>
@@ -63,6 +72,7 @@
                 folderIconList: [],
                 scope: {},
                 star: false,
+                showRightList:-1
             }
         },
         computed: {
@@ -72,7 +82,9 @@
                 },
                 currentTab: function (state) {
                     return state.currentTab
-
+                },
+                skintype: function (state) {
+                    return state.skintype
                 }
             }),
         },
@@ -127,6 +139,13 @@
                      })*/
 
             },
+            //右侧折叠功能
+            rightList(i){
+                this.showRightList=i
+            },
+            rightListhide(){
+                this.showRightList=-1
+            },
         }
     }
 </script>
@@ -180,7 +199,7 @@
     }
 
     .icon.first.message {
-        background-image: url(../../assets/img/hudong.png) !important;
+        background-image: none!important;
         transform: rotate(0deg);
         transition: transform 0.4s ease-out;
 
@@ -258,5 +277,34 @@
         width: 80%;
         font-size: 13px;
         color: #999;
+    }
+
+</style>
+<style scoped lang="scss" rel="stylesheet/scss">
+    #rightList {
+        top: 0;
+        position: absolute;
+        background: #fff;
+        left: 300px;
+        z-index: 999;
+        width: 140px;
+        border-radius: 4px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        padding: 6px 0;
+    img{
+        width: 14px;
+        height: 15px;
+        margin-top: 7px;
+        margin-right: 10px;
+    }
+    li{
+        height: 30px;
+        line-height: 30px;
+        padding: 0 13px;
+        border-bottom: 0;
+    }
+    :hover{
+        background: #edebea;
+    }
     }
 </style>

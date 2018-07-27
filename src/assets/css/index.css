@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'iconfont';  /* project id 732874 */
-    src: url('http://at.alicdn.com/t/font_732874_5kezquip6ss.eot');
-    src: url('http://at.alicdn.com/t/font_732874_5kezquip6ss.eot?#iefix') format('embedded-opentype'),
-    url('http://at.alicdn.com/t/font_732874_5kezquip6ss.woff') format('woff'),
-    url('http://at.alicdn.com/t/font_732874_5kezquip6ss.ttf') format('truetype'),
-    url('http://at.alicdn.com/t/font_732874_5kezquip6ss.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_732874_jqgezzcz6ts.eot');
+    src: url('//at.alicdn.com/t/font_732874_jqgezzcz6ts.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_732874_jqgezzcz6ts.woff') format('woff'),
+    url('//at.alicdn.com/t/font_732874_jqgezzcz6ts.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_732874_jqgezzcz6ts.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family:"iconfont" !important;
@@ -13,7 +13,7 @@
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;}
 .contanier{width: 100%}
-#userlist{background-color: #f9f9f9;width: 300px;position: relative;}
+#userlist{background-color: #f9f9f9;width: 300px;position: relative;border-right: 1px solid #dcdcdc}
 #userchat{width: 100%;position: relative;}
 .mslide{display: none}
 @media (max-width: 786px) {

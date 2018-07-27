@@ -108,7 +108,7 @@
                             <li @click="gongneng(11)"><img src="../../assets/img/more.png" alt=""
                                                            :class="{'itemActive':itemActive===11}" title="更多"></li>
                         </ul>
-                        <div class="fr">消息记录</div>
+                        <div class="fr"><img src="../../assets/img/msgIcon.png" alt="" style="margin-right: 10px">消息记录</div>
                     </div>
                     <quill-editor :options="editorOption"
                                   :content="content"
@@ -119,9 +119,16 @@
                                   >
                     </quill-editor>
                     <div class="sendbtn">
-                        <button :style="{'background-color':this.$store.state.skintype}" @click="sendMsg(clickId)">发送
+                        <button :style="{'background-color':this.$store.state.skintype}"><span @click="sendMsg(clickId)">发送</span><i :class="['iconfont',SendMethod==true?'hignLight':'']" @click="showSendMethod">&#xe608;</i>
                         </button>
+                        <ul class="sendList" v-show="SendMethod">
+                            <li @click="SendMethod=false">
+                                <img src="../../assets/img/choose.png" alt="">
+                                按Ctrl+Enter键发送消息
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
                 <dialogs></dialogs>
             </div>
@@ -251,19 +258,28 @@
                 barStatus: false,
                 x: 0,
                 y: 0,
+                SendMethod:false,
                 tipList:-1,
                 itemActive: -1,
                 functions: [{
                     fid: 0,
-                    icon: '&#xe608;',
+                    icon: '&#xe60e;',
+                    tipsname: '远程协助'
+                },{
+                    fid: 1,
+                    icon: '&#xe60d;',
+                    tipsname: '请求控制'
+                },{
+                    fid: 2,
+                    icon: '&#xe60c;',
                     tipsname: '视频聊天'
                 }, {
-                    fid: 1,
-                    icon: '&#xe634;',
+                    fid: 3,
+                    icon: '&#xe60f;',
                     tipsname: '网络电话'
                 }, {
-                    fid: 2,
-                    icon: '&#xe606;',
+                    fid: 4,
+                    icon: '&#xe60b;',
                     tipsname: '创建讨论组'
                 },],
                 tips: -1,
@@ -369,6 +385,9 @@
 
                 this.scrolldown()
             },
+            showSendMethod(){
+                this.SendMethod=true
+            },
             //会话窗口滚动条在底部
             scrolldown: function () {
                 this.$nextTick(function () {
@@ -463,13 +482,66 @@
 
     .sendbtn {
         text-align: right;
+        width: 96px;
+        height: 32px;
+        float: right;
+        margin-right: 15px;
+        position: relative;
+
+        .sendList{
+            position: absolute;
+            top: -50px;
+            background: #fff;
+            font-size: 12px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+            width: 185px;
+            border-radius: 4px;
+            right: 0;
+            padding: 6px 0;
+            li{
+                height: 28px;
+                line-height: 28px;
+                text-align: left;
+                padding:0 12px;
+                img {
+                    margin-right: 5px
+                }
+
+            }
+            :hover{
+                background: #edebea;
+            }
+        }
         button {
-            margin-right: 15px;
+            width: 100%;
+            /*margin-right: 15px;*/
             margin-bottom: 15px;
             border: 0;
-            padding: 5px 10px;
+            padding: 0;
             color: #fff;
+            height: 100%;
             font-size: 14px;
+            border-radius: 4px;
+            span{
+                width: 63px;
+                text-align: center;
+                display: inline-block;
+                /*height: 100%;*/
+                line-height: 18px;
+                /*padding: 7px 0;*/
+                border-right: 1px solid rgba(255,255,255,0.5);
+            }
+            i {
+                width: 32px;
+                /*height: 32px;*/
+                display: inline-block;
+                height: 100%;
+                padding: 7px 0;
+                text-align: center;
+            }
+            i.hignLight{
+                background: rgba(255,255,255,0.2);
+            }
         }
         :hover {
             cursor: pointer;
@@ -501,7 +573,7 @@
             font-size: 16px;
         }
         i.iconfont {
-            font-size: 26px;
+            font-size: 30px;
             margin-left: 20px;
             cursor: pointer;
         }

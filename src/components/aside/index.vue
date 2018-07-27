@@ -7,31 +7,39 @@
                 <ul class="clearfix" v-show="tabStatus">
                     <li :class="{'active':txTab1===2}" @click="txTablist1(2)">
                         <div :style="{'border-bottom-color':txTab1===2 ? skintype:'','color':txTab1===2 ? skintype:''}">
-                            <i class="iconfont">&#xe65c;</i>常用
+                            <i class="iconfont">&#xe605;</i>常用
                         </div>
                     </li>
                     <li :class="{'active':txTab1===3}" @click="txTablist1(3)">
                         <div :style="{'border-bottom-color':txTab1===3 ? skintype:'','color':txTab1===3 ? skintype:''}">
-                            <i class="iconfont">&#xe604;</i>更多
+                            <i class="iconfont">&#xe609;</i>更多
                         </div>
                     </li>
                 </ul>
             </div>
             <ul class="conversationlist" v-show="txTab1 == 2">
-                <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)">
+                <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)" style="position: relative" @mouseleave="rightListhide">
                     <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                         <div class="messageInfo clearfix">
                             <p class="fl"><span :style="{'color':skintype}">[未读]</span>
                             {{item.lastmsg}}</p>
-                            <div @click.stop="addStar(item,$event)">
-                                <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
-                                <div id="ball"><img :src=item.reciveavatar alt=""></div>
+                            <div>
+                                <div @mouseenter="rightList(index)">
+                                    <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe617;</i>
+                                    <div id="ball"><img :src=item.reciveavatar alt=""></div>
+                                </div>
+                                <ul id="rightList" v-show="showRightList==index">
+                                    <li @click.stop="closeconversion1(index)"><img src="../../assets/img/deleteIcon.png" alt="">删除消息</li>
+                                    <li><img src="../../assets/img/upIcon.png" alt="">置顶消息</li>
+                                    <li><img src="../../assets/img/collectIcon.png" alt="">取消常用</li>
+                                    <li><img src="../../assets/img/userIcon.png" alt="">个人资料</li>
+                                </ul>
                             </div>
 
                         </div>
-                        <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>
+                        <!--<i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion1(index)">&#xe776;</i>-->
                     </div>
                 </li>
             </ul>
@@ -59,12 +67,12 @@
                 <ul class="clearfix" v-show="tabStatus1">
                     <li :class="{'active':txTab===0}" @click="txTablist(0)">
                         <div :style="{'border-bottom-color':txTab===0 ? skintype:'','color':txTab===0 ? skintype:''}">
-                            <i class="iconfont">&#xe65c;</i>常用
+                            <i class="iconfont">&#xe605;</i>常用
                         </div>
                     </li>
                     <li :class="{'active':txTab===1}" @click="txTablist(1)">
                         <div :style="{'border-bottom-color':txTab===1 ? skintype:'','color':txTab===1 ? skintype:''}">
-                            <i class="iconfont">&#xe604;</i>更多
+                            <i class="iconfont">&#xe609;</i>更多
                         </div>
                     </li>
                 </ul>
@@ -74,12 +82,27 @@
                     <li :class="index==clickId?'active':''" v-for="(item,index) in this.conversionabc" @click="opencard(index)">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                         <div class="fl">
-                            <div class="replyusername">{{item.recivename}}</div>
-                            <div class="messageInfo">
-                               <p class="fl">{{item.lastmsg}}</p>
-                                <i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>
+                            <div class="replyusername clearfix">
+                                <span class="fl">{{item.recivename}}</span>
+                                <span class="fr position">{{item.position}}</span>
                             </div>
-                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>
+                            <div class="messageInfo">
+                               <p class="fl">{{item.company}}</p>
+                                <!--<i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>-->
+                            </div>
+                            <!--<i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>-->
+                            <div>
+                                <div @mouseenter="rightList(index)">
+                                    <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe617;</i>
+                                    <div id="ball"><img :src=item.reciveavatar alt=""></div>
+                                </div>
+                                <ul id="rightList" v-show="showRightList==index">
+                                    <li @click.stop="closeconversion(index)"><img src="../../assets/img/deleteIcon.png" alt="">删除消息</li>
+                                    <li><img src="../../assets/img/upIcon.png" alt="">置顶消息</li>
+                                    <li><img src="../../assets/img/collectIcon.png" alt="">取消常用</li>
+                                    <li><img src="../../assets/img/userIcon.png" alt="">个人资料</li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -108,12 +131,12 @@
                 <ul class="clearfix" v-show="tabStatus2">
                     <li :class="{'active':txTab2===4}" @click="txTablist2(4)">
                         <div :style="{'border-bottom-color':txTab2===4 ? skintype:'','color':txTab2===4 ? skintype:''}">
-                            <i class="iconfont">&#xe65c;</i>常用
+                            <i class="iconfont">&#xe605;</i>常用
                         </div>
                     </li>
                     <li :class="{'active':txTab2===5}" @click="txTablist2(5)">
                         <div :style="{'border-bottom-color':txTab2===5 ? skintype:'','color':txTab2===5 ? skintype:''}">
-                            <i class="iconfont">&#xe604;</i>更多
+                            <i class="iconfont">&#xe609;</i>更多
                         </div>
                     </li>
                 </ul>
@@ -125,7 +148,7 @@
                         <div class="fl">
                             <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                             <div class="messageInfo">{{item.lastmsg}}</div>
-                            <i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion2(index)">&#xe776;</i>
+                            <!--<i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion2(index)">&#xe776;</i>-->
                         </div>
                     </li>
                 </ul>
@@ -207,8 +230,9 @@
 
                     }
                 ],
-                closeColor:'#666',
+                // closeColor:'#666',
                 clickId:0,
+                showRightList:-1,
                 tabStatus:true,
                 tabStatus1:true,
                 tabStatus2:true,
@@ -265,17 +289,17 @@
                     })*/
             },
 
-            //鼠标悬浮关闭按钮，颜色变换
+           /* //鼠标悬浮关闭按钮，颜色变换
             closecolor:function () {
                 this.closeColor=this.skintype
             },
             //鼠标离开返回初始颜色
             closecolor1:function () {
                 this.closeColor='#666'
-            },
+            },*/
             //关闭按钮删除选中的会话
             closeconversion:function (index) {
-                this.conversion.splice(index,1)
+                this.$store.state.conversion.splice(index,1)
             },
             //关闭按钮删除选中的会话
             closeconversion1:function (index) {
@@ -343,6 +367,13 @@
             },
             hideMenu() {
                 this.aaa = false;
+            },
+            //右侧折叠功能
+            rightList(i){
+                this.showRightList=i
+            },
+            rightListhide(){
+                this.showRightList=-1
             },
             ...mapActions({
                 txTablist: "txTab",
@@ -455,7 +486,7 @@
     .triangle_border_nw{
         width:0;
         height:0;
-        border-width:20px 0 0 20px;
+        border-width:10px 0 0 10px;
         border-style:solid;
         position:absolute;
         right: 0;
@@ -474,6 +505,37 @@
             border-radius: 50%;
             z-index: 999;
         }
+    }
+
+    #rightList {
+        top: 0;
+        position: absolute;
+        background: #fff;
+        left: 300px;
+        z-index: 999;
+        width: 140px;
+        border-radius: 4px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        padding: 6px 0;
+        img{
+            width: 14px;
+            height: 15px;
+            margin-top: 7px;
+            margin-right: 10px;
+        }
+        li{
+            height: 30px;
+            line-height: 30px;
+            padding: 0 13px;
+            border-bottom: 0;
+        }
+        :hover{
+            background: #edebea;
+        }
+    }
+    .position{
+        color: #999;
+        font-size: 13px;
     }
 </style>
 <style lang="stylus" rel="stylesheet/stylus">

@@ -15,6 +15,7 @@
                     {
                         "gid":0,
                         "gname":"个人消息",
+                        'icon':'&#xe712;',
                         "tid":0,
                         "children": [
                             {
@@ -31,6 +32,7 @@
                     {
                         "gid":1,
                         "gname":"群组消息",
+                        'icon':'&#xe712;',
                         "tid":0,
                         "children":[
                                     {
@@ -48,6 +50,7 @@
                     {
                         "gid":2,
                         "gname":"组织消息",
+                        'icon':'&#xe712;',
                         "tid":0,
                         "children":[
                             {
@@ -66,6 +69,7 @@
                         "gid":3,
                         "gname":"广告消息",
                         "tid":0,
+                        'icon':'&#xe712;',
                         "children":[
                             {
                                 "gname": "王麻子",
@@ -81,6 +85,7 @@
                     },
                     {
                         "gid":4,
+                        'icon':'&#xe712;',
                         "gname":"陌生人消息",
                         "tid":0
                     }
