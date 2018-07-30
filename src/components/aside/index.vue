@@ -18,17 +18,17 @@
                 </ul>
             </div>
             <ul class="conversationlist" v-show="txTab1 == 2">
-                <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)" style="position: relative" @mouseleave="rightListhide">
+                <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)" style="position: relative" @mouseleave="rightListhide" @mouseenter="menuIcon(index)">
                     <el-badge :value="item.unread" :max="99" class="item" :hidden="item.unread!=0?false:true">
                         <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
                     </el-badge>
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                         <div class="messageInfo clearfix">
-                            <p class="fl"><span :style="{'color':skintype}">[未读]</span>
+                            <p class="fl">
                             {{item.lastmsg}}</p>
                             <div>
-                                <div @mouseenter="rightList(index)">
+                                <div @mouseenter="rightList(index)" v-show="status==index">
                                     <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe617;</i>
                                     <div id="ball"><img :src=item.reciveavatar alt=""></div>
                                 </div>
@@ -53,7 +53,7 @@
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
-                    <div class="menu" v-show="aaa">
+                    <div class="menu" v-show="addMenu">
                         <div class="inner inner-1">1</div>
                         <div class="inner inner-2">2</div>
                         <div class="inner inner-3">3</div>
@@ -90,9 +90,7 @@
                             </div>
                             <div class="messageInfo">
                                <p class="fl">{{item.company}}</p>
-                                <!--<i @click.stop="addStar(item)" :class="['iconfont fr','star',item.star?'addStar':'']">&#xe6b9;</i>-->
                             </div>
-                            <!--<i class="iconfont closeconversion" @mouseover="closecolor"  @mouseout="closecolor1" :style="{'color':closeColor}" @click="closeconversion(index)">&#xe776;</i>-->
                             <div>
                                 <div @mouseenter="rightList(index)">
                                     <i :class="['iconfont fr','star',item.star?'addStar':'']">&#xe617;</i>
@@ -117,7 +115,7 @@
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
-                    <div class="menu" v-show="aaa">
+                    <div class="menu" v-show="addMenu">
                         <div class="inner inner-1">1</div>
                         <div class="inner inner-2">2</div>
                         <div class="inner inner-3">3</div>
@@ -163,7 +161,7 @@
                     <img src="../../assets/img/addicon.png" alt="">
                 </div>
                 <transition name="move">
-                    <div class="menu" v-show="aaa">
+                    <div class="menu" v-show="addMenu">
                         <div class="inner inner-1">1</div>
                         <div class="inner inner-2">2</div>
                         <div class="inner inner-3">3</div>
@@ -185,7 +183,8 @@
         data :function() {
             return {
                 listheight:'',
-                aaa:false,
+                addMenu:false,
+                status:-1,
                 conversion:[],
                 conversion1:[],
                 conversion2:[
@@ -371,17 +370,21 @@
                 this.tabStatus2=!this.tabStatus2
             },
             showMenu() {
-                this.aaa = true;
+                this.addMenu = true;
             },
             hideMenu() {
-                this.aaa = false;
+                this.addMenu = false;
             },
             //右侧折叠功能
             rightList(i){
                 this.showRightList=i
             },
             rightListhide(){
-                this.showRightList=-1
+                this.showRightList=-1;
+                this.status=-1
+            },
+            menuIcon(status){
+                this.status=status
             },
             ...mapActions({
                 txTablist: "txTab",
@@ -487,7 +490,7 @@
         z-index: 99;
     }
     .star{
-        color: #ccc;
+        color: #999;
         font-size: 15px;
     }
     .addStar{color: #ffd000; }

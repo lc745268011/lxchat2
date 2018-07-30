@@ -50,7 +50,7 @@
                             <!--我发出的消息样式-->
                             <div v-if="m.usertype==1" style="max-width: 61.8%;" class="fr clearfix" @mouseleave="tipsBoxhide">
                                 <div>
-                                    <div v-html="m.msgInfo" style="background: #d8e8f9;" class="msgInfo fr"
+                                    <div v-html="m.msgInfo" :style="{'background': skintype,'color':'#fff'}" class="msgInfo fr"
                                          @mouseover="tipsBoxshow(index)">
                                     </div>
                                     <div class="tipList" :style="{'top':y+'px','right':'35px'}" v-show="tipList==index" @mouseleave="tipsBoxhide">
@@ -295,6 +295,7 @@
             this.toolbar();
             window.onresize = () => {
                 this.init();
+                this.scrolldown();
             };
         },
         components: {
@@ -331,10 +332,12 @@
                 return this.$store.state.winHeight-60-260
             }
         },
+        updated:function(){
+            this.scrolldown()
+        },
         methods: {
             init() {
-                let that=this;
-                that.scrolldown();
+                var that= this;
                 document.getElementsByClassName('ql-blank')[0].addEventListener('keydown',function () {
                     that.onEditorKeydown()
                 })

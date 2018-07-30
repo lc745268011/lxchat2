@@ -22,7 +22,7 @@
                     <li class="fl skin"><a href="javascript:;" @click="skin"><img src="../../assets/img/skin.png" alt=""></a>
                         <ul v-show="skinlist" class="skinlist">
                             <li @click="skinchange('#fb6161')">红色</li>
-                            <li @click="skinchange('#579ff1')">蓝色</li>
+                            <li @click="skinchange('#0e8de6')">蓝色</li>
                             <li @click="skinchange('black')">黑色</li>
                         </ul>
                     </li>

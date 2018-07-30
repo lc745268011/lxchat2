@@ -25,7 +25,6 @@
                                         "gname": "张三",
                                         "tid":1,
                                         "star":false,
-                                        "last":true,
                                         "position":"联信科技-研发总监联信科技-研发总监联信科技-研发总监",
                                         "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                                     }
@@ -46,7 +45,6 @@
                                         "gname": "张三",
                                         "tid":1,
                                         "star":false,
-                                        "last":true,
                                         "position":"联信科技-研发总监",
                                         "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                                     }
@@ -63,7 +61,6 @@
                                 "gname": "李四",
                                 "tid":1,
                                 "star":false,
-                                "last":true,
                                 "position":"青岛河北商会-秘书长",
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg"
                             }
@@ -78,7 +75,6 @@
                                 "gname": "王麻子",
                                 "tid":1,
                                 "star":false,
-                                "last":true,
                                 "position":"B座501业主",
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
                             }
@@ -98,7 +94,6 @@
                                 "gname": "我的冰箱",
                                 "tid":1,
                                 "star":false,
-                                "last":true,
                                 "position":"B座501业主",
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
                             },
@@ -106,7 +101,6 @@
                                 "gname": "我的手机",
                                 "tid":1,
                                 "star":false,
-                                "last":true,
                                 "position":"B座501业主",
                                 "avatar":"https://tva2.sinaimg.cn/crop.0.8.751.751.180/961a9be5jw8fczq7q98i7j20kv0lcwfn.jpg"
                             }

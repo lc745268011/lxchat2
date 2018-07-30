@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </span>
-            <span @click="toggle(item, index)" v-show="item.tid!='0'" class="clearfix"  @mouseenter="rightList(index)" style="position: relative" @mouseleave="rightListhide">
+            <span @click="toggle(item, index)" v-show="item.tid!='0'" class="clearfix"  @mouseenter="menuIcon(index)" style="position: relative" @mouseleave="rightListhide">
                 <img :src="item.avatar" alt="" class="avatarImg messageavatar fl">
                 <div style="width: 200px" class="fl">
                     <div class="clearfix">
@@ -39,9 +39,9 @@
                     </div>
                     <div class="clearfix">
                     <p class="msg fl">{{item.msg}}</p>
-                        <div @mouseenter="rightList(index)">
-                            <i :class="['iconfont fr','star',item.star?'addStar':'']" v-show="item.last"
-                               @click.stop="addstar(item)">&#xe617;</i>
+                        <div>
+                                <i :class="['iconfont fr','star',item.star?'addStar':'']" @mouseenter="rightList(index)" v-show="status==index">&#xe617;</i>
+
                                 <ul id="rightList" v-show="showRightList==index">
                                     <li @click="closeconversion1(index)"><img src="../../assets/img/deleteIcon.png"
                                                                               alt="">删除消息</li>
@@ -72,7 +72,8 @@
                 folderIconList: [],
                 scope: {},
                 star: false,
-                showRightList:-1
+                showRightList:-1,
+                status:-1
             }
         },
         computed: {
@@ -144,7 +145,11 @@
                 this.showRightList=i
             },
             rightListhide(){
-                this.showRightList=-1
+                this.showRightList=-1,
+                this.status=-1
+            },
+            menuIcon(status){
+                this.status=status
             },
         }
     }
@@ -171,7 +176,7 @@
     }
 
     .tree-menu li span:hover {
-        background: #d5d5d5
+        background: #f0f0f0
     }
 
     .icon {
@@ -245,7 +250,7 @@
 
     .star {
         float: right;
-        color: #ccc;
+        color: #999;
         font-size: 15px;
     }
 
