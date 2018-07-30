@@ -1,5 +1,5 @@
 <template>
-    <div id="userchat" :style="{'height':listheight+'px'}">
+    <div id="userchat">
         <!--通讯录卡片-->
         <div id="usercard" v-show="this.ucard">
             <div class="top">
@@ -18,7 +18,7 @@
         <!--互动和dapp消息样式-->
         <div v-show="!this.ucard">
             <!--dapp样式-->
-            <div id="dapp" v-show="currentTab=='dapp'" :style="{'height':listheight+'px'}">
+            <div id="dapp" v-show="currentTab=='dapp'">
                 <div class="dappBox">
                     <img :src=reciveavatar alt="" class="chatavatar">
                     <span class="chatname">{{replyusername}}</span>
@@ -44,7 +44,7 @@
 
 
                 </div>
-                <div class="msgBox" :style="{'height':msgBoxHeight+'px','width':'100%'}">
+                <div class="msgBox" :style="{'height':fullHeight+'px','width':'100%'}">
                     <div v-for="item in msgBox" v-show="clickId==item.id">
                         <div v-for="(m,index) in item.msg" class="clearfix list ql-editor">
                             <!--我发出的消息样式-->
@@ -253,7 +253,7 @@
                     placeholder: ''
                 },
                 listheight: '',
-                msgBoxHeight: '',
+                winheight:'',
                 content: '',
                 barStatus: false,
                 x: 0,
@@ -293,6 +293,9 @@
         mounted() {
             this.init();
             this.toolbar();
+            window.onresize = () => {
+                this.init();
+            };
         },
         components: {
             dialogs
@@ -320,13 +323,17 @@
                 currentTab: function (state) {
                     return state.currentTab
                 },
+                winHeight: function (state) {
+                    return state.winHeight
+                },
             }),
+            fullHeight(){
+                return this.$store.state.winHeight-60-260
+            }
         },
         methods: {
             init() {
                 let that=this;
-                that.listheight = document.documentElement.clientHeight - this.$store.state.listheight
-                that.msgBoxHeight = this.listheight - document.getElementsByClassName('editorbox')[0].offsetHeight - document.getElementsByClassName('chatInfo')[0].offsetHeight;
                 that.scrolldown();
                 document.getElementsByClassName('ql-blank')[0].addEventListener('keydown',function () {
                     that.onEditorKeydown()
@@ -338,15 +345,12 @@
             },
             //富文本编辑器状态
             onEditorBlur(quill) {
-                this.barStatus = !this.barStatus;
-                document.getElementsByClassName('ql-toolbar')[0].style.display = 'none',
-                    this.toolbar()
             },
             onEditorFocus(quill) {
                 // console.log('editor focus!', quill)
-                this.barStatus = !this.barStatus;
-                document.getElementsByClassName('ql-toolbar')[0].style.display = 'block',
-                    this.toolbar();
+                this.barStatus = true;
+                document.getElementsByClassName('ql-toolbar')[0].style.display = 'block'
+                this.toolbar()
             },
             onEditorReady(quill) {
                 // console.log('editor ready!', quill)
@@ -396,22 +400,16 @@
                 })
             },
             gongneng(i) {
+                console.log(i)
                 if (i == 1) {
-                    if (this.barStatus) {
-                        this.barStatus = !this.barStatus;
-                        document.getElementsByClassName('ql-toolbar')[0].style.display = 'none'
-                        this.toolbar()
-                    } else {
-                        this.barStatus = !this.barStatus;
-                        document.getElementsByClassName('ql-toolbar')[0].style.display = 'block',
-                            this.toolbar()
-                    }
+                    this.barStatus = true;
+                    document.getElementsByClassName('ql-toolbar')[0].style.display = 'block'
+                    this.toolbar()
                 } else {
                     this.barStatus = false;
                     document.getElementsByClassName('ql-toolbar')[0].style.display = 'none'
                     this.toolbar()
                 }
-
                 this.itemActive = i
             },
             showtips(t) {
@@ -421,7 +419,7 @@
                 this.tips = -1
             },
             open5(t) {
-                if (t == 2) {
+                if (t == 4) {
                     this.$store.commit('dialogVisible', true);
                 }
             },

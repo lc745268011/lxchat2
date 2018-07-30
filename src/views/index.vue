@@ -32,7 +32,7 @@
 
         </div>-->
         <lx-header></lx-header>
-        <div class="contanier vCenter indexBox">
+        <div class="contanier vCenter indexBox" :style="{'height':winHeight+'px'}">
             <lx-aside></lx-aside>
             <lx-contact></lx-contact>
             <img src="../assets/logo.png" alt="" class="mslide" @click="showSlide">
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    import {mapState, mapActions} from 'vuex'
     import lxHeader from '../components/header/index'
     import lxAside from '../components/aside/index'
     import lxContact from '../components/contact/index'
@@ -50,6 +51,7 @@
         name: "index",
         data:function(){
             return{
+                listheight:''
             }
         },
         components:{
@@ -57,10 +59,24 @@
             lxAside,
             lxContact
         },
-      /*  mounted(){
-            this.init()
-        },*/
+        mounted() {
+            this.init();
+            window.onresize = () => {
+                this.init();
+            };
+        },
+        computed: {
+            ...mapState({
+                winHeight: function (state) {
+                    return state.winHeight
+                },
+            }),
+        },
         methods:{
+            init() {
+                this.$store.commit('winHeight',window.innerHeight-this.$store.state.listheight)
+
+            },
             //在手机尺寸点击切换显示组织列表
             showSlide:function () {
                 this.$store.commit('show',!this.$store.state.show);

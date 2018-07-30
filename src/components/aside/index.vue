@@ -1,7 +1,7 @@
 <template>
     <div id="aside">
         <!--互动侧栏列表-->
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']" v-show="currentTab == 'message'">
+        <div id="userlist" :class="[this.$store.state.show?'show':'noshow']" v-show="currentTab == 'message'">
             <div class="triangle_border_nw" :style="{'border-color':skintype+' transparent transparent transparent'}" @click="tabToggle"></div>
             <div class="messagetab">
                 <ul class="clearfix" v-show="tabStatus">
@@ -19,7 +19,9 @@
             </div>
             <ul class="conversationlist" v-show="txTab1 == 2">
                 <li :class="index==clickId?'active':''" v-for="(item,index) in conversion2" @click="openconversion(index)" style="position: relative" @mouseleave="rightListhide">
-                    <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
+                    <el-badge :value="item.unread" :max="99" class="item" :hidden="item.unread!=0?false:true">
+                        <img :src=item.reciveavatar alt="" class="replyuseravatar fl">
+                    </el-badge>
                     <div class="fl">
                         <div class="replyusername">{{item.recivename}} <span class="fr time">{{item.sendtime}}</span></div>
                         <div class="messageInfo clearfix">
@@ -61,7 +63,7 @@
 
         </div>
         <!--通讯录侧栏列表-->
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
+        <div id="userlist" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'tongxunlu'">
             <div class="triangle_border_nw" :style="{'border-color':skintype+' transparent transparent transparent'}" @click="tabToggle1"></div>
             <div class="messagetab">
                 <ul class="clearfix" v-show="tabStatus1">
@@ -125,7 +127,7 @@
 
         </div>
         <!--dapp侧栏列表-->
-        <div id="userlist" :style="{'height':listheight+'px'}" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'dapp'">
+        <div id="userlist" :class="[this.$store.state.show?'show':'noshow']"  v-show="currentTab == 'dapp'">
             <div class="triangle_border_nw" :style="{'border-color':skintype+' transparent transparent transparent'}" @click="tabToggle2"></div>
             <div class="messagetab">
                 <ul class="clearfix" v-show="tabStatus2">
@@ -195,7 +197,8 @@
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:0,
-                        star:false
+                        star:false,
+                        unread:12
                     },
                     {
                         recivename:'李四',
@@ -205,7 +208,9 @@
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:1,
-                        star:false
+                        star:false,
+                        unread:500
+
                     },
                     {
                         recivename:'系统消息',
@@ -215,7 +220,9 @@
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:2,
-                        star:false
+                        star:false,
+                        unread:0
+
 
                     },
                     {
@@ -226,7 +233,8 @@
                         sendavatar:'',
                         reciveavatar:'https://tva2.sinaimg.cn/crop.0.0.512.512.180/005LMAegjw8f2bp9qg4mrj30e80e8dg5.jpg',
                         id:3,
-                        star:false
+                        star:false,
+                        unread:5
 
                     }
                 ],
@@ -280,13 +288,13 @@
         methods:{
             //初始化时计算左右两栏高度
             init:function () {
-                this.listheight=document.documentElement.clientHeight-this.$store.state.listheight;
-               /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
-                    .then((res) => {
-                        this.conversion = res.data
-                    }, (err) => {
-                        console.log(err)
-                    })*/
+                this.listheight = window.innerHeight-this.$store.state.listheight
+                /* this.$http.get('/api/conversion')//代替http://localhost:3000/getNewsList
+                     .then((res) => {
+                         this.conversion = res.data
+                     }, (err) => {
+                         console.log(err)
+                     })*/
             },
 
            /* //鼠标悬浮关闭按钮，颜色变换
@@ -439,7 +447,7 @@
                 width: 42px;
                 height: 42px;
                 border-radius: 50%;
-                margin-right: 10px;
+                margin-right: 12px;
             }
             .time{
                 font-size: 13px;
@@ -537,6 +545,7 @@
         color: #999;
         font-size: 13px;
     }
+
 </style>
 <style lang="stylus" rel="stylesheet/stylus">
     #app
@@ -604,4 +613,16 @@
         .inner-3
             left: 70px
             bottom: 0
+</style>
+<style>
+    .item .el-badge__content.is-fixed{
+        top:-2px;
+        right: 6px;
+        border: 0;
+        padding: 0 5px;
+        height: 16px;
+        line-height: 14px;
+        background-color: #ff3b30!important;
+        transform: translateY(0) translateX(0);
+    }
 </style>

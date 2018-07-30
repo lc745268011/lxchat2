@@ -5,7 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/store'
-import { Dialog,Transfer,Button,Input,MessageBox } from 'element-ui';
+import { Dialog,Transfer,Button,Input,MessageBox,Badge } from 'element-ui';
 /**
  * axios
  */
@@ -31,6 +31,7 @@ import './assets/css/index.css'
 Vue.use(Dialog);
 Vue.use(Button);
 Vue.use(Input);
+Vue.use(Badge);
 const components = [
         Transfer
 ];

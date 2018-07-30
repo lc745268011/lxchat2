@@ -5,6 +5,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         listheight:'',
+        winHeight:'',
         show:false,
         currentTab:'message',
         skintype:'#fb6161',
@@ -66,7 +67,10 @@ const store = new Vuex.Store({
     },
     mutations: {
         "setId": function(state, listheight) {
-            state.listheight = listheight
+            state.listheight =listheight
+        },
+        "winHeight": function(state, winHeight) {
+            state.winHeight =winHeight
         },
         "currentTab": function(state, currentTab) {
             state.currentTab = currentTab
@@ -164,7 +168,7 @@ const store = new Vuex.Store({
         },
         "dialogVisible": function(state, dialogVisible) {
             store.commit("dialogVisible", dialogVisible)
-        }
+        },
     }
 })
 export default store;
