@@ -11,6 +11,7 @@ import regisiter from '@/views/regisiter'
 import forget from '@/views/forget'
 import backstage from '@/views/backstage'
 import group from '@/views/group'
+import editor from '@/views/editor'
 
 Vue.use(Router)
 
@@ -74,6 +75,11 @@ export default new Router({
           path: '/group',
           name: 'group',
           component: group
+      },
+      {
+          path: '/editor',
+          name: 'editor',
+          component: editor
       }
   ]
 })

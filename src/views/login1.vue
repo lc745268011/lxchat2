@@ -3,7 +3,7 @@
         <router-link to="/login">返回首页</router-link>
         <div id="section">
             <div class="contanier clearfix">
-                <div class="loginBox">
+                <div class="loginBox fr">
                     <div class="tab clearfix">
                         <div :class="tabshow=='tabuser'?'fl active':'fl'" @click="changeTab('tabuser')">帐户密码登录</div>
                         <div :class="tabshow=='tabewm'?'fl active':'fl'" @click="changeTab('tabewm')">二维码登录</div>

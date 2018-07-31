@@ -16,9 +16,9 @@
             <div class="nickname bottom">昵称：<span>{{replyusername}}</span><br>职位：<span>{{replyusername}}</span></div>
         </div>
         <!--互动和dapp消息样式-->
-        <div v-show="!this.ucard">
+        <div v-show="!this.ucard" style="height: 100%">
             <!--dapp样式-->
-            <div id="dapp" v-show="currentTab=='dapp'">
+            <div id="dapp" v-show="currentTab=='dapp'" style="height: 100%">
                 <div class="dappBox">
                     <img :src=reciveavatar alt="" class="chatavatar">
                     <span class="chatname">{{replyusername}}</span>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="msgBox" :style="{'height':fullHeight+'px','width':'100%'}">
                     <div v-for="item in msgBox" v-show="clickId==item.id">
-                        <div v-for="(m,index) in item.msg" class="clearfix list ql-editor">
+                        <div v-for="(m,index) in item.msg" class="clearfix list">
                             <!--我发出的消息样式-->
                             <div v-if="m.usertype==1" style="max-width: 61.8%;" class="fr clearfix" @mouseleave="tipsBoxhide">
                                 <div>
@@ -110,14 +110,7 @@
                         </ul>
                         <div class="fr"><img src="../../assets/img/msgIcon.png" alt="" style="margin-right: 10px">消息记录</div>
                     </div>
-                    <quill-editor :options="editorOption"
-                                  :content="content"
-                                  ref="QuillEditor"
-                                  @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
-                                  @change="onEditorChange($event)"
-                                  @ready="onEditorReady($event)"
-                                  >
-                    </quill-editor>
+                    <editor></editor>
                     <div class="sendbtn">
                         <button :style="{'background-color':this.$store.state.skintype}"><span @click="sendMsg(clickId)">发送</span><i :class="['iconfont',SendMethod==true?'hignLight':'']" @click="showSendMethod">&#xe608;</i>
                         </button>
@@ -142,7 +135,7 @@
 <script>
     import {mapState, mapActions} from 'vuex'
     import dialogs from '../dialog/addgroup'
-
+    import editor from '../../components/editor/editor'
     export default {
         name: "index",
         data: function () {
@@ -291,15 +284,29 @@
             }
         },
         mounted() {
-            this.init();
-            this.toolbar();
+            var that = this;
+            that.init();
+            that.toolbar();
             window.onresize = () => {
-                this.init();
-                this.scrolldown();
+                that.init();
+                that.scrolldown();
             };
+
+
+            /*CKEDITOR.on("instanceReady", function(e){
+                CKEDITOR.instances.editor.document.$.body.addEventListener('keydown',function (e) {
+                    if (e.ctrlKey &&e.keyCode == 13)  {
+                        var key=that.$store.state.clickId;
+                        // console.log(that.$options.methods.sendMsg.bind(this))
+                        that.$options.methods.sendMsg(key);
+
+                    }
+                })
+            })*/
         },
         components: {
-            dialogs
+            dialogs,
+            editor
         },
         computed: {
             ...mapState({
@@ -333,40 +340,13 @@
             }
         },
         updated:function(){
-            this.scrolldown()
+            this.scrolldown();
         },
         methods: {
             init() {
-                var that= this;
-                document.getElementsByClassName('ql-blank')[0].addEventListener('keydown',function () {
-                    that.onEditorKeydown()
-                })
             },
             toolbar() {
-                document.getElementsByClassName('ql-container')[0].style.height = document.getElementsByClassName('quill-editor')[0].offsetHeight - document.getElementsByClassName('ql-toolbar')[0].offsetHeight - 1 + 'px';
 
-            },
-            //富文本编辑器状态
-            onEditorBlur(quill) {
-            },
-            onEditorFocus(quill) {
-                // console.log('editor focus!', quill)
-                this.barStatus = true;
-                document.getElementsByClassName('ql-toolbar')[0].style.display = 'block'
-                this.toolbar()
-            },
-            onEditorReady(quill) {
-                // console.log('editor ready!', quill)
-            },
-            onEditorChange({quill, html, text}) {
-                // console.log('editor change!', quill, html, text)
-                this.content = html
-            },
-            onEditorKeydown(){
-                var key=this.$store.state.clickId;
-                if (event.ctrlKey &&event.keyCode == 13)  {
-                    this.sendMsg(key)
-                }
             },
             //左侧会话列表和右侧会话窗口联动
             openconversion: function (i) {
@@ -379,17 +359,28 @@
             },
             //发送消息
             sendMsg: function (i) {
-                this.msgBox[i].msg.push({
-                    time: '09:00',
-                    msgInfo: this.content,
-                    usertype: 1,
-                    avatar: 'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
-                    username: '我是用户'
-                });
+                var CHtml= CKEDITOR.instances.editor.getData();
+                var CHtml1= CKEDITOR.instances.editor1.getData();
+                if(CHtml==''&&CHtml1!=''){
+                    this.msgBox[i].msg.push({
+                        time: '09:00',
+                        msgInfo: CHtml1,
+                        usertype: 1,
+                        avatar: 'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                        username: '我是用户'
+                    });
+                }else if(CHtml1==''&&CHtml!=''){
+                    this.msgBox[i].msg.push({
+                        time: '09:00',
+                        msgInfo: CHtml,
+                        usertype: 1,
+                        avatar: 'https://tva1.sinaimg.cn/crop.0.0.180.180.180/7fde8b93jw1e8qgp5bmzyj2050050aa8.jpg',
+                        username: '我是用户'
+                    });
+                }
 
-                this.content = '';
-                console.log(this.content)
 
+                CKEDITOR.instances.editor.setData("");
                 this.scrolldown()
             },
             showSendMethod(){
@@ -403,14 +394,15 @@
                 })
             },
             gongneng(i) {
-                console.log(i)
                 if (i == 1) {
                     this.barStatus = true;
-                    document.getElementsByClassName('ql-toolbar')[0].style.display = 'block'
+                    document.getElementById('cke_editor').style.display='none'
+                    document.getElementById('cke_editor1').style.display='block'
                     this.toolbar()
                 } else {
                     this.barStatus = false;
-                    document.getElementsByClassName('ql-toolbar')[0].style.display = 'none'
+                    document.getElementById('cke_editor1').style.display='none'
+                    document.getElementById('cke_editor').style.display='block'
                     this.toolbar()
                 }
                 this.itemActive = i
@@ -736,4 +728,6 @@
     .quill-editor .ql-toolbar.ql-snow {
         display: none
     }
+    em{font-style: italic}
+    #cke_editor1{display:none }
 </style>
